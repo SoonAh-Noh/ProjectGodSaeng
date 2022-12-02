@@ -756,7 +756,6 @@ def get_point_list_by_user(body_data):  # 사용자별 포인트 리스트 가�
         close_conn(db)
         return "err : " + str(e)
 
-
 def insert_goods(request):  # 상품권 입력하기
     form_data = request.form.to_dict()
 
@@ -892,6 +891,31 @@ def get_dispose_list_byuser(body_data):  # 관리자) 사용자 관리 - 신고 
             close_conn(db)
             return "nothing"
 
+    except Exception as e:
+        close_conn(db)
+        return "err : " + str(e)
+
+
+def insert_point(body_data):  # 포인트 증감
+    db = conn_db()
+    cursor = db.cursor(pymysql.cursors.DictCursor)
+
+    sql = f"""
+            INSERT INTO POINT(`NOTIFY_IDX`, `USER_IDX`, `POINT_PLUS`, `POINT_MINUS`, `POINT_CHANGE`)
+            VALUES(
+                {body_data["NOTIFY_IDX"]}, 
+                {body_data["USER_IDX"]},
+                {body_data["POINT_PLUS"]},
+                {body_data["POINT_MINUS"]},
+                {body_data["POINT_CHANGE"]}'
+                 );
+          """
+
+    try:
+        cursor.execute(sql)
+        db.commit()
+        close_conn(db)
+        return "success"
     except Exception as e:
         close_conn(db)
         return "err : " + str(e)

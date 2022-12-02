@@ -229,14 +229,14 @@ def insert_goods():  # 상품권 등록하기
 
 
 @app.route("/goodslist", methods=["GET", "POST"])
-def get_goods_list():  # 사용자 포인트 목록 가져오기
+def get_goods_list():  # 
     body_data = get_body_data(request)
     sendData = dbconnecter.get_goods_list()
     return jsonify(sendData)
 
 
 @app.route("/updategoods", methods=["GET", "POST"])
-def update_goods():  # 사용자 포인트 목록 가져오기
+def update_goods():  # 
     sendData = dbconnecter.update_goods(request)
     return jsonify(sendData)
 
@@ -247,6 +247,11 @@ def get_dispose_list_byuser():  # 신고 리스트 받아오기
     sendData = dbconnecter.get_dispose_list_byuser(body_data)
     return jsonify(sendData)
 
+@app.route("/insertpoint", methods=["GET", "POST"])
+def insert_point(): 
+    body_data = get_body_data(request)
+    sendData = dbconnecter.insert_point(body_data)
+    return jsonify(sendData)
 
 if __name__ == "__main__":
     app.run(debug=True)

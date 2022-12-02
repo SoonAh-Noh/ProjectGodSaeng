@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRef, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as server_bridge from '../../controller/server_bridge';
@@ -16,27 +17,92 @@ const PointPay = () => {
     return num.toString().replace(regexp, ',');
   };
 
+  // 포인트 가져오기 위한 작업
   const [point, setPoint] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     getUserPoint();
   }, []);
 
+  const user_id = window.sessionStorage.getItem('USER_ID');
+  const user_idx = window.sessionStorage.getItem('USER_IDX');
+  console.log('아이디', user_id);
+  console.log('IDX', user_idx);
   const getUserPoint = async () => {
-    const response = await server_bridge.axios_instace.get(
-      '/get_point_list_by_user',
+    const response = await server_bridge.axios_instace.post(
+      '/pointlistbyuser',
+      {
+        user_id: user_id,
+        user_idx: user_idx,
+      },
     );
     setPoint(response.data);
   };
 
+  //보유 포인트 계산
+  let p = 0;
+
+  point.forEach((item) => {
+    p += parseInt(item.POINT_PLUS) - parseInt(item.POINT_MINUS);
+  });
+
+  // 결제 버튼 누르면 팝업
   const nameRef = useRef();
   const phoneRef = useRef();
 
-  const letter = () => {
-    alert(
-      `온누리 상품권이 발송되었습니다. \n - 받는 분 : ${nameRef.current.value} \n - 휴대폰번호 : ${phoneRef.current.value}`,
+  // const [lave, setLave] = useState(0);
+
+  const pointForm = async () => {
+    let totalPrice = 0;
+    const lave = p - totalPrice;
+
+    if (lave >= 0) {
+      //잔여 포인트가 0 이상이면
+      const response = await server_bridge.axios_instace.post('/insertpoint', {
+        NOTIFY_IDX: null,
+        USER_IDX: user_idx,
+        POINT_PLUS: 0,
+        POINT_MINUS: totalPrice,
+        POINT_CHANGE: '상품권 구매에 의한 포인트 차감',
+      });
+      if (response.data === 'success') {
+        alert('성공');
+        navigate('/');
+      } else {
+        alert('실패');
+      }
+    } else {
+      //포인트가 부족하면
+      alert('포인트 부족!');
+    }
+  };
+
+  const [lave, setLave] = useState(0); //포인트를 보관할 state
+  const pointRegister = async () => {
+    //이건 맨처음에 포인트를 세팅해주는 함수
+    //1. db랑 통신해서 유저 본인이 가진 포인트 리스트를 가져온다.
+    const response = await server_bridge.axios_instace.post(
+      '/pointlistbyuser',
+      {
+        NOTIFY_IDX: null,
+        USER_IDX: user_idx,
+        POINT_PLUS: 0,
+        POINT_MINUS: totalPrice,
+        POINT_CHANGE: '상품권 구매에 의한 포인트 차감',
+      },
     );
-    navigate('/mypage');
+    //2. 가져온 포인트의 리스트를 반복문으로 돌리기 위해 변수에 담아준다.
+    const point_list = response.data;
+    console.log(point_list);
+
+    //3. 포인트의 리스트를 반복문으로 돌려서 계산한다.
+    let temp = 0; //반복문으로 돌려서 계산한 결과를 누적해서 담을 변수. temporary 의 약자로, 이렇게 임시로 사용할 변수는 코딩할때 temp라고 자주 주게됨.
+    point_list.forEach((item) => {
+      console.log('나옴', item);
+      temp += parseInt(item.POINT_PLUS) - parseInt(item.POINT_MINUS);
+    });
+    //4. state 로 관리할 lave를 담아준다.
+    setLave(temp);
   };
 
   return (
@@ -76,13 +142,13 @@ const PointPay = () => {
         <div>
           <div>포인트</div>
           <span>보유</span>
-          {point.map((item) => (
-            <span>{item.POINT_PULS}</span>
-          ))}
+          <span>{addComma(p)}</span>
           <span>사용</span>
           <span>{addComma(totalPrice)}</span>
+          <span>잔여</span>
+          <span>{addComma(lave)}</span>
         </div>
-        <button type="button" onClick={letter}>
+        <button type="button" onClick={pointRegister}>
           결제하기
         </button>
       </form>

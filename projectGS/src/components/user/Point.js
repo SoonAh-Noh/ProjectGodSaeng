@@ -70,9 +70,12 @@ const Point = () => {
     getGoodsList();
   }, []);
 
+  // console.log('구우웃~', goods);
+
   const getGoodsList = async () => {
     const response = await server_bridge.axios_instace.get('/goodslist');
     setGoods(response.data);
+    console.log(response.data);
   };
 
   // 1000의 자리마다 ,를 찍어주는 정규식
