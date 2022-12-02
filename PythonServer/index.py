@@ -218,6 +218,7 @@ def read_plate():  # 자동차 번호판 인식시키기
 @app.route("/pointlistbyuser", methods=["GET", "POST"])
 def get_point_list_by_user():  # 사용자 포인트 목록 가져오기
     body_data = get_body_data(request)
+    # print("푹-",  body_data)
     sendData = dbconnecter.get_point_list_by_user(body_data)
     return jsonify(sendData)
 
@@ -250,6 +251,7 @@ def get_dispose_list_byuser():  # 신고 리스트 받아오기
 @app.route("/insertpoint", methods=["GET", "POST"])
 def insert_point(): 
     body_data = get_body_data(request)
+    print("푹-",  body_data)
     sendData = dbconnecter.insert_point(body_data)
     return jsonify(sendData)
 

@@ -899,15 +899,15 @@ def get_dispose_list_byuser(body_data):  # 관리자) 사용자 관리 - 신고 
 def insert_point(body_data):  # 포인트 증감
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
-
+    print("너는 누구니", body_data)
     sql = f"""
-            INSERT INTO POINT(`NOTIFY_IDX`, `USER_IDX`, `POINT_PLUS`, `POINT_MINUS`, `POINT_CHANGE`)
+            INSERT INTO POINT(NOTIFY_IDX, USER_IDX, POINT_PLUS, POINT_MINUS, POINT_CHANGE)
             VALUES(
-                {body_data["NOTIFY_IDX"]}, 
-                {body_data["USER_IDX"]},
-                {body_data["POINT_PLUS"]},
-                {body_data["POINT_MINUS"]},
-                {body_data["POINT_CHANGE"]}'
+                '{body_data["NOTIFY_IDX"]}', 
+                '{body_data["USER_IDX"]}',
+                '{body_data["POINT_PLUS"]},
+                '{body_data["POINT_MINUS"]},
+                '{body_data["POINT_CHANGE"]}
                  );
           """
 
