@@ -728,7 +728,7 @@ def search_user_info(body_data):  # 사용자 목록 가져오기
         return "err : " + str(e)
 
 
-def get_poit_list_by_user(body_data):  # 사용자별 포인트 리스트 가져오기
+def get_point_list_by_user(body_data):  # 사용자별 포인트 리스트 가져오기
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 

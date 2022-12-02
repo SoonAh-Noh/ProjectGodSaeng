@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import * as server_bridge from '../../controller/server_bridge';
 
@@ -14,6 +14,29 @@ const PointPay = () => {
   const addComma = (num) => {
     var regexp = /\B(?=(\d{3})+(?!\d))/g;
     return num.toString().replace(regexp, ',');
+  };
+
+  const [point, setPoint] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    getUserPoint();
+  }, []);
+
+  const getUserPoint = async () => {
+    const response = await server_bridge.axios_instace.get(
+      '/get_point_list_by_user',
+    );
+    setPoint(response.data);
+  };
+
+  const nameRef = useRef();
+  const phoneRef = useRef();
+
+  const letter = () => {
+    alert(
+      `온누리 상품권이 발송되었습니다. \n - 받는 분 : ${nameRef.current.value} \n - 휴대폰번호 : ${phoneRef.current.value}`,
+    );
+    navigate('/mypage');
   };
 
   return (
@@ -46,18 +69,22 @@ const PointPay = () => {
         <div>
           <div>연락처 입력하기</div>
           <span>받는 분</span>
-          <input type="text" />
+          <input type="text" ref={nameRef} />
           <span>휴대폰 번호</span>
         </div>
-        <input type="text" />
+        <input type="text" ref={phoneRef} />
         <div>
           <div>포인트</div>
           <span>보유</span>
-          <span>10,000원</span>
+          {point.map((item) => (
+            <span>{item.POINT_PULS}</span>
+          ))}
           <span>사용</span>
           <span>{addComma(totalPrice)}</span>
         </div>
-        <button type="button">결제하기</button>
+        <button type="button" onClick={letter}>
+          결제하기
+        </button>
       </form>
     </div>
   );
