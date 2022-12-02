@@ -54,20 +54,22 @@ const PointOrder = () => {
       <form>
         <div>주문하기~</div>
         <div>
-          <span className="brand">{state.article.brand}</span>
+          {/* <span className="brand">{state.article.brand}</span> */}
           <figure className="order_img">
-            <img src={state.article.img} alt="온누리상품권" />
+            <img src={state.article.GOODS_IMG} alt="온누리상품권" />
           </figure>
         </div>
         <section>
           <ul>
-            <div className="giftCard">{state.article.title}</div>
+            <div className="giftCard">{state.article.GOODS_NAME}</div>
             <li>
               <div>정상가</div>
               <div>
                 <span className="cover-price">
                   <span className="won">￦</span>
-                  <span className="price">{addComma(state.article.price)}</span>
+                  <span className="price">
+                    {addComma(state.article.GOODS_PRICE)}
+                  </span>
                 </span>
               </div>
             </li>
@@ -76,7 +78,9 @@ const PointOrder = () => {
               <div>
                 <span className="cover-price">
                   <span className="won">￦</span>
-                  <span className="price">{addComma(state.article.price)}</span>
+                  <span className="price">
+                    {addComma(state.article.GOODS_PRICE)}
+                  </span>
                 </span>
               </div>
             </li>
@@ -104,10 +108,10 @@ const PointOrder = () => {
         <hr />
         <div>
           <b>[상품명]</b>
-          <p>{state.article.title}</p>
+          <p>{state.article.GOODS_NAME}</p>
           <br />
           <b>[상품설명]</b>
-          <p>{state.article.title}</p>
+          <p>{state.article.GOODS_NAME}</p>
           <br />
           <b>[이용안내]</b>
           <p>- 본 상품은 예시 이미지로서 실제 상품과 다를 수 있습니다.</p>

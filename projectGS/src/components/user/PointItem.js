@@ -13,7 +13,7 @@ function redeucer(state, action) {
 }
 
 const PointItem = ({ article }) => {
-  console.log('아이템 id', article.id);
+  console.log('아이템 img', article.GOODS_IMG);
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -30,14 +30,14 @@ const PointItem = ({ article }) => {
   return (
     <div>
       <figure onClick={onClick}>
-        <img src={article.img} alt="온누리상품권" />
+        <img src={article.GOODS_IDX} alt="온누리상품권" />
         <figcaption>
-          <span className="brand">{article.brand}</span>
+          {/* <span className="brand">{article.brand}</span> */}
           <br />
-          <div className="giftCard">{article.title}</div>
+          <div className="giftCard">{article.GOODS_NAME}</div>
           <br />
           <span className="won">￦</span>
-          <span className="price">{addComma(article.price)}</span>
+          <span className="price">{addComma(article.GOODS_PRICE)}</span>
         </figcaption>
       </figure>
     </div>

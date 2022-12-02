@@ -4,9 +4,9 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const PointPay = () => {
   const { state } = useLocation(); // 포인트 오더에서 넘겨받은 데이터
   console.log('오더에서 넘겨받은 데이터', state);
-  console.log('타입', typeof state.state.article.price);
+  console.log('타입', typeof state.state.article.GOODS_PRICE);
 
-  const totalPrice = state.num.count * state.state.article.price;
+  const totalPrice = state.num.count * state.state.article.GOODS_PRICE;
   console.log('총금액', totalPrice);
 
   // 1000의 자리마다 ,를 찍어주는 정규식
@@ -30,9 +30,9 @@ const PointPay = () => {
           </thead>
           <tbody>
             <tr>
-              <td>{state.state.article.title}</td>
+              <td>{state.state.article.GOODS_NAME}</td>
               <td>{state.num.count}</td>
-              <td>{addComma(state.state.article.price)}</td>
+              <td>{addComma(state.state.article.GOODS_PRICE)}</td>
               <td>{addComma(totalPrice)}</td>
             </tr>
           </tbody>
