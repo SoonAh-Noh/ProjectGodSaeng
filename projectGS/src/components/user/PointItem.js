@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as server_bridge from '../../controller/server_bridge';
 
 function redeucer(state, action) {
   switch (action.type) {
@@ -30,7 +31,10 @@ const PointItem = ({ article }) => {
   return (
     <div>
       <figure onClick={onClick}>
-        <img src={article.GOODS_IDX} alt="온누리상품권" />
+        <img
+          src={server_bridge.py_url + '/' + article.GOODS_IMG}
+          alt="온누리상품권"
+        />
         <figcaption>
           {/* <span className="brand">{article.brand}</span> */}
           <br />

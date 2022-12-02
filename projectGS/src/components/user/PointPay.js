@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import * as server_bridge from '../../controller/server_bridge';
 
 const PointPay = () => {
   const { state } = useLocation(); // 포인트 오더에서 넘겨받은 데이터

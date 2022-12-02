@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import * as server_bridge from '../../controller/server_bridge';
 
 function redeucer(state, action) {
   switch (action.type) {
@@ -56,7 +57,10 @@ const PointOrder = () => {
         <div>
           {/* <span className="brand">{state.article.brand}</span> */}
           <figure className="order_img">
-            <img src={state.article.GOODS_IMG} alt="온누리상품권" />
+            <img
+              src={server_bridge.py_url + '/' + state.article.GOODS_IMG}
+              alt="온누리상품권"
+            />
           </figure>
         </div>
         <section>
