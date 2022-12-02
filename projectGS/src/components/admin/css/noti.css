@@ -1,0 +1,10 @@
+#notifile{
+    display:none;
+}
+#labelbutton{
+    cursor: pointer;
+    border: 1px solid #333333;
+    background-color: #dddddd;
+    font-size: 14px;
+    border-radius: 2px;
+}

@@ -1,0 +1,12 @@
+.noticeWidgets {
+  margin: 20px;
+  padding: 20px;
+  flex: 1;
+
+  /* box-shadow: 0px 0px 12px -1px #333; */
+}
+
+.noticeTable {
+  width: 100%;
+  border-spacing: 20px;
+}

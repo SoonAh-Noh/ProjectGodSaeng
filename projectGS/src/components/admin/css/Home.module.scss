@@ -1,0 +1,16 @@
+.container {
+    display: grid;
+    /* 세로로 200픽셀씩 자릅니다. */
+    //grid-template-columns: 200px 200px;
+  }
+ 
+  [class *= cell] {
+    // box-sizing: border-box;
+    // border: 5px solid black;
+    // border-radius: 10px;
+    // padding: 20px;
+    /* 각각의 요소들이 눈에 보이도록 입력하였습니다. */
+    float:left;
+    width:45%;
+    height:50%;
+  }

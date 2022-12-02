@@ -1,0 +1,212 @@
+#Header {
+    width: 100%;
+    position: relative;
+    height: 100px;
+
+    .logo {
+        position: absolute;
+        left: 100px;
+        top: 15px;
+
+        img {
+            width: 100%;
+            max-width: 220px;
+        }
+    }
+
+    .menu {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        ul {
+            text-align: center;
+
+            li {
+                display: inline-block;
+                margin: 0 40px;
+                line-height: 120px;
+                position: relative;
+
+                a {
+                    font-size: 18px;
+                    color: #fff;
+                    opacity: 0.95;
+                    font-weight: 500;
+                    padding: 5px 10px;
+                    box-sizing: border-box;
+                }
+            }
+        }
+    }
+
+    .submenu {
+        position: absolute;
+        text-align: initial !important;
+        visibility: hidden;
+        opacity: 0;
+        top: 70px;
+        left: -10%;
+        width: 120%;
+        padding: 0 10px;
+        z-index: 500;
+        box-sizing: border-box;
+        box-shadow: 15px 20px 29px rgba(0, 0, 0, 0.11);
+        transition: all 0.6s ease-out;
+        transition-property: opacity, top, visibility;
+        transition-delay: 0s, 0s, 0s;
+        background: #fff;
+
+        &.on {
+            visibility: visible;
+            opacity: 0.95;
+            top: 85px;
+            z-index: 800;
+        }
+
+        li {
+            display: block !important;
+            margin: 0 !important;
+            line-height: 1.8 !important;
+
+            a {
+                display: block;
+                position: relative;
+                padding: 11px 5px !important;
+                color: #555 !important;
+                border-top: 1px solid #eee;
+                font-size: 0.95rem !important;
+                font-weight: 400;
+                opacity: 0.85;
+                box-sizing: border-box;
+                text-align: left;
+                transition: all 0.3s;
+                cursor: pointer !important;
+            }
+
+            &:first-child a {
+                border-top: 0;
+            }
+        }
+    }
+
+    .login {
+        position: absolute;
+        right: 100px;
+        top: 60%;
+        transform: translateY(-50%);
+
+        ul {
+            text-align: center;
+
+            li {
+                display: inline-block;
+                margin: 0 15px;
+                position: relative;
+
+                a {
+                    font-size: 16px;
+                    font-weight: 400;
+                    color: #ccc;
+                    opacity: 0.95;
+                }
+
+                &::before {
+                    content: '';
+                    width: 1px;
+                    height: 12px;
+                    background: #aaa;
+                    position: absolute;
+                    right: -15px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+
+                &:last-child::before {
+                    width: 0;
+                }
+            }
+        }
+    }
+}
+
+.btn-up {
+    position: fixed;
+    right: 140px;
+    bottom: 60px;
+    z-index: 100;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s;
+
+    svg {
+        opacity: 0.6;
+    }
+
+    &.fixed {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+#Footer {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 0;
+    box-sizing: border-box;
+    position: relative;
+
+    .info {
+        h4 {
+            font-size: 18px;
+            color: #444;
+            font-weight: 500;
+        }
+
+        ul {
+            margin: 20px 0;
+
+            li {
+                font-size: 16px;
+                color: #888;
+                line-height: 1.65;
+                font-weight: 300;
+            }
+        }
+
+        .copy {
+            color: #888;
+            font-size: 16px;
+        }
+    }
+
+    .ft-menu {
+        position: absolute;
+        right: 0;
+        top: 60px;
+
+        ul {
+            text-align: center;
+
+            li {
+                display: inline-block;
+                margin-left: 30px;
+
+                a {
+                    font-size: 16px;
+                    color: #666;
+                    font-weight: 500;
+
+                }
+            }
+        }
+    }
+}

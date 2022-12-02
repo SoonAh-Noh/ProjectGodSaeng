@@ -1,0 +1,25 @@
+.todoList {
+  display: flex;
+  justify-content: space-between;
+
+  /* box-shadow: 0px 0px 12px -1px #333; */
+}
+
+.todoListItem {
+  flex: 1;
+  margin: 0 20px;
+  padding: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.todoTitle {
+  margin: 20px;
+  padding: 20px;
+}
+
+.todoContainer {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}

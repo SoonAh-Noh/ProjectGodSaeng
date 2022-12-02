@@ -1,0 +1,30 @@
+.memberMain {
+    background: #fafafa;
+    min-height: 980px;
+
+    #Header {
+        .menu ul li a {
+            color: #333;
+        }
+
+        .login ul li a {
+            color: #888;
+        }
+    }
+}
+
+.memberSection {
+    width: 100%;
+    max-width: 1200px;
+    margin: 120px auto;
+
+    .sub-title {
+        margin-bottom: 100px;
+
+        h2 {
+            font-size: 38px;
+            color: #333;
+            text-align: center;
+        }
+    }
+}

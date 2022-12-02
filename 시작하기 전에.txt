@@ -1,0 +1,55 @@
+1. react의 설치된 라이브러리 
+yarn add redux react-redux redux-devtools-extension redux-logger axios react-json-to-csv react-js-pagination
+
+yarn add sass react-icons styled-components
+
+**** 순아 추가 ****
+yarn add react-daum-postcode
+yarn add react-hook-form
+yarn add recharts
+yarn add @mui/material @emotion/react @emotion/styled @material-ui/icons
+
+**** 지형 추가 ****
+yarn add @mui/lab swiper
+
+yarn add sass react-icons styled-components 
+yarn add react-router-dom
+yarn add @mui/x-data-grid
+yarn add @mui/icons-material
+yarn add styled-components
+yarn add styled-reset
+yarn add @mui/material @emotion/react @emotion/styled
+yarn add @material-ui/icons 
+yarn add @material-ui/core 
+yarn add recharts
+yarn add react-daum-postcode
+yarn add react-datepicker
+yarn add date-fns
+yarn add react-hook-form
+yarn add @material-ui/lab
+yarn add @mui/material
+
+1-1. react의 실행
+C:\Project\AI_Source\AIProject\projectGS> yarn start
+
+2. node.js 설치된 라이브러리
+npm install multer uuid react-router-dom axios express body-parser mysql cors nodemon nodemailer mysql2
+2-1. node.js 서버의 실행
+C:\Project\AI_Source\AIProject\NodeServer> npm run dev
+
+3. 파이썬 설치된 라이브러리
+pip install pymysql
+pip install cryptography
+
+**** 순아 추가 ****
+pip install bcrypt  // 단방향 암호화해주는 파이썬 라이브러리
+pip install pyjwt  // jwt(json web token)을 암호화, 복호화해주는 라이브러리
+
+**** 선우 추가 ****
+//ai 모델 관련
+pip install opencv-python==4.5.5.64
+pip install easyocr
+pip install matplotlib
+
+3-1. 파이썬 서버의 실행
+C:\Project\AI_Source\AIProject\PythonServer> python index.py

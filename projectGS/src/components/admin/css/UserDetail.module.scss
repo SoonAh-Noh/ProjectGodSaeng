@@ -1,0 +1,15 @@
+.udContainer{
+    display:grid;
+    width:100%;
+    height:100vh;
+    grid-template-columns: 1fr 1fr; /* 명시적 2개 열 정의 */
+    
+    grid-auto-rows:50%;
+    grid-gap: 5px;
+}
+.ud_item{
+    width:99%;
+}
+.ud_item:nth-child(1){
+    grid-row:1/3;
+}

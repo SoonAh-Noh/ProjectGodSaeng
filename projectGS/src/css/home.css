@@ -1,0 +1,10 @@
+.home {
+  flex: 4;
+
+  background-color: lightgray;
+}
+
+.homeWidgets {
+  display: flex;
+  margin: 20px;
+}
