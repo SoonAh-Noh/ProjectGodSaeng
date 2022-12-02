@@ -60,6 +60,7 @@ const Login = () => {
           alert(res.data[0].USER_NAME + '님 환영합니다!');
           // 세션에 값 저장후 메인페이지로 이동
           // navigate('/');
+          window.location.href = '/';
         } else {
           console.log('실패 id', res.data[0].USER_ID);
           console.log('실패 name', res.data[0].USER_NAME);

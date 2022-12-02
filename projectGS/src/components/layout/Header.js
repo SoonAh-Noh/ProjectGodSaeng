@@ -1,12 +1,27 @@
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import * as server_bridge from '../../controller/server_bridge';
+import { useState } from 'react';
 
 import logo from '../../images/logo-w.png';
 import '../../css/user/common.scss';
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  // 로그아웃시 세션 초기화
+  const logout = () => {
+    window.sessionStorage.clear();
+    console.log('세션초기화');
+
+    setLogin((prev) => !prev);
+    navigate('/');
+  };
+
+  const [login, setLogin] = useState(false);
+
   const onMouse = (e) => {
     e.target.nextElementSibling.classList.add('on');
+    // e.target.classList.add('on');
   };
 
   const leaveMouse = (e) => {
@@ -52,15 +67,30 @@ const Header = () => {
           </li>
         </ul>
       </div>
+
+      {/* 로그인 여부 확인 */}
       <div className="login">
-        <ul>
-          <li>
-            <a href="/login">로그인</a>
-          </li>
-          <li>
-            <a href="/join">회원가입</a>
-          </li>
-        </ul>
+        {window.sessionStorage.getItem('USER_ID') ? (
+          <ul className="logOn">
+            <li>
+              <a onClick={logout}>로그아웃</a>
+            </li>
+            <li>
+              <a href="/mypage" className="goMyPage">
+                마이페이지
+              </a>
+            </li>
+          </ul>
+        ) : (
+          <ul>
+            <li>
+              <a href="/login">로그인</a>
+            </li>
+            <li>
+              <a href="/join">회원가입</a>
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );
