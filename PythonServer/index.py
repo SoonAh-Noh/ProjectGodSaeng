@@ -251,7 +251,7 @@ def get_dispose_list_byuser():  # 신고 리스트 받아오기
 @app.route("/insertpoint", methods=["GET", "POST"])
 def insert_point(): 
     body_data = get_body_data(request)
-    print("푹-",  body_data)
+    # print("푹-",  body_data)
     sendData = dbconnecter.insert_point(body_data)
     return jsonify(sendData)
 

@@ -84,7 +84,7 @@ const PointPay = () => {
       });
       console.log(response.data);
       if (response.data === 'success') {
-        alert('성공');
+        alert(`구매가 완료 되었습니다.`);
         // navigate('/');
       } else {
         alert('실패');

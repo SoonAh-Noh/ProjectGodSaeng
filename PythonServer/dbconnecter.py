@@ -900,6 +900,7 @@ def insert_point(body_data):  # 포인트 증감
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
     print("너는 누구니", body_data)
+    print("타입 확인", type(body_data["NOTIFY_IDX"]))
     # sql = f"""
     #         INSERT INTO POINT(NOTIFY_IDX, USER_IDX, POINT_PLUS, POINT_MINUS, POINT_CHANGE)
     #         VALUES(
@@ -911,28 +912,32 @@ def insert_point(body_data):  # 포인트 증감
     #              );
     #       """
     
-    sql = f"""INSERT INTO"""
+    sql = f"""INSERT INTO """
     
-    if body_data["NOTIFY_IDX"] != 'NONE':
+    if body_data["NOTIFY_IDX"] !=  None:
         sql2 = f"""POINT(NOTIFY_IDX, USER_IDX, POINT_PLUS, POINT_MINUS, POINT_CHANGE)
             VALUES(
                 '{body_data["NOTIFY_IDX"]}', 
                 '{body_data["USER_IDX"]}',
-                '{body_data["POINT_PLUS"]},
-                '{body_data["POINT_MINUS"]},
-                '{body_data["POINT_CHANGE"]}
+                '{body_data["POINT_PLUS"]}',
+                '{body_data["POINT_MINUS"]}',
+                '{body_data["POINT_CHANGE"]}'
                  );"""
-        sql += sql2 + ";"
+        # sql += sql2 + ";"
+        sql += sql2
     else :
-        sql3 = f"""POINT(NOTIFY_IDX, USER_IDX, POINT_PLUS, POINT_MINUS, POINT_CHANGE)
+        sql3 = f"""POINT(USER_IDX, POINT_PLUS, POINT_MINUS, POINT_CHANGE)
             VALUES(
-                'NONE', 
                 '{body_data["USER_IDX"]}',
-                '{body_data["POINT_PLUS"]},
-                '{body_data["POINT_MINUS"]},
-                '{body_data["POINT_CHANGE"]}
+                '{body_data["POINT_PLUS"]}',
+                '{body_data["POINT_MINUS"]}',
+                '{body_data["POINT_CHANGE"]}'
                  );"""
-        sql += sql3 + ";" 
+        # sql += sql3 + ";" 
+        sql += sql3 
+
+    print('sql출력', sql)
+    # print('타입', type of body_data["NOTIFY_IDX"])
 
     try:
         cursor.execute(sql)
