@@ -98,7 +98,8 @@ const Join = () => {
       .then((res) => {
         console.log(res);
         //회원가입에 성공하면
-        if (res.data === '회원가입 성공') {
+        if (res.data === 'success') {
+          alert('회원가입 성공');
           //로그인 페이지로 이동
           navigate('/login');
         } else {
@@ -122,8 +123,10 @@ const Join = () => {
   return (
     <div id="Join">
       <div className="memberSection">
-        <div className="sub-title"><h2>회원가입</h2></div>
-        
+        <div className="sub-title">
+          <h2>회원가입</h2>
+        </div>
+
         <form>
           <div>아이디</div>
           <input

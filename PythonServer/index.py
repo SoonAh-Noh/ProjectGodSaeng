@@ -98,7 +98,7 @@ def download_file(subpath):  # 등록한 파일 다운로드하기
     return send_file(subpath, as_attachment=True)
 
 
-@app.route("/join", methods=["POST"])
+@app.route("/join", methods=["GET","POST"])
 def join():  # 회원가입
     body_data = get_body_data(request)
     return dbconnecter.join(body_data)

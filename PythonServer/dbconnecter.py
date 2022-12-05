@@ -310,13 +310,20 @@ def join(data):  # 회원가입
     print(pw)
     join_tuple = (data["id"], data["pw"], data["name"],
                   data["mail"], data["tel"], "O")  # 입력하고자 하는 데이터의 튜플
-    sql = """
-            INSERT INTO USER(`USER_ID`, `USER_PW`, `USER_NAME`, `USER_MAIL`, `USER_TEL`, `USER_OX`)
-            VALUES(%s, %s, %s, %s, %s, %s);
-          """
+    # sql = """
+    #         INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_MAIL, USER_TEL, USER_OX)
+    #         VALUES(%s, %s, %s, %s, %s, %s);
+    #       """
 
+    sql = f"""INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_MAIL, USER_TEL, USER_OX)
+              VALUES ('{data["id"]}', '{pw}', '{data["name"]}', '{data["mail"]}', '{data["tel"]}', 'O');"""
+    print("회원가입 sql", sql)
+    
     try:
-        cursor.execute(sql, join_tuple)
+        cursor.execute(sql)
+        db.commit()
+        close_conn(db)
+        return "success"
     except Exception as e:
         close_conn(db)
         return "err : " + str(e)
