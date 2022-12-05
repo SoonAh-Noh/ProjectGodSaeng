@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.jo {
+    width: 100%;
+    max-width:850px;
+    margin: 50px auto;
+
+    padding: 80px 250px;
+    box-sizing: border-box;
+    height: 800px;
+    border:solid 3px 3px;;
+    border-radius: 3%;
+    background-color: rgba(96, 133, 175, 0.6);
+
+    .sub-title {
+        margin-bottom: 20px;
+
+        h2 {
+            font-size: 38px;
+            color: #DEF1FA;
+            text-align: center;
+        }
+    }
+}
+
+.form-join {
+    margin-top: 100px;
+    width: 100px;
+    margin: 0 auto;
+    padding: 10px;
+    display: inline;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    margin: 10px 0;
+}
+
+// id, pw ////////////////////////////////////////////
+.join_id, .join_pw, .join_pwck, .join_name, .join_email, .join_tel {
+    color: #DEF1FA;
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px #ffffff;
+    font-size: 14pt;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.join_id::placeholder,
+.join_pw::placeholder,
+.join_pwck::placeholder,
+.join_name::placeholder,
+.join_email::placeholder,
+.join_tel::placeholder {
+    color: transparent;
+}
+
+.join_id:placeholder-shown + label,
+.join_pw:placeholder-shown + label,
+.join_pwck:placeholder-shown + label,
+.join_name:placeholder-shown + label,
+.join_email:placeholder-shown + label,
+.join_tel:placeholder-shown + label {
+    color: #DEF1FA; // 입력되기 전 색상
+    font-size: 14pt;
+    top: 15px;
+}
+
+.join_id:focus + label,
+.join_pw:focus + label, 
+.join_pwck:focus + label, 
+.join_name:focus + label, 
+.join_email:focus + label, 
+.join_tel:focus + label, label {
+    color: #6db5cf;
+    font-size: 10pt;
+    pointer-events: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transition: all 0.2s ease ;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+}
+
+.join_id:focus, .join_id:not(:placeholder-shown),
+.join_pw:focus, .join_pw:not(:placeholder-shown),
+.join_pwck:focus, .join_pwck:not(:placeholder-shown),
+.join_name:focus, .join_name:not(:placeholder-shown),
+.join_email:focus, .join_email:not(:placeholder-shown),
+.join_tel:focus, .join_tel:not(:placeholder-shown) {
+    border-bottom: solid 1px #6db5cf;
+    outline: none;
+}
+
+// button ////////////////////////////////////////////
+.sign_up[type=button] {
+    background-color: #0f4391;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    width: 100%;
+    height: 35px;
+    font-size: 14pt;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0px 7px #20357b;
+    display: block;
+    position: relative;
+    float: left;
+    padding: 0;
+    margin: 10px 20px 10px 0;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    border-radius: 5px;
+    transition: all 0.2s ;
+}
+
+.sign_up[type=button]:hover {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    box-shadow: 0px 0px 0px 0px #004F6F;
+}

@@ -12,7 +12,7 @@ const UserDisposeList = ({ user_idx }) => {
   ]);
   const [body, setBody] = useState([]);
   const [page, setPage] = useState(1); //페이징 처리되어 나눠지는 총 게시판의 페이지 갯수
-  const itemcount = 5; //한 페이지에 보여줄 게시글 갯수
+  const itemcount = 3; //한 페이지에 보여줄 게시글 갯수
   const [totalcnt, setCnt] = useState(0); //총 게시글 갯수
   const navigate = useNavigate(); //페이지 이동용 네비게이터
   const setCurrentPage = (e) => {

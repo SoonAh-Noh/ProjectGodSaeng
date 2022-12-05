@@ -98,10 +98,16 @@ def download_file(subpath):  # 등록한 파일 다운로드하기
     return send_file(subpath, as_attachment=True)
 
 
-@app.route("/join", methods=["GET","POST"])
+@app.route("/join", methods=["POST"])
 def join():  # 회원가입
     body_data = get_body_data(request)
     return dbconnecter.join(body_data)
+
+
+@app.route("/idCheck", methods=["GET", "POST"])
+def idCheck():  # 아이디 체크
+    body_data = get_body_data(request)
+    return dbconnecter.idCheck(body_data)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -146,6 +152,12 @@ def get_dispose_list():  # 신고 리스트 받아오기
 def update_dispose():  # 신고내역 수정하기
     body_data = get_body_data(request)
     sendData = dbconnecter.update_dispose(body_data)
+
+    if (int(body_data["NOTIFY_PNUM"]) == 4) & (body_data["USER_IDX"] != "non"):
+        body_data["POINT_MINUS"] = 0
+        body_data["POINT_PLUS"] = 50
+        body_data["POINT_CHANGE"] = "신고 보상에 대한 포인트 적립"
+        sendData = dbconnecter.insert_point(body_data)
     return jsonify(sendData)
 
 
@@ -216,10 +228,9 @@ def read_plate():  # 자동차 번호판 인식시키기
 
 
 @app.route("/pointlistbyuser", methods=["GET", "POST"])
-def get_point_list_by_user():  # 사용자 포인트 목록 가져오기
+def get_poit_list_by_user():  # 사용자 포인트 목록 가져오기
     body_data = get_body_data(request)
-    # print("푹-",  body_data)
-    sendData = dbconnecter.get_point_list_by_user(body_data)
+    sendData = dbconnecter.get_poit_list_by_user(body_data)
     return jsonify(sendData)
 
 
@@ -230,14 +241,14 @@ def insert_goods():  # 상품권 등록하기
 
 
 @app.route("/goodslist", methods=["GET", "POST"])
-def get_goods_list():  # 
+def get_goods_list():  # 상품권 목록 가져오기
     body_data = get_body_data(request)
     sendData = dbconnecter.get_goods_list()
     return jsonify(sendData)
 
 
 @app.route("/updategoods", methods=["GET", "POST"])
-def update_goods():  # 
+def update_goods():  # 상품권 수정하기
     sendData = dbconnecter.update_goods(request)
     return jsonify(sendData)
 
@@ -248,12 +259,14 @@ def get_dispose_list_byuser():  # 신고 리스트 받아오기
     sendData = dbconnecter.get_dispose_list_byuser(body_data)
     return jsonify(sendData)
 
+
 @app.route("/insertpoint", methods=["GET", "POST"])
-def insert_point(): 
+def insert_point():
     body_data = get_body_data(request)
     # print("푹-",  body_data)
     sendData = dbconnecter.insert_point(body_data)
     return jsonify(sendData)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

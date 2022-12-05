@@ -1,0 +1,136 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.admin {
+    display: flex;
+    justify-content: center;
+    align-content: center; 
+    width: 100%;
+    height: 100vh;
+    background: url(../../images/illust.jpg) no-repeat center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.ad {
+    width: 100%;
+    max-width:850px;
+    margin: auto;
+
+    padding: 160px 250px;
+    box-sizing: border-box;
+    height: 800px;
+    border:solid 3px 3px;;
+    border-radius: 3%;
+    background-color: rgba(255, 255, 255, 0.9);
+    
+    .sub-title {
+        margin-bottom: 20px;
+
+        h3 {
+            font-size: 38px;
+            color: #004F6F;
+            text-align: center;
+        }
+    }
+}
+
+.form_login {
+    margin-top: 100px;
+    width: 100px;
+    margin: 0 auto;
+    padding: 10px;
+    display: inline;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    margin: 5px 0;
+}
+
+// id, pw ////////////////////////////////////////////
+.id_ad, .pw_ad {
+    color: #009CBB; // id, pw 입력 글자색
+    background: transparent;
+    border: none;
+    border-bottom: solid 1px #0A697C;
+    font-size: 14pt;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.id_ad::placeholder,
+.pw_ad::placeholder {
+    color: transparent;
+}
+
+.id_ad:placeholder-shown + label,
+.pw_ad:placeholder-shown + label {
+    color: #0A697C;
+    font-size: 14pt;
+    top: 15px;
+}
+
+.id_ad:focus + label,
+.pw_ad:focus + label {
+    color: #009CBB; // 입력 시 글자 색상
+    font-size: 10pt;
+    pointer-events: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transition: all 0.2s ease ;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+}
+
+.id_ad:focus, .id_ad:not(:placeholder-shown),
+.pw_ad:focus, .pw_ad:not(:placeholder-shown) {
+    border-bottom: solid 1px #009CBB; // 입력 시 선 색상
+    outline: none;
+}
+
+// button ////////////////////////////////////////////
+.btn_admin[type=button] {
+    background-color: #007cac;
+    border: none;
+    color: #ffffff;
+    border-radius: 5px;
+    width: 100%;
+    height: 35px;
+    font-size: 14pt;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0px 5px 0px 0px #004F6F;
+    display: block;
+    position: relative;
+    float: left;
+    padding: 0;
+    margin: 10px 20px 10px 0;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+    color: #FFF;
+    border-radius: 5px;
+    transition: all 0.1s;
+}
+
+.btn_admin[type=button]:hover {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    box-shadow: 0px 0px 0px 0px #ffffff;
+}
+
+////////////////////////////////////////////////////////
+.ad_info {
+    margin: 100px 0px;
+}
+
+.copy {
+    padding-top: 230px;
+}

@@ -179,6 +179,7 @@ def get_board_list(where_clause):  # 공지사항 관리의 게시판 리스트
               A.BOARD_IDX AS BOARD_IDX,
               date_format(A.BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE,
               A.BOARD_TIT AS BOARD_TIT,
+              A.BOARD_TXT AS BOARD_TXT,
               B.USER_NAME AS USER_NAME
     FROM BOARD AS A
                    INNER JOIN USER AS B ON A.USER_IDX = B.USER_IDX """
@@ -316,7 +317,7 @@ def join(data):  # 회원가입
     #       """
 
     sql = f"""INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_MAIL, USER_TEL, USER_OX)
-              VALUES ('{data["id"]}', '{pw}', '{data["name"]}', '{data["mail"]}', '{data["tel"]}', 'O');"""
+              VALUES ('{data["id"]}', '{data["pw"]}', '{data["name"]}', '{data["mail"]}', '{data["tel"]}', 'O');"""
     print("회원가입 sql", sql)
     
     try:
@@ -327,6 +328,19 @@ def join(data):  # 회원가입
     except Exception as e:
         close_conn(db)
         return "err : " + str(e)
+
+
+def idCheck(data):  # 아이디 중복 가입 체크
+    db = conn_db()
+    cursor = db.cursor(pymysql.cursors.DictCursor)
+
+    sql = f"SELECT * FROM USER WHERE USER_ID='{data['id']}';"
+    print(sql)
+
+    cursor.execute(sql)
+    res = cursor.fetchall()
+    close_conn(db)
+    return res
 
 
 def get_cate_list():  # 카테고리 리스트
@@ -735,7 +749,7 @@ def search_user_info(body_data):  # 사용자 목록 가져오기
         return "err : " + str(e)
 
 
-def get_point_list_by_user(body_data):  # 사용자별 포인트 리스트 가져오기
+def get_poit_list_by_user(body_data):  # 사용자별 포인트 리스트 가져오기
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
@@ -762,6 +776,7 @@ def get_point_list_by_user(body_data):  # 사용자별 포인트 리스트 가�
     except Exception as e:
         close_conn(db)
         return "err : " + str(e)
+
 
 def insert_goods(request):  # 상품권 입력하기
     form_data = request.form.to_dict()
@@ -908,17 +923,7 @@ def insert_point(body_data):  # 포인트 증감
     cursor = db.cursor(pymysql.cursors.DictCursor)
     print("너는 누구니", body_data)
     print("타입 확인", type(body_data["NOTIFY_IDX"]))
-    # sql = f"""
-    #         INSERT INTO POINT(NOTIFY_IDX, USER_IDX, POINT_PLUS, POINT_MINUS, POINT_CHANGE)
-    #         VALUES(
-    #             '{body_data["NOTIFY_IDX"]}', 
-    #             '{body_data["USER_IDX"]}',
-    #             '{body_data["POINT_PLUS"]},
-    #             '{body_data["POINT_MINUS"]},
-    #             '{body_data["POINT_CHANGE"]}
-    #              );
-    #       """
-    
+
     sql = f"""INSERT INTO """
     
     if body_data["NOTIFY_IDX"] !=  None:

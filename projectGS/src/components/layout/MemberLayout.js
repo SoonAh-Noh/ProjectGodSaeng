@@ -54,7 +54,7 @@ const MemberLayout = () => {
         <Outlet />
       </main>
       <button type="button" onClick={onScrollTop} className={scrollActive ? 'btn-up fixed' : 'btn-up'}><StraightIcon /></button>
-      <footer>
+      <footer className="memberFoot">
         <Footer />
       </footer>
     </div>

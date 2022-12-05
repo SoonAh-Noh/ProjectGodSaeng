@@ -35,18 +35,35 @@ const AdminInformation = () => {
     setUser(res.data[0]);
   };
   return (
-    <div className="adminInformation">
-      <div className="adminInformationContent">
-        <h3>내 정보</h3>
-        {mode && <button onClick={updateInfo}>수정하기</button>}
-        <button onClick={onClick}>{!mode ? '수정하기' : '수정취소'}</button>
-        <table border={1}>
+    <div className="adminInformation Contents">
+      <div className="adminInformationContent pageWrap">
+        <div className="adminTitle"><h3>관리자 정보</h3></div>
+        
+        <table className="adminTable2" border="0" cellPadding="0" cellSpacing="0">
+          <colgroup>
+            <col width="50px" />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <thead>
           <tr>
+            <th>No.</th>
             <th>아이디</th>
-            <td>{user.USER_ID}</td>
-          </tr>
-          <tr>
             <th>비밀번호</th>
+            <th>이름</th>
+            <th>연락처</th>
+            <th>관리자 등급</th>
+            <th>정보 수정</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr align="center">
+            <td>1</td>
+            <td>{user.USER_ID}</td>
             <td>
               {!mode ? (
                 '****'
@@ -54,9 +71,6 @@ const AdminInformation = () => {
                 <input type="password" name="pass" id="pass" ref={passRef} />
               )}
             </td>
-          </tr>
-          <tr>
-            <th>이름</th>
             <td>
               {!mode ? (
                 user.USER_NAME
@@ -70,9 +84,6 @@ const AdminInformation = () => {
                 />
               )}
             </td>
-          </tr>
-          <tr>
-            <th>연락처</th>
             <td>
               {!mode ? (
                 user.USER_TEL
@@ -86,11 +97,18 @@ const AdminInformation = () => {
                 />
               )}
             </td>
-          </tr>
-          <tr>
-            <th>관리자 등급</th>
             <td>일반 관리자</td>
+            <td>
+              <div className="tableBtnWrap">
+                {mode && <button onClick={updateInfo} className="adminBtn adminBtnNavy">수정하기</button>}
+                {/* <button onClick={onClick} className="tableBtn btnReset">{!mode ? '수정하기' : '수정취소'}</button> */}
+                {!mode ? <button onClick={onClick} className="adminBtn adminBtnNavy">수정하기</button> : 
+                  <button onClick={onClick} className="adminBtn">수정취소</button>
+                }
+              </div>
+            </td>
           </tr>
+          </tbody>
         </table>
       </div>
     </div>

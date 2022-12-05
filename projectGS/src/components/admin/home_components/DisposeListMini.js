@@ -13,7 +13,8 @@ const DisposeListMini = ({ data }) => {
 
   return (
     <div className="cell-c">
-      <div>신고 내역(관리자홈)</div>
+      <div className="mainTitle"><h4>신고 내역</h4></div>
+      
       {typeof data !== 'string' && data.length > 0 ? (
         data.map((val, idx) => (
           <div key={idx}>

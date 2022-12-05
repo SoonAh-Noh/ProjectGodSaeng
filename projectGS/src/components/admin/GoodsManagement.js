@@ -50,50 +50,54 @@ const GoodsManagement = () => {
   };
 
   return (
-    <div>
-      <div>상품권 목록</div>
-      <div>
-        상품권 추가하기 <br />
-        상품권 이미지 : <input type="file" accept="image/*" ref={imgRef} />
-        <br />
-        상품권명 : <input type="text" ref={nameRef} />
-        <br />
-        가격 :{' '}
-        <input
-          type="text"
-          ref={priceRef}
-          placeholder="숫자만 입력해주세요! ex)9000"
-          style={{ width: '300px' }}
-        />
-        <br />
-        <button onClick={insertGoods}>추가하기</button>
+    <div className="Contents">
+      <div className="pageWrap">
+        <div className="adminTitle"><h3>상품권 관리</h3></div>
+
+        <div>상품권 목록</div>
+        <div>
+          상품권 추가하기 <br />
+          상품권 이미지 : <input type="file" accept="image/*" ref={imgRef} />
+          <br />
+          상품권명 : <input type="text" ref={nameRef} />
+          <br />
+          가격 :{' '}
+          <input
+            type="text"
+            ref={priceRef}
+            placeholder="숫자만 입력해주세요! ex)9000"
+            style={{ width: '300px' }}
+          />
+          <br />
+          <button onClick={insertGoods}>추가하기</button>
+        </div>
+        {typeof goods !== 'string' && goods.length > 0 ? (
+          goods.map((item, idx) => (
+            <div
+              key={idx}
+              onClick={() =>
+                navigate('/admin/goodsview', { state: { data: item } })
+              }
+              style={{ cursor: 'pointer' }}
+            >
+              <img
+                src={server_bridge.py_url + '/' + item.GOODS_IMG}
+                alt="상품권 이미지"
+              />
+              <br />
+              {item.GOODS_NAME}
+              <br />
+              {item.GOODS_PRICE} 원
+              <br />
+              <button onClick={() => deleteGoods(item.GOODS_IDX)}>
+                삭제하기
+              </button>
+            </div>
+          ))
+        ) : (
+          <div>등록한 상품이 없습니다!</div>
+        )}
       </div>
-      {typeof goods !== 'string' && goods.length > 0 ? (
-        goods.map((item, idx) => (
-          <div
-            key={idx}
-            onClick={() =>
-              navigate('/admin/goodsview', { state: { data: item } })
-            }
-            style={{ cursor: 'pointer' }}
-          >
-            <img
-              src={server_bridge.py_url + '/' + item.GOODS_IMG}
-              alt="상품권 이미지"
-            />
-            <br />
-            {item.GOODS_NAME}
-            <br />
-            {item.GOODS_PRICE} 원
-            <br />
-            <button onClick={() => deleteGoods(item.GOODS_IDX)}>
-              삭제하기
-            </button>
-          </div>
-        ))
-      ) : (
-        <div>등록한 상품이 없습니다!</div>
-      )}
     </div>
   );
 };

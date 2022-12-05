@@ -1,0 +1,177 @@
+#Admin {
+    header {
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+        position: fixed;
+        min-height: 60px;
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333;
+
+        button {
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+    }
+
+    .Contents {
+        padding: 40px;
+        box-sizing: border-box;
+
+        // .Wrap {
+        //     background: #fff;
+        //     border-radius: 20px;
+        //     padding: 60px;
+        //     box-sizing: border-box;
+        //     overflow: hidden;
+        // }
+    }
+}
+
+
+#SideBar {
+    width: 220px;
+    background: #333;
+    position: fixed;
+    bottom: 0;
+    height: calc(100vh - 60px);
+    // padding: 20px 0;
+    box-sizing: border-box;
+
+    ul {
+        // border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+        li {
+            position: relative;
+
+            button {
+                padding: 15px 20px;
+                box-sizing: border-box;
+                font-size: 18px;
+                color: #fff;
+                font-weight: 400;
+                display: block;
+                width: 100%;
+                text-align: left;
+                transition: all 0.4s;
+                position: relative;
+
+                svg {
+                    vertical-align: text-bottom;
+                    padding-right: 10px;
+                    transition: all 0.4s;
+                }
+            }
+
+            &.on {
+
+                // background: #fafafa;
+                &:before {
+                    content: '';
+                    width: 95%;
+                    height: 100%;
+                    background: #fafafa;
+                    position: absolute;
+                    right: 0;
+                    border-radius: 40px 0 0 40px;
+                    box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.4);
+                    z-index: -1;
+                }
+
+                button {
+                    color: #333;
+                    font-weight: 500;
+
+                    svg {
+                        padding-left: 5%;
+                    }
+                }
+            }
+
+            &.userSiteGo {
+                background: #222;
+                transition: all 0.4s;
+
+                &:hover {
+                    background: #191d73;
+                }
+            }
+        }
+
+        &.userSite {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        &.adminSite {
+            padding-top: 20px;
+        }
+    }
+}
+
+#AdminLayout {
+    width: 100%;
+    padding: 60px 0 0 220px;
+    box-sizing: border-box;
+
+    .pageWrap {
+        width: 100%;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
+        padding: 40px;
+        box-sizing: border-box;
+        min-height: 750px;
+    }
+}
+
+.adminTable {
+    width: 100%;
+
+    th,
+    td {
+        font-size: 16px;
+        color: #444;
+        line-height: 1.65;
+        padding: 10px;
+    }
+
+    th {
+        background: rgba(25, 29, 115, 0.1);
+        font-weight: 500;
+    }
+
+    td {
+        border-bottom: 1px solid rgba(25, 29, 115, 0.2);
+    }
+}
+
+.adminTable2 {
+    width: 100%;
+
+    th,
+    td {
+        font-size: 16px;
+        color: #444;
+        line-height: 1.65;
+        padding: 15px;
+        border-bottom: 1px solid #fff;
+    }
+
+    th {
+        background: rgba(25, 29, 115, 0.1);
+        font-weight: 500;
+    }
+
+    td {
+        border-bottom: 1px solid rgba(25, 29, 115, 0.2);
+    }
+
+    input {
+        padding: 10px;
+        font-size: 16px;
+        min-height: auto;
+    }
+}

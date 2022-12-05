@@ -1,7 +1,9 @@
 const DisposeSummary = ({ data }) => {
   return (
     <div className="cell-b">
-      <table border={1}>
+      <div className="mainTitle"><h4>신고처리현황 테이블</h4></div>
+      
+      <table className="adminTable" border="0" cellPadding="0" cellSpacing="0">
         <thead>
           <tr>
             <th align="center">일자</th>

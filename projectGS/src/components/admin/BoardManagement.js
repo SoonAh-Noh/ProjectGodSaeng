@@ -8,9 +8,10 @@ const BoardManagement = () => {
   const optionRef = useRef(); //검색 옵션
   const navigate = useNavigate(); //링크 네비게이터
   const [page, setPage] = useState(1); //페이징 처리되어 나눠지는 총 게시판의 페이지 갯수
-  const itemcount = 3; //한 페이지에 보여줄 게시글 갯수
+  const itemcount = 5; //한 페이지에 보여줄 게시글 갯수
   const [board_list, setList] = useState([]); // 게시판 리스트
   const [totalcnt, setCnt] = useState(0); //총 게시글 갯수
+  
   useEffect(() => {
     getList();
   }, []);
@@ -38,67 +39,94 @@ const BoardManagement = () => {
     setPage(e);
   };
   return (
-    <div>
-      <div>
-        검색
-        <select name="search_option" id="search_option" ref={optionRef}>
-          <option value="BOARD_TIT">제목</option>
-          <option value="USER_NAME">작성자</option>
-        </select>
-        <input type="text" name="search" id="search" ref={searchRef} />
-        <button onClick={getList}>검색</button>
-      </div>
-      <div className="updownSpace"></div>
-      <button onClick={() => navigate('/admin/writenoti')}>글쓰기</button>
-      <div className="updownSpace"></div>
-      <table border={1}>
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-          </tr>
-        </thead>
-        <tbody>
-          {typeof board_list !== 'string' && board_list.length > 0 ? (
-            board_list
-              .slice(page * itemcount - itemcount, page * itemcount) //여기서 보여주려고 하는 리스트를 잘라내서 페이징 처리
-              .map((data, key) => {
-                return (
-                  <tr key={key}>
-                    <td>{data.BOARD_IDX}</td>
-                    <td>
-                      <Link
-                        to={'/admin/boardview'}
-                        state={{
-                          board_idx: data.BOARD_IDX,
-                        }}
-                      >
-                        {data.BOARD_TIT}
-                      </Link>
-                    </td>
-                    <td>{data.USER_NAME}</td>
-                    <td>{data.BOARD_DATE}</td>
-                  </tr>
-                );
-              })
-          ) : (
+    <div className="Contents">
+      <div className="pageWrap">
+        <div className="adminTitle"><h3>공지사항 관리</h3></div>
+
+        {/* <div className="searchWrap">
+          <select name="search_option" id="search_option" ref={optionRef}>
+            <option value="BOARD_TIT">제목</option>
+            <option value="USER_NAME">작성자</option>
+          </select>
+          <input type="text" name="search" id="search" ref={searchRef} />
+          <button onClick={getList}>검색</button>
+        </div> */}
+
+        <div className="flexBetween">
+          <div className="searchWrap">
+            <div className="searchCate">
+              <select name="search_option" id="search_option" ref={optionRef}>
+                <option value="BOARD_TIT">제목</option>
+                <option value="USER_NAME">작성자</option>
+              </select>
+            </div>
+            <input type="text" name="search" id="search" ref={searchRef} className="searchTxt" />
+            <button onClick={getList} className="searchBtn">검색</button>
+          </div>
+          
+          <div className="adminBtnWrap right">
+            <button onClick={() => navigate('/admin/writenoti')} className="adminBtn adminBtnNavy">글쓰기</button>
+          </div>
+        </div>
+
+        <table className="adminTable2" border="0" cellPadding="0" cellSpacing="0">
+          <colgroup>
+            <col width="80px" />
+            <col />
+            <col width="120px" />
+            <col width="160px" />
+            <col width="100px" />
+          </colgroup>
+          <thead>
             <tr>
-              <td colSpan={4}></td>
+              <th>No.</th>
+              <th>제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>첨부파일</th>
             </tr>
+          </thead>
+          <tbody>
+            {typeof board_list !== 'string' && board_list.length > 0 ? (
+              board_list
+                .slice(page * itemcount - itemcount, page * itemcount) //여기서 보여주려고 하는 리스트를 잘라내서 페이징 처리
+                .map((data, key) => {
+                  return (
+                    <tr key={key}>
+                      <td align="center">{data.BOARD_IDX}</td>
+                      <td>
+                        <Link
+                          to={'/admin/boardview'}
+                          state={{
+                            board_idx: data.BOARD_IDX,
+                          }}
+                        >
+                          {data.BOARD_TIT}
+                        </Link>
+                      </td>
+                      <td align="center">{data.USER_NAME}</td>
+                      <td align="center">{data.BOARD_DATE}</td>
+                      <td align="center"><i className={data.BOARD_FILE ? "xi-diskette fileIcon" : " "}></i></td>
+                    </tr>
+                  );
+                })
+            ) : (
+              <tr>
+                <td colSpan={5}></td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <div>
+          {typeof body !== 'string' && (
+            <Page //페이지네이션 객체(component/admin/Page.js)
+              page={page} //현재 페이지
+              totalcnt={totalcnt} //총 게시글 갯수
+              setPage={setCurrentPage} //페이징 처리함수
+              itemcount={itemcount} //한 페이지에 몇개를 보여줄건지를 뜻함
+            />
           )}
-        </tbody>
-      </table>
-      <div>
-        {typeof body !== 'string' && (
-          <Page //페이지네이션 객체(component/admin/Page.js)
-            page={page} //현재 페이지
-            totalcnt={totalcnt} //총 게시글 갯수
-            setPage={setCurrentPage} //페이징 처리함수
-            itemcount={itemcount} //한 페이지에 몇개를 보여줄건지를 뜻함
-          />
-        )}
+        </div>
       </div>
     </div>
   );

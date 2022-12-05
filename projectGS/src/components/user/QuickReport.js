@@ -134,7 +134,7 @@ const QuickReport = () => {
   return (
     <div id="Report" className="subPage">
       <div className="subTop">
-        <h1>불법주정차 신고</h1>
+        <h1>공유킥보드 신고</h1>
         <ul>
           <li><a href="/report">불법주정차 신고</a></li>
           <li className="on"><a href="/quickreport">공유킥보드 신고</a></li>
@@ -154,7 +154,7 @@ const QuickReport = () => {
 
         <div className="reportForm">
           <form onSubmit={writeReport}>
-            <div className="row">
+            {/* <div className="row">
               <div className="col-2 col-sm-12">
                 <div className="rTitle"><h3>불법 주정차 유형</h3></div>
               </div>
@@ -172,7 +172,7 @@ const QuickReport = () => {
                     <option value="08">친환경차 충전구역</option>
                     <option value="09">기타</option>
                   </select>
-                  {/* <ul name="category" className="category" ref={categoryRef}>
+                  <ul name="category" className="category" ref={categoryRef}>
                     <li><button value="01">소화전</button></li>
                     <li><button value="02">교차로 모퉁이</button></li>
                     <li><button value="03">버스정류소</button></li>
@@ -182,10 +182,10 @@ const QuickReport = () => {
                     <li><button value="07">소방차 전용구역</button></li>
                     <li><button value="08">친환경차 충전구역</button></li>
                     <li><button value="09">기타</button></li>
-                  </ul> */}
+                  </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="row">
               <div className="col-2 col-sm-12">
@@ -212,7 +212,7 @@ const QuickReport = () => {
 
             <div className="row">
               <div className="col-2 col-sm-12">
-                <div className="rTitle"><h3>차량 번호</h3></div>
+                <div className="rTitle"><h3>킥보드 회사</h3></div>
               </div>
 
               <div className="col-10 col-sm-12">
@@ -222,11 +222,11 @@ const QuickReport = () => {
                     name="carNum"
                     ref={carNumRef}
                     type="text"
-                    placeholder="차량 번호"
+                    placeholder="킥보드 회사명을 입력해주세요"
                     value={text}
                     onChange={onChange}
                   />
-                  <input type="button" className="inputBtn" value="수정" onClick={onReset} />
+                  {/* <input type="button" className="inputBtn" value="수정" onClick={onReset} /> */}
                 </div>
               </div>
             </div>
@@ -256,7 +256,7 @@ const QuickReport = () => {
                     name="notifySpot"
                     ref={notifySpotRef}
                     type="text"
-                    placeholder="주소 입력"
+                    placeholder="장소를 입력해주세요"
                     onClick={handle.clickButton}
                     defaultValue={address}
                   />
@@ -288,7 +288,7 @@ const QuickReport = () => {
                   className="notifyTxt"
                   name="notifyTxt"
                   ref={notifyTxtRef}
-                  placeholder="불법 주정차 위반 사항을 입력해주세요"
+                  placeholder="위반 사항을 입력해주세요"
                 />
               </div>
             </div>
@@ -305,7 +305,7 @@ const QuickReport = () => {
                   name="userTel"
                   ref={userTelRef}
                   type="text"
-                  placeholder="핸드폰 번호를 입력하세요"
+                  placeholder="핸드폰 번호를 입력해주세요"
                 />
                 </div>
                 

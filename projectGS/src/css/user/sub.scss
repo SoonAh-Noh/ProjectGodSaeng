@@ -187,6 +187,15 @@ textarea {
     min-height: 300px;
 }
 
+.textLeft {
+    text-align: left !important;
+}
+
+.textRight {
+    text-align: right !important;
+}
+
+
 /**************************************************************
 Report.js 불법주정차 신고
 ***************************************************************/
@@ -472,34 +481,42 @@ Report.js 불법주정차 신고
         align-items: center;
         margin: 10px 0;
 
+
+        // .privacyBtn {
+        //     font-size: 14px;
+        //     width: 100%;
+        //     max-width: 120px;
+        //     background: #ededed;
+        //     border-radius: 5px;
+        //     border: 1px solid #ddd;
+        //     box-sizing: border-box;
+        //     padding: 5px 15px;
+        //     position: relative;
+        //     color: #666;
+        //     padding-right: 20px;
+        //     text-align: left;
+
+        //     &::after {
+        //         content: "\e942";
+        //         font-family: 'xeicon';
+        //         position: absolute;
+        //         right: 5px;
+        //         color: #888;
+        //         top: 50%;
+        //         transform: translateY(-50%);
+        //         transition: all 0.4s;
+        //     }
+
+        //     &.on::after {
+        //         transform: translateY(-50%) rotate(180deg);
+        //     }
+        // }
         .privacyBtn {
-            font-size: 14px;
-            width: 100%;
-            max-width: 120px;
-            background: #ededed;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            color: #191D73;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 0 5px;
             box-sizing: border-box;
-            padding: 5px 15px;
-            position: relative;
-            color: #666;
-            padding-right: 20px;
-            text-align: left;
-
-            &::after {
-                content: "\e942";
-                font-family: 'xeicon';
-                position: absolute;
-                right: 5px;
-                color: #888;
-                top: 50%;
-                transform: translateY(-50%);
-                transition: all 0.4s;
-            }
-
-            &.on::after {
-                transform: translateY(-50%) rotate(180deg);
-            }
         }
 
     }
@@ -660,6 +677,381 @@ IllegalAreaGuide.js 불법주정차 금지구역
 
 
 /**************************************************************
+Point.js 포인트 사용
+***************************************************************/
+#Point {
+    .goods {
+        .goodsList {
+            margin-bottom: 20px;
+
+            span {
+                font-size: 16px;
+                color: #666;
+            }
+
+            h3 {
+                font-size: 28px;
+                color: #333;
+            }
+        }
+    }
+
+    .goodsWrap {
+        display: flex;
+        justify-content: space-between;
+
+        .goodsItem {
+            padding: 40px;
+            box-sizing: border-box;
+            background: #fafafa;
+            border-radius: 10px;
+            border: 1px solid #fafafa;
+            width: 30%;
+            cursor: pointer;
+            transition: all 0.6s;
+
+            img {
+                max-width: 100%;
+                margin: 0 auto 20px;
+                display: block;
+            }
+
+            h4 {
+                font-size: 22px;
+                font-weight: 400;
+                color: #444;
+                text-align: center;
+            }
+
+            &:hover {
+                background: #fff;
+                border-color: #191D73;
+                box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05);
+            }
+        }
+
+    }
+}
+
+#PointOrder {
+    .goodsTop {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 60px;
+
+        .goodsImg {
+            width: 46%;
+            background: #fafafa;
+            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 80px 60px;
+
+            img {
+                max-width: 100%;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+
+        .goodsInfo {
+            width: 46%;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: space-between;
+
+            .goodsTitle {
+
+                span {
+                    font-size: 18px;
+                    color: #666;
+                }
+
+                h3 {
+                    font-size: 32px;
+                    color: #333;
+                }
+            }
+
+            .goodsContents {
+                width: 100%;
+
+                table {
+                    width: 100%;
+                    margin-bottom: 20px;
+
+                    th,
+                    td {
+                        font-size: 18px;
+                        color: #444;
+                        line-height: 1.65;
+                        padding: 5px 20px;
+                        text-align: left;
+                    }
+
+                }
+
+                .goodsCnt {
+                    .cntBtn {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 20px;
+                        min-height: auto;
+                        text-align: auto;
+                        padding: 0;
+                        border: 0;
+                        // background: #333;
+                        // color: #fff;
+                        // background: none;
+                        color: #444;
+                        font-size: 18px;
+                        font-weight: 300;
+                    }
+
+                    span {
+                        margin: 0 10px;
+                    }
+                }
+
+                .btn {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+    .goodsDetail {
+        width: 100%;
+        padding: 40px 0;
+        box-sizing: border-box;
+        border-top: 1px dashed #ddd;
+
+        h4 {
+            font-size: 18px;
+            color: #444;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        ul li {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.65;
+            position: relative;
+            padding-left: 15px;
+
+            &:before {
+                content: '';
+                width: 5px;
+                height: 5px;
+                border-radius: 3px;
+                background: #888;
+                position: absolute;
+                left: 0;
+                top: 10px;
+            }
+        }
+    }
+}
+
+#PointPay {
+    h3 {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 45px;
+
+        .num {
+            position: absolute;
+            font-weight: 300;
+            left: 0;
+            top: 55%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            text-align: center;
+            line-height: 30px;
+            font-size: 16px;
+            background: #191D73;
+            color: #fff;
+        }
+    }
+
+    i {
+        color: #666;
+        padding-left: 5px;
+        font-weight: 300;
+    }
+
+    .payWrap {
+        position: relative;
+        width: 100%;
+    }
+
+    .orderWrap {
+        width: calc(100% - 400px);
+        padding-right: 60px;
+        box-sizing: border-box;
+        margin-bottom: 50px;
+
+        table {
+            width: 100%;
+
+            th,
+            td {
+                font-size: 18px;
+                color: #444;
+                line-height: 1.65;
+                padding: 15px;
+                border-top: 1px solid #444;
+                text-align: center;
+            }
+
+            th {
+                font-weight: 500;
+            }
+
+            .goods {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                .orderImg {
+                    width: 40%;
+                    background: #fafafa;
+                    padding: 20px;
+                    box-sizing: border-box;
+                    border-radius: 10px;
+
+                    img {
+                        display: block;
+                        max-width: 80px;
+                        margin: 0 auto;
+                    }
+                }
+
+                span {
+                    font-size: 14px;
+                    color: #666;
+                }
+            }
+
+            .textRight {
+                font-weight: 500;
+            }
+
+            .totalPrice {
+                font-size: 22px;
+                padding-left: 20px;
+            }
+        }
+
+        .orderList {
+            margin-bottom: 40px;
+        }
+    }
+
+    .orderInfo {
+
+        table {
+
+            th,
+            td {
+                text-align: left;
+            }
+
+            tr:last-child th,
+            tr:last-child td {
+                border-bottom: 1px solid #444;
+            }
+
+            input {
+                width: 50%;
+            }
+        }
+    }
+
+    .userPoint {
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        width: 100%;
+        max-width: 400px;
+        background: #fafafa;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 40px;
+
+        table {
+            width: 100%;
+            margin: 40px 0;
+            background: #fff;
+            padding: 30px 10px;
+            box-sizing: border-box;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+
+            th,
+            td {
+                font-size: 18px;
+                padding: 10px;
+                text-align: left;
+                color: #444;
+            }
+
+            th {
+                font-weight: 500;
+            }
+
+            td {
+                text-align: right;
+            }
+
+            tr:first-child th,
+            tr:first-child td,
+            tr:last-child th,
+            tr:last-child td {
+                border-top: 1px solid #444;
+            }
+
+            &:before {
+                content: '';
+                width: 100%;
+                height: 10px;
+                background: url(../../images/semo.png)repeat-x;
+                position: absolute;
+                top: -10px;
+                left: 0;
+            }
+
+            &:after {
+                content: '';
+                width: 100%;
+                height: 10px;
+                background: url(../../images/semo.png)repeat-x;
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                transform: rotate(180deg);
+            }
+        }
+
+        .btn {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}
+
+
+/**************************************************************
 Notice.js 공지사항
 ***************************************************************/
 #Notice {
@@ -709,7 +1101,6 @@ Notice.js 공지사항
             border: 1px solid #ddd;
             box-sizing: border-box;
             max-width: 120px;
-            min-height: 45px;
             position: relative;
 
             select {

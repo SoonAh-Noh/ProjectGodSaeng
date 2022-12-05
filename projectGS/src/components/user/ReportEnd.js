@@ -17,7 +17,7 @@ const ReportEnd = () => {
         <h1>불법주정차 신고</h1>
         <ul>
           <li className="on"><a href="report">불법주정차 신고</a></li>
-          <li><a href="#">공유킥보드 신고</a></li>
+          <li><a href="/quickreport">공유킥보드 신고</a></li>
         </ul>
       </div>
 

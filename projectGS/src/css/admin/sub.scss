@@ -1,0 +1,101 @@
+.adminTitle {
+    margin-bottom: 20px;
+
+    h3 {
+        font-size: 28px;
+        color: #333;
+    }
+}
+
+
+/**************************************************************
+AdminInformation.js 관리자 정보
+***************************************************************/
+
+.tableBtnWrap {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.adminBtn {
+    padding: 10px 40px;
+    font-size: 14px;
+    border-radius: 5px;
+    background: #ededed;
+    color: #555;
+}
+
+.adminBtnNavy {
+    background: #191d73;
+    color: #fff;
+}
+
+
+
+/**************************************************************
+BoardManagement.js 공지사항 관리
+***************************************************************/
+
+.searchWrap {
+    margin: 20px 0;
+    display: flex;
+
+    .searchCate {
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        width: 100px;
+        position: relative;
+
+        select {
+            width: 100%;
+            font-size: 14px;
+            color: #666;
+            border: 0;
+            min-height: auto;
+            padding: 15px;
+        }
+
+        &:after {
+            content: "\e936";
+            font-family: 'xeicon';
+            color: #aaa;
+            font-size: 14px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    .searchTxt {
+        border-radius: 0;
+        margin-left: -1px;
+        min-height: 45px;
+        font-size: 16px;
+        padding: 0 15px;
+    }
+
+    .searchBtn {
+        margin-left: -1px;
+        padding: 0 25px;
+        box-sizing: border-box;
+        background: #333;
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+.flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+
+    .searchWrap {
+        margin-bottom: 0;
+    }
+}
+
+.fileIcon {
+    font-size: 20px;
+    vertical-align: middle;
+}

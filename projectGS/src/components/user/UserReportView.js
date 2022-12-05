@@ -38,7 +38,12 @@ const UserReportView = () => {
         장소 : {data.NOTIFY_SPOT}
         <br />
         처리 상태 :
-        <select key={uuid()} defaultValue={data.NOTIFY_PNUM} ref={processRef}>
+        <select
+          key={uuid()}
+          defaultValue={data.NOTIFY_PNUM}
+          ref={processRef}
+          disabled
+        >
           {process.map((val2, key2) => (
             <option key={key2} value={val2.NOTIFY_PNUM}>
               {val2.NOTIFY_STATUS}

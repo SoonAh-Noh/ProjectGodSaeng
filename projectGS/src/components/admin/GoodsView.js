@@ -46,28 +46,32 @@ const GoodsView = () => {
     }
   };
   return (
-    <div>
-      <div>상품권 상세보기</div>
-      <div>
-        <img
-          src={server_bridge.py_url + '/' + state.data.GOODS_IMG}
-          alt="상품권 이미지"
-        />
-        상품권 이미지 변경: <input type="file" accept="image/*" ref={imgRef} />
-        <br />
-        상품권명 :
-        <input type="text" ref={nameRef} defaultValue={state.data.GOODS_NAME} />
-        <br />
-        가격 :
-        <input
-          type="text"
-          ref={priceRef}
-          placeholder="숫자만 입력해주세요! ex)9000"
-          defaultValue={state.data.GOODS_PRICE}
-        />
-        <br />
-        <button onClick={updateGoods}>수정하기</button>
-        <button onClick={deleteGoods}>삭제하기</button>
+    <div className="Contents">
+      <div className="pageWrap">
+        <div className="adminTitle"><h3>상품권 상세</h3></div>
+
+        <div>상품권 상세보기</div>
+        <div>
+          <img
+            src={server_bridge.py_url + '/' + state.data.GOODS_IMG}
+            alt="상품권 이미지"
+          />
+          상품권 이미지 변경: <input type="file" accept="image/*" ref={imgRef} />
+          <br />
+          상품권명 :
+          <input type="text" ref={nameRef} defaultValue={state.data.GOODS_NAME} />
+          <br />
+          가격 :
+          <input
+            type="text"
+            ref={priceRef}
+            placeholder="숫자만 입력해주세요! ex)9000"
+            defaultValue={state.data.GOODS_PRICE}
+          />
+          <br />
+          <button onClick={updateGoods}>수정하기</button>
+          <button onClick={deleteGoods}>삭제하기</button>
+        </div>
       </div>
     </div>
   );

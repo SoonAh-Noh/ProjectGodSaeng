@@ -14,7 +14,7 @@ function redeucer(state, action) {
 }
 
 const PointItem = ({ article }) => {
-  console.log('아이템 img', article.GOODS_IMG);
+  // console.log('아이템 img', article.GOODS_IMG);
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -29,37 +29,21 @@ const PointItem = ({ article }) => {
   };
 
   return (
-    <div>
+    <div className="goodsItem">
       <figure onClick={onClick}>
-        <img
-          src={server_bridge.py_url + '/' + article.GOODS_IMG}
-          alt="온누리상품권"
-        />
+        <img src={server_bridge.py_url + '/' + article.GOODS_IMG} alt="온누리상품권" />
         <figcaption>
-          {/* <span className="brand">{article.brand}</span> */}
-          <br />
+          {/* <br />
           <div className="giftCard">{article.GOODS_NAME}</div>
-          <br />
-          <span className="won">￦</span>
-          <span className="price">{addComma(article.GOODS_PRICE)}</span>
+          <br /> */}
+          <h4>
+            <span className="won">￦</span>
+            <span className="price">{addComma(article.GOODS_PRICE)}</span>
+          </h4>
         </figcaption>
       </figure>
     </div>
   );
 };
-
-// return (
-//   <li className="tags">
-//     <button
-//       // className={`${tagData.isChecked ? 'tagBtn' : 'tagBtnOFF'}`}
-//       type="button"
-//       style={{ backgroundColor: tagData.color }}
-//       onClick={() => clickTagBtn(tagData.id)}
-//     >
-//       {tagData.title}
-//     </button>
-//   </li>
-//   );
-// };
 
 export default PointItem;

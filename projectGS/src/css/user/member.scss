@@ -2,15 +2,35 @@
     background: #fafafa;
     min-height: 980px;
 
-    #Header {
-        .menu ul li a {
-            color: #333;
-        }
+    background: url(../../images/bg.jpg)no-repeat;
+    overflow: hidden;
+    background-size: cover;
 
-        .login ul li a {
-            color: #888;
-        }
-    }
+    // #Header {
+    //     .menu ul li a {
+    //         color: #333;
+    //     }
+
+    //     .login ul li a {
+    //         color: #888;
+    //     }
+
+    //     .logOn li {
+    //         a {
+    //             border: 1px solid rgba(0, 0, 0, 0.5) !important;
+
+    //             &:hover {
+    //                 background: #333;
+    //                 color: #fff;
+    //                 border-color: #333;
+    //             }
+    //         }
+
+    //         &:last-child a {
+    //             border-left: 0 !important;
+    //         }
+    //     }
+    // }
 }
 
 .memberSection {
@@ -23,8 +43,28 @@
 
         h2 {
             font-size: 38px;
-            color: #333;
+            // color: #333;
+            color: rgba(255, 255, 255, 0.9);
             text-align: center;
         }
+    }
+}
+
+// .memberFoot {
+//     background: #fafafa;
+// }
+
+.memberFoot {
+    #Footer .info h4 {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    #Footer .info ul li,
+    #Footer .info .copy {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    #Footer .ft-menu ul li a {
+        color: rgba(255, 255, 255, 0.75);
     }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../css/admin/AdminLogin.scss';
 
 const AdminLogin = () => {
   // 아이디 패스워드 인풋태그 Ref
@@ -85,31 +86,52 @@ const AdminLogin = () => {
   };
 
   return (
-    <div>
-      <form>
-        <h3>로그인</h3>
-        <label>아이디</label>
-        <input
-          type="text"
-          defaultValue=""
-          placeholder="아이디를 입력하세요"
-          ref={idRef}
-        />
-        <label>비밀번호</label>
-        <input
-          type="password"
-          defaultValue=""
-          placeholder="비밀번호를 입력하세요"
-          ref={pwRef}
-          onKeyPress={onKeyPress}
-        />
+    <div className="admin">
+      <div className="ad">
+        <div className="sub-title">
+          <h3>관리자 로그인</h3>
+        </div>
 
-        {/* <label>관리자 권한이 없습니다.</label>
+        <form className="form_login">
+          <div className="input-box">
+            <input
+              className="id_ad"
+              type="text"
+              defaultValue=""
+              placeholder=" "
+              ref={idRef}
+            />
+            <label>아이디</label>
+          </div>
 
-        <label>로그인 정보가 틀렸습니다.</label> */}
-        <input type="button" value="로그인" onClick={handleLogin} />
-      </form>
+          <div className="input-box">
+            <input
+              className="pw_ad"
+              type="password"
+              defaultValue=""
+              placeholder="비밀번호를 입력하세요"
+              ref={pwRef}
+              onKeyPress={onKeyPress}
+            />
+            <label>비밀번호</label>
+          </div>
+
+          <input
+            className="btn_admin"
+            type="button"
+            value="로그인"
+            onClick={handleLogin}
+          />
+
+          <div className="ad_info">
+            <div>※ 관리자 전용 로그인 화면입니다.</div>
+            <div>※ 비밀번호 분실 시 문의 바랍니다.</div>
+            <div className="copy">© GODSAENG. ALL RIGHTS RESERVED.</div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
+
 export default AdminLogin;

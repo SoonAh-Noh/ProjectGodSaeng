@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../css/user/Login.scss';
 
 const Login = () => {
   // 페이지 이동 navigate
@@ -59,8 +60,7 @@ const Login = () => {
 
           alert(res.data[0].USER_NAME + '님 환영합니다!');
           // 세션에 값 저장후 메인페이지로 이동
-          // navigate('/');
-          window.location.href = '/';
+          navigate('/');
         } else {
           console.log('실패 id', res.data[0].USER_ID);
           console.log('실패 name', res.data[0].USER_NAME);
@@ -81,39 +81,56 @@ const Login = () => {
 
   return (
     <div id="Login">
-      <div className="memberSection">
+      <div className="log">
         <div className="sub-title">
           <h2>로그인</h2>
         </div>
 
-        <form>
-          <div>아이디</div>
-          <input
-            className="id"
-            type="text"
-            defaultValue=""
-            placeholder="아이디를 입력하세요"
-            ref={idRef}
-          />
-          <div>비밀번호</div>
-          <input
-            className="pw"
-            type="password"
-            defaultValue=""
-            placeholder="비밀번호를 입력하세요"
-            ref={pwRef}
-            onKeyPress={onKeyPress}
-          />
-          <input type="button" value="로그인" onClick={handleLogin} />
-          <div>
-            <a href="/forgot">비밀번호 찾기</a>
+        <form className="form-login">
+          <div className="input-box">
+            <input
+              className="id_login"
+              type="text"
+              defaultValue=""
+              placeholder=" "
+              ref={idRef}
+            />
+            <label>아이디</label>
           </div>
+
+          <div className="input-box">
+            <input
+              className="pw_login"
+              type="password"
+              defaultValue=""
+              placeholder=" "
+              ref={pwRef}
+              onKeyPress={onKeyPress}
+            />
+            <label>비밀번호</label>
+          </div>
+
+          <div className="btn_log">
+            <input
+              className="btn-login"
+              type="button"
+              value="로그인"
+              onClick={handleLogin}
+            />
+          </div>
+
           <div>
-            <a href="/join">회원가입 </a>
+            <a className="login_pw" href="/forgot">
+              비밀번호 찾기
+            </a>
+            <a className="gaip" href="/join">
+              회원가입{' '}
+            </a>
           </div>
         </form>
       </div>
     </div>
   );
 };
+
 export default Login;

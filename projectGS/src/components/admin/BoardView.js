@@ -45,32 +45,36 @@ const BoardView = () => {
     return;
   };
   return (
-    <div>
-      <div>
-        제목 : {board.BOARD_TIT} <br />
-        작성자 : {board.USER_NAME}
-        <br />
-        작성일 : {board.BOARD_DATE}
-        <br />
-        <button onClick={updateBoard}>수정하기</button>
-        <br />
-        <button onClick={deleteBoard}>삭제하기</button>
-        <br />
+    <div className="Contents">
+      <div className="pageWrap">
+        <div className="adminTitle"><h3>공지사항 글쓰기</h3></div>
+
+        <div>
+          제목 : {board.BOARD_TIT} <br />
+          작성자 : {board.USER_NAME}
+          <br />
+          작성일 : {board.BOARD_DATE}
+          <br />
+          <button onClick={updateBoard}>수정하기</button>
+          <br />
+          <button onClick={deleteBoard}>삭제하기</button>
+          <br />
+        </div>
+        <div>
+          {board.BOARD_FILE !== '' ? (
+            <a
+              href={
+                server_bridge.py_url + '/download_file/' + board.BOARD_FILE.dir
+              }
+            >
+              {board.BOARD_FILE.filename}
+            </a>
+          ) : (
+            ''
+          )}
+        </div>
+        <div>{board.BOARD_TXT}</div>
       </div>
-      <div>
-        {board.BOARD_FILE !== '' ? (
-          <a
-            href={
-              server_bridge.py_url + '/download_file/' + board.BOARD_FILE.dir
-            }
-          >
-            {board.BOARD_FILE.filename}
-          </a>
-        ) : (
-          ''
-        )}
-      </div>
-      <div>{board.BOARD_TXT}</div>
     </div>
   );
 };

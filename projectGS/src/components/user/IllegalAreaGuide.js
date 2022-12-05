@@ -27,7 +27,8 @@ import bus1_1 from "../../images/guide3-1.jpg";
 import crosswalk1_1 from "../../images/guide4-1.jpg";
 import school1_1 from "../../images/guide5-1.jpg";
 import disabled1_1 from "../../images/guide6-1.jpg";
-// import fire1 from "../../images/guide7-1.jpg";
+import disabled1_2 from "../../images/guide6-2.jpg";
+import fire1_1 from "../../images/guide7-1.jpg";
 import fire1_2 from "../../images/guide7-2.jpg";
 // import elect1 from "../../images/guide8-1.jpg";
 // import elect2 from "../../images/guide8-2.jpg";
@@ -76,6 +77,8 @@ const IllegalAreaGuide = () => {
   let crosswalk1 = {backgroundImage: `url(${crosswalk1_1})`};
   let school1 = {backgroundImage: `url(${school1_1})`};
   let disabled1 = {backgroundImage: `url(${disabled1_1})`};
+  let disabled2 = {backgroundImage: `url(${disabled1_2})`};  
+  let fire1 = {backgroundImage: `url(${fire1_1})`};
   let fire2 = {backgroundImage: `url(${fire1_2})`};
 
   const [value, setValue] = React.useState(0);
@@ -307,9 +310,9 @@ const IllegalAreaGuide = () => {
                     <SwiperSlide>
                       <div style={disabled1} className="slideImg"></div>
                     </SwiperSlide>
-                    {/* <SwiperSlide>
-                      <div style={bus2} className="slideImg"></div>
-                    </SwiperSlide> */}
+                    <SwiperSlide>
+                      <div style={disabled2} className="slideImg"></div>
+                    </SwiperSlide>
                   </Swiper>
                 </div>
               </div>
@@ -341,11 +344,11 @@ const IllegalAreaGuide = () => {
                     speed={1400}
                   >
                     <SwiperSlide>
+                      <div style={fire1} className="slideImg"></div>
+                    </SwiperSlide>
+                    <SwiperSlide>
                       <div style={fire2} className="slideImg"></div>
                     </SwiperSlide>
-                    {/* <SwiperSlide>
-                      <div style={bus2} className="slideImg"></div>
-                    </SwiperSlide> */}
                   </Swiper>
                 </div>
               </div>

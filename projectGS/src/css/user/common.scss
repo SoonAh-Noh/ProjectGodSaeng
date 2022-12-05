@@ -127,6 +127,39 @@
                 }
             }
         }
+
+        .logOn {
+            li {
+                margin: 0;
+
+                a {
+                    border: 1px solid rgba(255, 255, 255, 0.5);
+                    padding: 10px 20px;
+                    box-sizing: border-box;
+                    transition: all 0.4s;
+
+                    &:hover {
+                        background: #fff;
+                        color: #191d73;
+                        border-color: #fff;
+                    }
+                }
+
+                &:first-child a {
+                    border-radius: 10px 0 0 10px;
+                }
+
+                &:last-child a {
+                    border-radius: 0 10px 10px 0;
+                    border-left: 0;
+                    // background: rgba(0, 0, 0, 0.6);
+                }
+            }
+
+            li::before {
+                width: 0;
+            }
+        }
     }
 }
 

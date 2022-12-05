@@ -1,4 +1,10 @@
 const MyPage = () => {
-  return <div>여기는 마이페이지!</div>;
+  return (
+    <div id="MyPage">
+      <div className="memberSection">
+        <div className="sub-title"><h2>마이페이지</h2></div>
+      </div>
+    </div>
+  );
 };
 export default MyPage;

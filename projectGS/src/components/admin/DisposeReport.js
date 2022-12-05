@@ -116,107 +116,110 @@ const DisposeReport = () => {
   };
 
   return (
-    <div>
-      관리자의 신고 내용 처리 페이지
-      <div>
-        기간 : <input type="date" ref={start_dateRef} /> ~{' '}
-        <input type="date" ref={end_dateRef} />
-      </div>
-      <div>
-        카테고리 :
-        <select name="cate_sel" id="cate_sel" ref={categoryRef}>
-          <option value="default">전체</option>
-          {category.length > 1 &&
-            category.map((val, key) => (
-              <option key={key} value={val.CATEGORY_IDX}>
-                {val.CATEGORY}
-              </option>
-            ))}
-        </select>
-      </div>
-      <div>
-        처리 상태 :
-        {process.length > 1 &&
-          process.map((val, key) => (
-            <span key={key}>
-              <input
-                type="checkbox"
-                id={`process_` + key}
-                name={`process_` + key}
-                value={val.NOTIFY_PNUM}
-                ref={addToRefs}
-              />
-              <label htmlFor={`process_` + key}>{val.NOTIFY_STATUS}</label>
-            </span>
-          ))}
-        <button onClick={handleReportList}>검색</button>
-      </div>
-      <CsvDownload
-        className="excelbtn"
-        // data : object 또는 object의 배열
-        data={disport}
-        delimiter={','}
-        // filename : 파일이름
-        filename="신고내역.csv"
-      >
-        엑셀 다운로드
-      </CsvDownload>
-      {/* <button onClick={downloadCSV}>엑셀 다운로드</button> */}
-      {/* <div>월별 그래프를 이 페이지에서 굳이 봐야하나 하는 생각이 들어서 일단 제외</div>  */}
-      <div>
+    <div className="Contents">
+      <div className="pageWrap">
+        <div className="adminTitle"><h3>신고 처리</h3></div>
+        
         <div>
-          <table border={1}>
-            <thead>
-              <tr>
-                <th>no</th>
-                <th>신고자</th>
-                <th>처리상태</th>
-                <th>카테고리</th>
-                <th>신고일시</th>
-                <th>더보기</th>
-              </tr>
-            </thead>
-            <tbody>
-              {typeof disport !== 'string' && disport.length > 0 ? (
-                disport
-                  .slice(page * itemcount - itemcount, page * itemcount)
-                  .map((data, key) => (
-                    //disport.map((val, key) => (
-                    //<DisposeDetail val={val} key={key} process={process} />
-
-                    <tr key={key}>
-                      <td>{data.NOTIFY_IDX}</td>
-                      <td>
-                        {data.USER_NAME === null ? '비회원' : data.USER_NAME}
-                      </td>
-                      <td>{data.NOTIFY_STATUS}</td>
-                      <td>{data.CATEGORY}</td>
-                      <td>{data.NOTIFY_DATE}</td>
-                      <td>
-                        <button onClick={() => move2Detail(data)}>
-                          상세보기
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-              ) : (
-                <tr>
-                  <td colSpan={6}></td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+          기간 : <input type="date" ref={start_dateRef} /> ~{' '}
+          <input type="date" ref={end_dateRef} />
         </div>
-      </div>
-      <div>
-        {typeof disport !== 'string' && (
-          <Page //페이지네이션 객체(component/admin/Page.js)
-            page={page} //현재 페이지
-            totalcnt={totalcnt} //총 게시글 갯수
-            setPage={setCurrentPage} //페이징 처리함수
-            itemcount={itemcount} //한 페이지에 몇개를 보여줄건지를 뜻함
-          />
-        )}
+        <div>
+          카테고리 :
+          <select name="cate_sel" id="cate_sel" ref={categoryRef}>
+            <option value="default">전체</option>
+            {category.length > 1 &&
+              category.map((val, key) => (
+                <option key={key} value={val.CATEGORY_IDX}>
+                  {val.CATEGORY}
+                </option>
+              ))}
+          </select>
+        </div>
+        <div>
+          처리 상태 :
+          {process.length > 1 &&
+            process.map((val, key) => (
+              <span key={key}>
+                <input
+                  type="checkbox"
+                  id={`process_` + key}
+                  name={`process_` + key}
+                  value={val.NOTIFY_PNUM}
+                  ref={addToRefs}
+                />
+                <label htmlFor={`process_` + key}>{val.NOTIFY_STATUS}</label>
+              </span>
+            ))}
+          <button onClick={handleReportList}>검색</button>
+        </div>
+        <CsvDownload
+          className="excelbtn"
+          // data : object 또는 object의 배열
+          data={disport}
+          delimiter={','}
+          // filename : 파일이름
+          filename="신고내역.csv"
+        >
+          엑셀 다운로드
+        </CsvDownload>
+        {/* <button onClick={downloadCSV}>엑셀 다운로드</button> */}
+        {/* <div>월별 그래프를 이 페이지에서 굳이 봐야하나 하는 생각이 들어서 일단 제외</div>  */}
+        <div>
+          <div>
+            <table border={1}>
+              <thead>
+                <tr>
+                  <th>no</th>
+                  <th>신고자</th>
+                  <th>처리상태</th>
+                  <th>카테고리</th>
+                  <th>신고일시</th>
+                  <th>더보기</th>
+                </tr>
+              </thead>
+              <tbody>
+                {typeof disport !== 'string' && disport.length > 0 ? (
+                  disport
+                    .slice(page * itemcount - itemcount, page * itemcount)
+                    .map((data, key) => (
+                      //disport.map((val, key) => (
+                      //<DisposeDetail val={val} key={key} process={process} />
+
+                      <tr key={key}>
+                        <td>{data.NOTIFY_IDX}</td>
+                        <td>
+                          {data.USER_NAME === null ? '비회원' : data.USER_NAME}
+                        </td>
+                        <td>{data.NOTIFY_STATUS}</td>
+                        <td>{data.CATEGORY}</td>
+                        <td>{data.NOTIFY_DATE}</td>
+                        <td>
+                          <button onClick={() => move2Detail(data)}>
+                            상세보기
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                ) : (
+                  <tr>
+                    <td colSpan={6}></td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          {typeof disport !== 'string' && (
+            <Page //페이지네이션 객체(component/admin/Page.js)
+              page={page} //현재 페이지
+              totalcnt={totalcnt} //총 게시글 갯수
+              setPage={setCurrentPage} //페이징 처리함수
+              itemcount={itemcount} //한 페이지에 몇개를 보여줄건지를 뜻함
+            />
+          )}
+        </div>
       </div>
     </div>
   );

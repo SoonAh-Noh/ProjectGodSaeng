@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import styles from './css/UserDetail.module.scss';
 import UserInfoContainer from './components/UserInfoContainer';
 import UserDisposeList from './UserDisposeList';
+import PointListComponent from '../common/PointListComponent';
 //import PagedTable from './components/PagedTable';
 import * as server_bridege from '../../controller/server_bridge';
 const UserDetail = () => {
@@ -33,6 +34,7 @@ const UserDetail = () => {
       </div>
       <div className={styles.ud_item}>
         <div>포인트 이력</div>
+        <PointListComponent user_id={state.user_id} />
       </div>
     </div>
   );

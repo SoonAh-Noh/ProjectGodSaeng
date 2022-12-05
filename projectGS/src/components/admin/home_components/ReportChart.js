@@ -18,7 +18,9 @@ export default class ReportChart extends PureComponent {
     return (
       // <div className="cell-a" style={{ width: '100%', height: 300 }}>
       <div className="cell-a" style={{ width: '45%', height: 200 }}>
-        <ResponsiveContainer width="100%" height="100%">
+        <div className="mainTitle"><h4>신고 처리 현황 그래프</h4></div>
+
+        <ResponsiveContainer width="100%" height="90%">
           <BarChart
             width={500}
             height={300}
@@ -35,10 +37,10 @@ export default class ReportChart extends PureComponent {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="c1" name="신고접수" fill="#8884d8" />
-            <Bar dataKey="c2" name="담당자배정" fill="#82ca9d" />
-            <Bar dataKey="c3" name="신고처리중" fill="#8573ad" />
-            <Bar dataKey="c4" name="처리완료" fill="#886547" />
+            <Bar dataKey="c1" name="신고접수" fill="#F77357" />
+            <Bar dataKey="c2" name="담당자배정" fill="#7969cc" />
+            <Bar dataKey="c3" name="신고처리중" fill="#4c429f" />
+            <Bar dataKey="c4" name="처리완료" fill="#191d73" />
           </BarChart>
         </ResponsiveContainer>
       </div>

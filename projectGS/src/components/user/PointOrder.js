@@ -51,79 +51,102 @@ const PointOrder = () => {
   //   };
   // }, []);
   return (
-    <div>
-      <form>
-        <div>주문하기</div>
-        <div>
-          {/* <span className="brand">{state.article.brand}</span> */}
-          <figure className="order_img">
-            <img
-              src={server_bridge.py_url + '/' + state.article.GOODS_IMG}
-              alt="온누리상품권"
-            />
-          </figure>
+    <div id="PointOrder" className="subPage">
+      <div className="subTop">
+        <h1>포인트 사용</h1>
+      </div>
+
+      <div className="section">
+        <div className="sub-title"><h2>상품권 주문하기</h2></div>
+
+        <div className="Order">
+          <form>
+            <div className="goodsTop">
+              <figure className="order_img goodsImg">
+                <img
+                  src={server_bridge.py_url + '/' + state.article.GOODS_IMG}
+                  alt="온누리상품권"
+                />
+              </figure>
+
+              <div className="goodsInfo">
+                <div className="giftCard goodsTitle">
+                  <span className="brand">소상공인시장진흥공단</span>
+                  <h3>{state.article.GOODS_NAME}</h3>
+                </div>
+
+                <div className="goodsContents">
+                  <table border="0" cellPadding="0" cellSpacing="0">
+                    <colgroup>
+                      <col width="20%" />
+                      <col />
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                      <th>정상가</th>
+                      <td>
+                        <span className="cover-price">
+                          <span className="won">￦</span>
+                          <span className="price">{addComma(state.article.GOODS_PRICE)}</span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>제공가</th>
+                      <td>
+                        <span className="cover-price">
+                          <span className="won">￦</span>
+                          <span className="price">{addComma(state.article.GOODS_PRICE)}</span>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>교환처</th>
+                      <td>은행 또는 환전대행가맹점</td>
+                    </tr>
+                    <tr>
+                      <th>유효기간</th>
+                      <td>발행일로부터 5년</td>
+                    </tr>
+                    <tr>
+                      <th>수량</th>
+                      <td>
+                        <div className="goodsCnt">
+                          <input type="button" className="cntBtn" value="-" onClick={onDecrease} />
+                          <span>{count}</span>
+                          <input type="button" className="cntBtn" value="+" onClick={onIncrease} />
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                  <button type="button" className="btn btn-navy" onClick={handleClick}>
+                    주문하기
+                  </button>
+                </div>
+              </div>
+                        
+            </div>
+            
+            <div className="goodsDetail">
+              <h4>[상품명]</h4>
+              <p>{state.article.GOODS_NAME}</p>
+              
+              <h4>[상품설명]</h4>
+              <p>{state.article.GOODS_NAME}</p>
+              
+              <h4>[이용안내]</h4>
+              <ul>
+                <li>본 상품은 예시 이미지로서 실제 상품과 다를 수 있습니다.</li>
+                <li>결제 완료 후에는 주문 및 결제 취소가 불가합니다.</li>
+                <li>1인당 월 구매한도는 50만원입니다.</li>
+                <li>온누리상품권 통합문의처 : 중소기업통합콜센터 (☎1357)</li>
+              </ul>
+            </div>
+          </form>
         </div>
-        <section>
-          <ul>
-            <div className="giftCard">{state.article.GOODS_NAME}</div>
-            <li>
-              <div>정상가</div>
-              <div>
-                <span className="cover-price">
-                  <span className="won">￦</span>
-                  <span className="price">
-                    {addComma(state.article.GOODS_PRICE)}
-                  </span>
-                </span>
-              </div>
-            </li>
-            <li>
-              <div>제공가</div>
-              <div>
-                <span className="cover-price">
-                  <span className="won">￦</span>
-                  <span className="price">
-                    {addComma(state.article.GOODS_PRICE)}
-                  </span>
-                </span>
-              </div>
-            </li>
-            <li>
-              <div>교환처</div>
-              <div>은행 또는 환전대행가맹점</div>
-            </li>
-            <li>
-              <div>유효기간</div>
-              <div>발행년도로부터 5년</div>
-            </li>
-            <li>
-              <div>수량</div>
-              <div>
-                <input type="button" value="-" onClick={onDecrease} />
-                <span>{count}</span>
-                <input type="button" value="+" onClick={onIncrease} />
-              </div>
-            </li>
-          </ul>
-          <button type="button" onClick={handleClick}>
-            주문하기
-          </button>
-        </section>
-        <hr />
-        <div>
-          <b>[상품명]</b>
-          <p>{state.article.GOODS_NAME}</p>
-          <br />
-          <b>[상품설명]</b>
-          <p>{state.article.GOODS_NAME}</p>
-          <br />
-          <b>[이용안내]</b>
-          <p>- 본 상품은 예시 이미지로서 실제 상품과 다를 수 있습니다.</p>
-          <p>- 결제 완료 후에는 주문 및 결제 취소가 불가합니다.</p>
-          <p>- 1인당 월 구매한도는 50만원입니다.</p>
-          <p>- 온누리상품권 통합문의처 : 중소기업통합콜센터 (☎1357)</p>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import styles from './css/Home.module.scss';
+// import styles from './css/Home.module.scss';
 import React from 'react';
-import './css/Home.module.scss';
+// import './css/Home.module.scss';
 import TodoList from './TodoList';
 // import ChartWidgets from './ChartWidgets';
 // import SummaryWidgets from './SummaryWidgets';
@@ -14,8 +14,13 @@ import ReportChart from './home_components/ReportChart';
 import AdminLogin from './AdminLogin';
 import * as server_bridge from '../../controller/server_bridge';
 
+
+import "../../css/admin/main.scss";
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+
 const Home = () => {
   const navigate = useNavigate();
   const [daily_summary, setDailySummary] = useState([]); //통계표/시각화 자료용 데이터표
@@ -128,26 +133,22 @@ const Home = () => {
     }
   };
   return (
-    <>
-      {window.sessionStorage.getItem('USER_ID') !== null ? (
-        <>
-          <TodoList data={sum_data} />
-          <div className="container">
-            <ReportChart data={daily_summary} />
-            {/* 시각화자료 */}
-            <DisposeSummary data={daily_summary} />
-            {/* 신고 통계 */}
-            <div className="clear" style={{ clear: 'both' }} />
-            <DisposeListMini data={noti_list} />
-            {/* 신고 리스트(관리자 메인페이지용) */}
-            <NoticeListMini data={board_list} />
-            {/* 공지사항(관리자 메인페이지용) */}
-          </div>
-        </>
-      ) : (
-        <AdminLogin />
-      )}
-    </>
+    <div className="Contents">
+      <div className="Wrap">
+        <TodoList data={sum_data} />
+        
+        <div className="container">
+          <ReportChart data={daily_summary} />
+          {/* 시각화자료 */}
+          <DisposeSummary data={daily_summary} />
+          {/* 신고 통계 */}
+          <DisposeListMini data={noti_list} />
+          {/* 신고 리스트(관리자 메인페이지용) */}
+          <NoticeListMini data={board_list} />
+          {/* 공지사항(관리자 메인페이지용) */}
+        </div>
+      </div>
+    </div>
   );
 };
 export default Home;
