@@ -2,7 +2,7 @@ import * as server_bridge from '../../controller/server_bridge';
 import { useRef, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './css/noti.css';
-const WriteNotify = () => {
+const BoardWrite = () => {
   const mode_list = ['write', 'update']; //새 게시글 작성/ 수정 모드의 리스트
   const titleRef = useRef(); //제목
   const contentRef = useRef(); //내용
@@ -104,56 +104,60 @@ const WriteNotify = () => {
   };
 
   return (
-    <div>
-      {mode === mode_list[0] ? '작성모드' : '수정모드'}
-      <form onSubmit={writeNoti}>
-        <div>
-          제목{' '}
-          <input
-            type="text"
-            name="title"
-            ref={titleRef}
-            defaultValue={board.BOARD_TIT}
-          />
-        </div>
-        <input
-          type="file"
-          name="notifile"
-          id="notifile"
-          ref={fileRef}
-          onChange={() => changeFile(fileRef.current.files[0].name)}
-        />
-        <label id="labelbutton" htmlFor="notifile">
-          파일선택
-        </label>
-        <label ref={filelabelRef}>파일을 선택해주세요</label>
-        {isfileuploading === true ? (
-          <input
-            type="button"
-            onClick={(e) => {
-              fileRef.current.value = null;
-              changeFile('파일을 선택해주세요');
-            }}
-            value="삭제"
-          />
-        ) : (
-          ''
-        )}
+    <div className="Contents">
+      <div className="pageWrap">
+        <div className="adminTitle"><h3>공지사항 작성</h3></div>
 
-        <div className="updownSpace" />
-        <div>
-          <textarea
-            name="content"
-            id=""
-            cols="30"
-            rows="10"
-            ref={contentRef}
-            defaultValue={board.BOARD_TXT}
+        {mode === mode_list[0] ? '작성모드' : '수정모드'}
+        <form onSubmit={writeNoti}>
+          <div>
+            제목{' '}
+            <input
+              type="text"
+              name="title"
+              ref={titleRef}
+              defaultValue={board.BOARD_TIT}
+            />
+          </div>
+          <input
+            type="file"
+            name="notifile"
+            id="notifile"
+            ref={fileRef}
+            onChange={() => changeFile(fileRef.current.files[0].name)}
           />
-        </div>
-        <button>업로드</button>
-      </form>
+          <label id="labelbutton" htmlFor="notifile">
+            파일선택
+          </label>
+          <label ref={filelabelRef}>파일을 선택해주세요</label>
+          {isfileuploading === true ? (
+            <input
+              type="button"
+              onClick={(e) => {
+                fileRef.current.value = null;
+                changeFile('파일을 선택해주세요');
+              }}
+              value="삭제"
+            />
+          ) : (
+            ''
+          )}
+
+          <div className="updownSpace" />
+          <div>
+            <textarea
+              name="content"
+              id=""
+              cols="30"
+              rows="10"
+              ref={contentRef}
+              defaultValue={board.BOARD_TXT}
+            />
+          </div>
+          <button>업로드</button>
+        </form>
+      </div>
     </div>
   );
 };
-export default WriteNotify;
+export default BoardWrite;

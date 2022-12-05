@@ -556,7 +556,7 @@ def get_nofity_mini():  # 신고내역 미니리스트
                     LEFT JOIN CATEGORY  AS C ON A.CATEGORY_IDX  = C.CATEGORY_IDX
                     LEFT JOIN PROCESS   AS D ON A.NOTIFY_PNUM   = D.NOTIFY_PNUM 
                 WHERE A.NOTIFY_PNUM != 4
-                ORDER BY A.NOTIFY_IDX DESC;"""
+                ORDER BY A.NOTIFY_IDX DESC LIMIT 5;"""
 
     try:
         row_cnt = cursor.execute(sql)
@@ -585,7 +585,7 @@ def get_board_list_mini():  # 공지사항 미니(관리자 메인)
               B.USER_NAME AS USER_NAME
             FROM BOARD AS A
               INNER JOIN USER AS B ON A.USER_IDX = B.USER_IDX """
-    sql += "ORDER BY BOARD_IDX DESC LIMIT 3;"
+    sql += "ORDER BY BOARD_IDX DESC LIMIT 5;"
 
     try:
         row_cnt = cursor.execute(sql)

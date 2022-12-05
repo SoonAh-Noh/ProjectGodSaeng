@@ -33,7 +33,7 @@ import PointPay from './components/user/PointPay';
 import BoardManagement from './components/admin/BoardManagement';
 import DisposeReport from './components/admin/DisposeReport';
 import UserManagement from './components/admin/UserManagement';
-import WriteNotify from './components/admin/WriteNotify';
+import BoardWrite from './components/admin/BoardWrite';
 import BoardView from './components/admin/BoardView';
 import DisposeDetail from './components/admin/DisposeDetail';
 import UserDetail from './components/admin/UserDetail';
@@ -117,7 +117,7 @@ function App() {
             {/* 관리자 - 회원관리 */}
             <Route path="/admin/userdetail" element={<UserDetail />} />
             {/* 관리자 - 회원 정보 상세 */}
-            <Route path="/admin/writenoti" element={<WriteNotify />} />
+            <Route path="/admin/writenoti" element={<BoardWrite />} />
             {/* 관리자 - 게시판 작성 */}
             <Route path="/admin/boardview" element={<BoardView />} />
             {/* 관리자 - 게시판 내용 보기 */}
