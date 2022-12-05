@@ -53,7 +53,7 @@ const PointOrder = () => {
   return (
     <div>
       <form>
-        <div>주문하기~</div>
+        <div>주문하기</div>
         <div>
           {/* <span className="brand">{state.article.brand}</span> */}
           <figure className="order_img">
