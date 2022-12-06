@@ -22,25 +22,43 @@ const Join = () => {
   const mailRef = useRef();
   const telRef = useRef();
 
-  // 아이디 중복 체크
+  const [idComment, setIdComment] = useState('');
+  const [pwComment, setPwComment] = useState('');
+  const [emailComment, setEmailComment] = useState('');
+  const [phoneComment, setPhoneComment] = useState('');
 
-  // 핸드폰번호 유효성 검사
-  const checkPhonenumber = (e) => {
-    // '-' 입력 시
-    var regExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
-    // 숫자만 입력시
-    var regExp2 = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
-    // 형식에 맞는 경우 true 리턴
-    console.log('핸드폰번호 유효성 검사 :: ', regExp.test(e.target.value));
+  // 아이디 중복 체크
+  var id = '';
+  const idChange = (e) => {
+    id = idRef.current.value;
+    axios.post('http://localhost:5000/idCheck', { id }).then((res) => {
+      setIdComment('');
+      // console.log(res);
+      // console.log(res.data);
+      if (res.data[0].CNT != 0) {
+        setIdComment('중복된 아이디가 있습니다.');
+      } else {
+        setIdComment('');
+      }
+    });
   };
 
   //비밀번호 유효성 검사
   const checkPassword = (e) => {
-    //  8 ~ 10자 영문, 숫자,  조합
+    //  8 ~ 10자 영문, 숫자, 문자  조합
     var regExp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
     // 형식에 맞는 경우 true 리턴
     console.log('비밀번호 유효성 검사 :: ', regExp.test(e.target.value));
+    console.log(regExp.test(e.target.value));
+
+    if (regExp.test(e.target.value) == false) {
+      setPwComment(
+        '비밀번호는 영어, 숫자, 특수문자를 포함해 총 8글자 이상이어야 합니다.',
+      );
+    } else {
+      setPwComment('');
+    }
   };
 
   // 이메일 유효성 검사
@@ -49,6 +67,27 @@ const Join = () => {
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     // 형식에 맞는 경우 true 리턴
     console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value));
+    console.log(regExp.test(e.target.value));
+    if (regExp.test(e.target.value) == false) {
+      setEmailComment('올바른 이메일 형식이 아닙니다.');
+    } else {
+      setEmailComment('');
+    }
+  };
+
+  // 핸드폰번호 유효성 검사
+  const checkPhonenumber = (e) => {
+    // '-' 입력 시
+    var regExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+    // 숫자만 입력시
+    var regExp2 = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+    // 형식에 맞는 경우 true 리턴
+    console.log('핸드폰번호 유효성 검사 :: ', regExp2.test(e.target.value));
+    if (regExp2.test(e.target.value) == false) {
+      setPhoneComment("'-'없이 번호만 입력해주세요");
+    } else {
+      setPhoneComment('');
+    }
   };
 
   const handleRegister = () => {
@@ -95,6 +134,23 @@ const Join = () => {
       return false;
     }
 
+    const checkPassword = (val) => {
+      var regExp =
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
+      return regExp.test(val);
+    };
+
+    const checkEmail = (val) => {
+      var regExp =
+        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+      return regExp.test(val);
+    };
+
+    const checkPhonenumber = (val) => {
+      var regExp2 = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
+      return regExp2.test(val);
+    };
+
     // 회원가입 요청
     axios
       .post('http://localhost:5000/join', {
@@ -138,18 +194,21 @@ const Join = () => {
 
         <form className="form-join">
           <div className="input-box">
+            <p>{idComment}</p>
             <input
               className="join_id"
               type="text"
               size="20"
               defaultValue=""
               ref={idRef}
+              onChange={idChange}
               placeholder=" "
             />
             <label>아이디 (문자, 숫자 포함 6-20자)</label>
           </div>
 
           <div className="input-box">
+            <p>{pwComment}</p>
             <input
               className="join_pw"
               type="password"
@@ -157,6 +216,7 @@ const Join = () => {
               defaultValue=""
               ref={pwRef}
               placeholder=" "
+              onBlur={checkPassword}
             />
             <label>비밀번호 (문자, 숫자, 특수문자 포함 8-20자)</label>
           </div>
@@ -186,6 +246,7 @@ const Join = () => {
           </div>
 
           <div className="input-box">
+            <p>{emailComment}</p>
             <input
               className="join_email"
               type="email"
@@ -193,11 +254,13 @@ const Join = () => {
               defaultValue=""
               ref={mailRef}
               placeholder=" "
+              onBlur={checkEmail}
             />
             <label>이메일</label>
           </div>
 
           <div className="input-box">
+            <p>{phoneComment}</p>
             <input
               className="join_tel"
               type="text"
@@ -206,8 +269,9 @@ const Join = () => {
               ref={telRef}
               placeholder=" "
               onKeyPress={onKeyPress}
+              onBlur={checkPhonenumber}
             />
-            <label>핸드폰</label>
+            <label>핸드폰('-'없이 숫자만 입력)</label>
           </div>
 
           <div>

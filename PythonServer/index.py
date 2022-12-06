@@ -105,9 +105,10 @@ def join():  # 회원가입
 
 
 @app.route("/idCheck", methods=["GET", "POST"])
-def idCheck():  # 아이디 체크
+def idCheck():  # 아이디 중복 체크
     body_data = get_body_data(request)
     return dbconnecter.idCheck(body_data)
+
 
 
 @app.route("/login", methods=["GET", "POST"])
