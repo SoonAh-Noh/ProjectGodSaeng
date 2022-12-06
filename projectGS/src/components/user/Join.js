@@ -49,8 +49,8 @@ const Join = () => {
     var regExp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
     // 형식에 맞는 경우 true 리턴
-    console.log('비밀번호 유효성 검사 :: ', regExp.test(e.target.value));
-    console.log(regExp.test(e.target.value));
+    // console.log('비밀번호 유효성 검사 :: ', regExp.test(e.target.value));
+    // console.log(regExp.test(e.target.value));
 
     if (regExp.test(e.target.value) == false) {
       setPwComment(
@@ -66,8 +66,8 @@ const Join = () => {
     var regExp =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     // 형식에 맞는 경우 true 리턴
-    console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value));
-    console.log(regExp.test(e.target.value));
+    // console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value));
+    // console.log(regExp.test(e.target.value));
     if (regExp.test(e.target.value) == false) {
       setEmailComment('올바른 이메일 형식이 아닙니다.');
     } else {
@@ -82,7 +82,7 @@ const Join = () => {
     // 숫자만 입력시
     var regExp2 = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
     // 형식에 맞는 경우 true 리턴
-    console.log('핸드폰번호 유효성 검사 :: ', regExp2.test(e.target.value));
+    // console.log('핸드폰번호 유효성 검사 :: ', regExp2.test(e.target.value));
     if (regExp2.test(e.target.value) == false) {
       setPhoneComment("'-'없이 번호만 입력해주세요");
     } else {
@@ -134,24 +134,24 @@ const Join = () => {
       return false;
     }
 
-    const checkPassword = (val) => {
-      var regExp =
-        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
-      return regExp.test(val);
-    };
+    if (checkPassword(pwRef.current.value) !== false) {
+      alert('비밀번호 형식이 아닙니다');
+      pwRef.current.focus();
+      return false;
+    }
 
-    const checkEmail = (val) => {
-      var regExp =
-        /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-      return regExp.test(val);
-    };
+    if (checkEmail(mailRef.current.value) !== false) {
+      alert('이메일 형식이 아닙니다');
+      mailRef.current.focus();
+      return false;
+    }
 
-    const checkPhonenumber = (val) => {
-      var regExp2 = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
-      return regExp2.test(val);
-    };
+    if (checkPhonenumber(telRef.current.value) !== false) {
+      alert('핸드폰 형식이 아닙니다');
+      telRef.current.focus();
+      return false;
+    }
 
-    // 회원가입 요청
     axios
       .post('http://localhost:5000/join', {
         id: idRef.current.value,
