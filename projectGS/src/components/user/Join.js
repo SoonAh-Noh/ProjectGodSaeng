@@ -21,6 +21,9 @@ const Join = () => {
   const nameRef = useRef();
   const mailRef = useRef();
   const telRef = useRef();
+  const checkEmailRef = useRef();
+  const checkPasswordRef = useRef();
+  const checkPhonenumberRef = useRef();
 
   const [idComment, setIdComment] = useState('');
   const [pwComment, setPwComment] = useState('');

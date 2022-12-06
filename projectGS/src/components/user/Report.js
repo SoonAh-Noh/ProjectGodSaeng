@@ -27,6 +27,7 @@ const Report = () => {
   const [notifyTxt, setNotifyTxt] = useState('');
   const [notifyPnum, setNotifyPnum] = useState('');
   const [userTel, setUserTel] = useState('');
+  const [userIdx, setuserIdx] = useState('');
 
   // 신고 유형 선택 ====================================================
   let CATEGORY_VALUE = ''; // 값이 계속 바뀌기 때문에 let으로 선언.
@@ -91,6 +92,15 @@ const Report = () => {
     formData.append('notifySpot', notifySpotRef.current.value);
     formData.append('notifyDate', notifyDateRef.current.value);
     formData.append('notifyTxt', notifyTxtRef.current.value);
+
+    formData.append(
+      'user',
+      window.sessionStorage.getItem('USER_IDX', res.data[0].USER_IDX),
+    );
+
+    console.log(
+      window.sessionStorage.getItem('USER_IDX', res.data[0].USER_IDX),
+    );
 
     const res = await server_bridge.axios_instace.post('/report', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -347,7 +357,7 @@ const Report = () => {
                     <DaumPostcode
                       onComplete={onCompletePost} // 값을 선택할 경우 실행되는 이벤트
                       autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
-                      defaultQuery="광주광역시 동구 제봉로 92" // 팝업을 열때 기본적으로 입력되는 검색어
+                      defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
                     />
                   </div>
                 )}
