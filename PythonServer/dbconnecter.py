@@ -306,11 +306,14 @@ def join(data):  # 회원가입
     print("회원가입 데이터야 나와랏", data)
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
+
+    # 비밀번호 암호화 처리
     pw = (bcrypt.hashpw(data["pw"].encode('UTF-8'),
           bcrypt.gensalt())).decode('utf-8')
     print(pw)
-    join_tuple = (data["id"], data["pw"], data["name"],
-                  data["mail"], data["tel"], "O")  # 입력하고자 하는 데이터의 튜플
+
+    # join_tuple = (data["id"], data["pw"], data["name"],
+    #               data["mail"], data["tel"], "O")  # 입력하고자 하는 데이터의 튜플
     # sql = """
     #         INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_MAIL, USER_TEL, USER_OX)
     #         VALUES(%s, %s, %s, %s, %s, %s);
@@ -331,16 +334,6 @@ def join(data):  # 회원가입
 
 
 def idCheck(data):  # 아이디 중복 가입 체크
-    db = conn_db()
-    cursor = db.cursor(pymysql.cursors.DictCursor)
-
-    sql = f"SELECT * FROM USER WHERE USER_ID='{data['id']}';"
-    print(sql)
-
-    cursor.execute(sql)
-    res = cursor.fetchall()
-    close_conn(db)
-    return res
 
 
 def get_cate_list():  # 카테고리 리스트

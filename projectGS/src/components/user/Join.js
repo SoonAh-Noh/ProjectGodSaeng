@@ -22,29 +22,7 @@ const Join = () => {
   const mailRef = useRef();
   const telRef = useRef();
 
-  const [idComment, setIdComment] = useState('');
-  const [password, setPassword] = useState('');
-
-  // // 아이디 중복 체크
-  // var id = '';
-  // const idChange = (e) => {
-  //   id = idRef.current.value;
-  //   axios
-  //     .post('http://localhost:5000/idCheck', { id: idRef.current.value })
-  //     .then((res) => {
-  //       console.log('아이디', id);
-  //       if (res === false) {
-  //         alert('사용 가능한 아이디입니다.');
-  //         setIdComment(res);
-  //       } else {
-  //         alert('중복된 아이디입니다. 다시 시도하세요.');
-  //         idRef.current.focus();
-  //         idRef.current.value = '';
-  //         setIdComment(res);
-  //       }
-  //       console.log('중복체크');
-  //     });
-  // };
+  // 아이디 중복 체크
 
   // 핸드폰번호 유효성 검사
   const checkPhonenumber = (e) => {
@@ -166,7 +144,6 @@ const Join = () => {
               size="20"
               defaultValue=""
               ref={idRef}
-              onChange={idRef}
               placeholder=" "
             />
             <label>아이디 (문자, 숫자 포함 6-20자)</label>
