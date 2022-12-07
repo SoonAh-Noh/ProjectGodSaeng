@@ -93,14 +93,9 @@ const Report = () => {
     formData.append('notifyDate', notifyDateRef.current.value);
     formData.append('notifyTxt', notifyTxtRef.current.value);
 
-    formData.append(
-      'user',
-      window.sessionStorage.getItem('USER_IDX', res.data[0].USER_IDX),
-    );
+    formData.append('user_idx', window.sessionStorage.getItem('USER_IDX'));
 
-    console.log(
-      window.sessionStorage.getItem('USER_IDX', res.data[0].USER_IDX),
-    );
+    console.log(window.sessionStorage.getItem('USER_IDX'));
 
     const res = await server_bridge.axios_instace.post('/report', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -162,6 +157,13 @@ const Report = () => {
   function onClickHide() {
     setValue((value) => !value);
   }
+
+  // 달력 미래 선택 금지
+  const now_utc = Date.now(); // 지금 날짜를 밀리초로
+  // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+  const timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
+  // new Date(now_utc-timeOff).toISOString()은 '2022-12-07T11:07:00.134Z'를 반환
+  const today = new Date(now_utc - timeOff).toISOString().substring(0, 16);
 
   return (
     <div id="Report" className="subPage">
@@ -324,6 +326,7 @@ const Report = () => {
                   name="notifyDate"
                   type="datetime-local"
                   ref={notifyDateRef}
+                  max={today}
                 />
               </div>
             </div>

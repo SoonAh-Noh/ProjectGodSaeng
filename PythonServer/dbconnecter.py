@@ -669,6 +669,7 @@ def adminlogin(data):  # 관리자 로그인
 
 
 def report(request):  # 신고접수
+    
 
     form_data = request.form.to_dict()
     # 221130 선우 - 파일 업로드는 번호판 인식을 위해 먼저 업로드하므로 이제는 필요없음
@@ -682,19 +683,49 @@ def report(request):  # 신고접수
     # file.save(os.path.join(path, filename))
     # file_dir = path+"/"+request.files["img"].filename
     # print(file_dir)
-
+    print(type(form_data["user_idx"]))
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
-    sql = "INSERT INTO NOTIFY(CATEGORY_IDX, CAR_NUM, NOTIFY_SPOT, NOTIFY_DATE, NOTIFY_TXT, NOTIFY_PNUM) VALUES (%s, %s, %s, %s, %s, %s); \
-        INSERT INTO IMG(NOTIFY_IDX, IMG_PATH) VALUES (LAST_INSERT_ID(), %s);"
-    # report_tuple = (form_data["category"], form_data["carNum"], form_data["notifySpot"],
-    #                 form_data["notifyDate"], form_data["notifyTxt"], "1", file_dir)
-    report_tuple = (form_data["category"], form_data["carNum"], form_data["notifySpot"],
-                    form_data["notifyDate"], form_data["notifyTxt"], "1", form_data["img_path"])
+    # sql = "INSERT INTO NOTIFY(USER_IDX, CATEGORY_IDX, CAR_NUM, NOTIFY_SPOT, NOTIFY_DATE, NOTIFY_TXT, NOTIFY_PNUM) VALUES (%s, %s, %s, %s, %s, %s, %s); \
+    #     INSERT INTO IMG(NOTIFY_IDX, IMG_PATH) VALUES (LAST_INSERT_ID(), %s);"
+    # # report_tuple = (form_data["category"], form_data["carNum"], form_data["notifySpot"],
+    # #                 form_data["notifyDate"], form_data["notifyTxt"], "1", file_dir)
+    # report_tuple = (form_data["user_idx"], form_data["category"], form_data["carNum"], form_data["notifySpot"],
+    #                 form_data["notifyDate"], form_data["notifyTxt"], "1", form_data["img_path"])
+
+    sql = f"INSERT INTO "
+    if form_data["user_idx"] != "null":
+        sql2 = f""" NOTIFY(USER_IDX, CATEGORY_IDX, CAR_NUM, NOTIFY_SPOT, NOTIFY_DATE, NOTIFY_TXT, NOTIFY_PNUM) 
+                    VALUES ('{form_data["user_idx"]}', 
+                            '{form_data["category"]}', 
+                            '{form_data["carNum"]}', 
+                            '{form_data["notifySpot"]}',
+                            '{form_data["notifyDate"]}', 
+                            '{form_data["notifyTxt"]}', 
+                            '1');
+                    INSERT INTO IMG(NOTIFY_IDX, IMG_PATH) VALUES (LAST_INSERT_ID(), '{form_data["img_path"]}');"""
+
+        sql += sql2
+
+    else:
+        sql3 = f""" NOTIFY(CATEGORY_IDX, CAR_NUM, NOTIFY_SPOT, NOTIFY_DATE, NOTIFY_TXT, NOTIFY_PNUM) 
+                    VALUES (
+                            '{form_data["category"]}', 
+                            '{form_data["carNum"]}', 
+                            '{form_data["notifySpot"]}',
+                            '{form_data["notifyDate"]}', 
+                            '{form_data["notifyTxt"]}', 
+                            '1');
+                    INSERT INTO IMG(NOTIFY_IDX, IMG_PATH) VALUES (LAST_INSERT_ID(), '{form_data["img_path"]}');"""
+                
+        sql += sql3
+
+
+
 
     try:
-        cursor.execute(sql, report_tuple)
+        cursor.execute(sql)
         db.commit()
         return "success"
     except Exception as e:

@@ -46,7 +46,7 @@ const Login = () => {
 
         // 일치하는 사용자가 있을경우
         if (res.data.length === 1) {
-          console.log('성공 idx', res.data[0].USER_ID);
+          console.log('성공 idx', res.data[0].USER_IDX);
           console.log('성공 id', res.data[0].USER_ID);
           console.log('성공 name', res.data[0].USER_NAME);
 

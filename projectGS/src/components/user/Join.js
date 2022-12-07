@@ -52,16 +52,18 @@ const Join = () => {
     var regExp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
     // 형식에 맞는 경우 true 리턴
-    // console.log('비밀번호 유효성 검사 :: ', regExp.test(e.target.value));
-    // console.log(regExp.test(e.target.value));
+    console.log('비밀번호 유효성 검사 :: ', regExp.test(e));
+    console.log(regExp.test(e));
 
-    if (regExp.test(e.target.value) == false) {
-      setPwComment(
-        '비밀번호는 영어, 숫자, 특수문자를 포함해 총 8글자 이상이어야 합니다.',
-      );
-    } else {
-      setPwComment('');
-    }
+    // if (regExp.test(e.target.value) == false) {
+    //   setPwComment(
+    //     '비밀번호는 영어, 숫자, 특수문자를 포함해 총 8글자 이상이어야 합니다.',
+    //   );
+    // } else {
+    //   setPwComment('');
+    // }
+
+    return regExp.test(e);
   };
 
   // 이메일 유효성 검사
@@ -71,11 +73,14 @@ const Join = () => {
     // 형식에 맞는 경우 true 리턴
     // console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value));
     // console.log(regExp.test(e.target.value));
-    if (regExp.test(e.target.value) == false) {
-      setEmailComment('올바른 이메일 형식이 아닙니다.');
-    } else {
-      setEmailComment('');
-    }
+
+    // if (regExp.test(e.target.value) == false) {
+    //   setEmailComment('올바른 이메일 형식이 아닙니다.');
+    // } else {
+    //   setEmailComment('');
+    // }
+
+    return regExp.test(e);
   };
 
   // 핸드폰번호 유효성 검사
@@ -86,11 +91,15 @@ const Join = () => {
     var regExp2 = /^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/;
     // 형식에 맞는 경우 true 리턴
     // console.log('핸드폰번호 유효성 검사 :: ', regExp2.test(e.target.value));
-    if (regExp2.test(e.target.value) == false) {
-      setPhoneComment("'-'없이 번호만 입력해주세요");
-    } else {
-      setPhoneComment('');
-    }
+    // console.log(regExp.test(e.target.value));
+
+    // if (regExp2.test(e.target.value) == false) {
+    //   setPhoneComment("'-'없이 번호만 입력해주세요");
+    // } else {
+    //   setPhoneComment('');
+    // }
+
+    return regExp2.test(e);
   };
 
   const handleRegister = () => {
@@ -120,7 +129,7 @@ const Join = () => {
     }
     // 이메일 입력 확인
     if (mailRef.current.value === '' || mailRef.current.value === undefined) {
-      alert('이름을 입력하세요');
+      alert('이메일을 입력하세요');
       mailRef.current.focus();
       return false;
     }
@@ -130,6 +139,7 @@ const Join = () => {
       telRef.current.focus();
       return false;
     }
+
     // 비밀번호 와 비밀번호 체크 값 비교
     if (pwRef.current.value !== pwCkRef.current.value) {
       alert('비밀번호가 서로 다릅니다');
@@ -137,55 +147,58 @@ const Join = () => {
       return false;
     }
 
-    if (checkPassword(pwRef.current.value) !== false) {
-      alert('비밀번호 형식이 아닙니다');
+    // 비밀번호 유효성 검사
+    if (checkPassword(pwRef.current.value) == false) {
+      setPwComment('비밀번호 형식이 아닙니다');
       pwRef.current.focus();
       return false;
     }
 
-    if (checkEmail(mailRef.current.value) !== false) {
-      alert('이메일 형식이 아닙니다');
+    // 이메일 유효성 검사
+    if (checkEmail(mailRef.current.value) == false) {
+      setEmailComment('이메일 형식이 아닙니다');
       mailRef.current.focus();
       return false;
     }
 
-    if (checkPhonenumber(telRef.current.value) !== false) {
-      alert('핸드폰 형식이 아닙니다');
+    // 핸드폰 유효성 검사
+    if (checkPhonenumber(telRef.current.value) == false) {
+      setPhoneComment('핸드폰 형식이 아닙니다');
       telRef.current.focus();
       return false;
     }
 
-    axios
-      .post('http://localhost:5000/join', {
-        id: idRef.current.value,
-        pw: pwRef.current.value,
-        name: nameRef.current.value,
-        mail: mailRef.current.value,
-        tel: telRef.current.value,
-      })
-      .then((res) => {
-        console.log(res);
-        //회원가입에 성공하면
-        if (res.data === 'success') {
-          alert('회원가입 성공');
-          //로그인 페이지로 이동
-          navigate('/login');
-        } else {
-          // 회원가입에 실패하면 input value 초기화
-          idRef.current.value = '';
-          pwRef.current.value = '';
-          pwCkRef.current.value = '';
-          nameRef.current.value = '';
-          mailRef.current.value = '';
-          telRef.current.value = '';
+    // axios
+    //   .post('http://localhost:5000/join', {
+    //     id: idRef.current.value,
+    //     pw: pwRef.current.value,
+    //     name: nameRef.current.value,
+    //     mail: mailRef.current.value,
+    //     tel: telRef.current.value,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     //회원가입에 성공하면
+    //     if (res.data === 'success') {
+    //       alert('회원가입 성공');
+    //       //로그인 페이지로 이동
+    //       navigate('/login');
+    //     } else {
+    //       // 회원가입에 실패하면 input value 초기화
+    //       idRef.current.value = '';
+    //       pwRef.current.value = '';
+    //       pwCkRef.current.value = '';
+    //       nameRef.current.value = '';
+    //       mailRef.current.value = '';
+    //       telRef.current.value = '';
 
-          // 회원가입 페이지로 이동
-          navigate('/join');
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    //       // 회원가입 페이지로 이동
+    //       navigate('/join');
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
   };
 
   return (
