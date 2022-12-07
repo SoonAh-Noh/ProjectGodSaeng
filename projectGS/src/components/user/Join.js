@@ -149,56 +149,56 @@ const Join = () => {
 
     // 비밀번호 유효성 검사
     if (checkPassword(pwRef.current.value) == false) {
-      setPwComment('비밀번호 형식이 아닙니다');
+      alert('비밀번호 형식이 아닙니다');
       pwRef.current.focus();
       return false;
     }
 
     // 이메일 유효성 검사
     if (checkEmail(mailRef.current.value) == false) {
-      setEmailComment('이메일 형식이 아닙니다');
+      alert('이메일 형식이 아닙니다');
       mailRef.current.focus();
       return false;
     }
 
     // 핸드폰 유효성 검사
     if (checkPhonenumber(telRef.current.value) == false) {
-      setPhoneComment('핸드폰 형식이 아닙니다');
+      alert('핸드폰 형식이 아닙니다');
       telRef.current.focus();
       return false;
     }
 
-    // axios
-    //   .post('http://localhost:5000/join', {
-    //     id: idRef.current.value,
-    //     pw: pwRef.current.value,
-    //     name: nameRef.current.value,
-    //     mail: mailRef.current.value,
-    //     tel: telRef.current.value,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     //회원가입에 성공하면
-    //     if (res.data === 'success') {
-    //       alert('회원가입 성공');
-    //       //로그인 페이지로 이동
-    //       navigate('/login');
-    //     } else {
-    //       // 회원가입에 실패하면 input value 초기화
-    //       idRef.current.value = '';
-    //       pwRef.current.value = '';
-    //       pwCkRef.current.value = '';
-    //       nameRef.current.value = '';
-    //       mailRef.current.value = '';
-    //       telRef.current.value = '';
+    axios
+      .post('http://localhost:5000/join', {
+        id: idRef.current.value,
+        pw: pwRef.current.value,
+        name: nameRef.current.value,
+        mail: mailRef.current.value,
+        tel: telRef.current.value,
+      })
+      .then((res) => {
+        console.log(res);
+        //회원가입에 성공하면
+        if (res.data === 'success') {
+          alert('회원가입 성공');
+          //로그인 페이지로 이동
+          navigate('/login');
+        } else {
+          // 회원가입에 실패하면 input value 초기화
+          idRef.current.value = '';
+          pwRef.current.value = '';
+          pwCkRef.current.value = '';
+          nameRef.current.value = '';
+          mailRef.current.value = '';
+          telRef.current.value = '';
 
-    //       // 회원가입 페이지로 이동
-    //       navigate('/join');
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
+          // 회원가입 페이지로 이동
+          navigate('/join');
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   return (
