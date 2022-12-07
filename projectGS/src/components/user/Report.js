@@ -138,7 +138,7 @@ const Report = () => {
   };
 
   const onCompletePost = (data) => {
-    console.log(data.address);
+    // console.log(data.address);
     setAddress(data.address);
     setOpenPostcode(false);
   };

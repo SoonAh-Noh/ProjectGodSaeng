@@ -9,13 +9,17 @@ import checkIcon from '../../images/check.png';
 import '../../css/user/sub.scss';
 
 const ReportEnd = () => {
+  const notifyidx = async () => {
+    const response = await server_bridge.axios_instace.get('/notifyidx');
+    console.log(response.data);
+  };
   return (
     <div id="ReportEnd" className="subPage">
       <div className="subTop">
         <h1>불법주정차 신고</h1>
         <ul>
           <li className="on">
-            <a href="report">불법주정차 신고</a>
+            <a href="/report">불법주정차 신고</a>
           </li>
           <li>
             <a href="/quickreport">공유킥보드 신고</a>
@@ -48,7 +52,7 @@ const ReportEnd = () => {
           <img src={checkIcon} alt="체크표시" />
           <h2>
             신고가 정상적으로 접수되었습니다. <br />
-            접수번호는 <strong className="ft_og">할수있다</strong> 입니다.
+            접수번호는 <strong className="ft_og">제발</strong> 입니다.
           </h2>
         </div>
 

@@ -130,8 +130,8 @@ def report():  # 신고접수
 
 @app.route("/notifyidx", methods=["GET", "POST"])
 def notifyidx():  # 신고접수번호
-    sendData = dbconnecter.notifyidx()
-    return jsonify(sendData)
+    body_data = get_body_data(request)
+    return dbconnecter.notifyidx(body_data)
 
 
 @app.route("/get_cate_list", methods=["GET"])
