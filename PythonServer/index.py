@@ -128,6 +128,11 @@ def report():  # 신고접수
     # body_data = get_body_data(request)
     return dbconnecter.report(request)
 
+@app.route("/notifyidx", methods=["GET", "POST"])
+def notifyidx():  # 신고접수번호
+    sendData = dbconnecter.notifyidx()
+    return jsonify(sendData)
+
 
 @app.route("/get_cate_list", methods=["GET"])
 def get_cate_list():  # 등록한 파일 다운로드하기

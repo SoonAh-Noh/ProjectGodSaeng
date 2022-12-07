@@ -78,7 +78,6 @@ function App() {
             <Route path="/noticeview" element={<NoticeView />} />{' '}
             {/* 공지사항 뷰 */}
             <Route path="/point" element={<Point />} /> {/* 포인트 */}
-            <Route path="/point" element={<Point />} /> {/* 포인트 메인 */}
             <Route path="/pointitem" element={<PointItem />} />
             {/* 포인트 리스트 */}
             <Route path="/pointorder" element={<PointOrder />} />

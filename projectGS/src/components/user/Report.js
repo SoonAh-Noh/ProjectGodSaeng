@@ -95,14 +95,14 @@ const Report = () => {
 
     formData.append('user_idx', window.sessionStorage.getItem('USER_IDX'));
 
-    console.log(window.sessionStorage.getItem('USER_IDX'));
+    // console.log(window.sessionStorage.getItem('USER_IDX'));
 
     const res = await server_bridge.axios_instace.post('/report', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
 
     if (res.data === 'success') {
-      console.log('성공', res.data);
+      // console.log('성공', res.data);
       // alert('신고 접수가 완료되었습니다.');
       navigate('/reportend');
     } else {
