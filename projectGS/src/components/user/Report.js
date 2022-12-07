@@ -78,9 +78,76 @@ const Report = () => {
     carNumRef.current.value = result.result; //인식한 번호판 결과를 인풋에 전달
     setUploadedSrc(result.dir); //저장된 번호판 이미지파일의 경로를 세팅
   };
-
   const writeReport = async (e) => {
     e.preventDefault();
+
+    // 카테고리 선택 확인
+    if (
+      categoryRef.current.value === 'none' ||
+      categoryRef.current.value === undefined
+    ) {
+      alert('불법주정차 유형을 선택하세요');
+      categoryRef.current.focus();
+      return false;
+    }
+    // console.log(categoryRef.current.value);
+
+    // 사진 업로드 확인
+    if (imgRef.current.value === '' || imgRef.current.value === undefined) {
+      alert('불법주정차 사진을 등록하세요');
+      imgRef.current.focus();
+      return false;
+    }
+
+    // 차량번호 입력 확인
+    if (
+      carNumRef.current.value === '' ||
+      carNumRef.current.value === undefined
+    ) {
+      alert('불법주정차 차량번호를 입력하세요');
+      carNumRef.current.focus();
+      return false;
+    }
+
+    // 발생일자 입력 확인
+    if (
+      notifyDateRef.current.value === '' ||
+      notifyDateRef.current.value === undefined
+    ) {
+      alert('불법주정차 발생 일자를 입력하세요');
+      notifyDateRef.current.focus();
+      return false;
+    }
+
+    // 발생지역 입력 확인
+    if (
+      notifySpotRef.current.value === '' ||
+      notifySpotRef.current.value === undefined
+    ) {
+      alert('불법주정차 발생 지역을 입력하세요');
+      notifySpotRef.current.focus();
+      return false;
+    }
+
+    // 신고내역 입력 확인
+    if (
+      notifyTxtRef.current.value === '' ||
+      notifyTxtRef.current.value === undefined
+    ) {
+      alert('불법주정차 신고내용을 입력하세요');
+      notifyTxtRef.current.focus();
+      return false;
+    }
+
+    // 휴대폰 번호 입력 확인
+    if (
+      userTelRef.current.value === '' ||
+      userTelRef.current.value === undefined
+    ) {
+      alert('휴대폰 번호를 입력하세요');
+      userTelRef.current.focus();
+      return false;
+    }
 
     const formData = new FormData(); //서버에 넘겨줄 데이터 객체
     formData.append('category', categoryRef.current.value);

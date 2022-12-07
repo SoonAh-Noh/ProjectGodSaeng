@@ -52,7 +52,7 @@ const ReportEnd = () => {
           <img src={checkIcon} alt="체크표시" />
           <h2>
             신고가 정상적으로 접수되었습니다. <br />
-            접수번호는 <strong className="ft_og">제발</strong> 입니다.
+            접수번호는 <strong className="ft_og">{notifyidx}</strong> 입니다.
           </h2>
         </div>
 
