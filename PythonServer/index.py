@@ -132,10 +132,7 @@ def report():  # 신고접수
     return dbconnecter.report(request)
 
 @app.route("/notifyidx", methods=["GET", "POST"])
-def notifyidx(): # 신고접수 번호
-    # body_data = get_body_data(request)
-    # notify_idx = body_data["notify_idx"]
-    # return dbconnecter.notifyidx(notify_idx)
+def notifyidx(): # 신고접수번호
     body_data = get_body_data(request)
     sendData = dbconnecter.notifyidx(body_data)
     return jsonify(sendData)

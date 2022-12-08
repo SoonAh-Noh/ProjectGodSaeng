@@ -13,16 +13,17 @@ const ReportEnd = () => {
 
   useEffect(() => {
     notifyidx();
-  }, [idx]);
+  }, []);
 
-  const notifyidx = async (body_data) => {
-    const res = await server_bridge.axios_instace.get('./notifyidx', {
-      notify_idx: body_data['notify_idx'],
+  const notifyidx = async () => {
+    const res = await server_bridge.axios_instace.post('./notifyidx', {
+      user_idx: window.sessionStorage.getItem('USER_IDX'),
     });
     setIdx(res.data[0].NOTIFY_IDX);
-    console.log('나와라', res.data[0].NOTIFY_IDX);
+    console.log('나와라', res.data[0]);
   };
 
+  console.log(idx);
   return (
     <div id="ReportEnd" className="subPage">
       <div className="subTop">
@@ -62,7 +63,7 @@ const ReportEnd = () => {
           <img src={checkIcon} alt="체크표시" />
           <h2>
             신고가 정상적으로 접수되었습니다. <br />
-            접수번호는 <strong className="ft_og">욕심{idx}그 사이</strong>
+            접수번호는 <strong className="ft_og">{idx}</strong>
             입니다.
           </h2>
         </div>

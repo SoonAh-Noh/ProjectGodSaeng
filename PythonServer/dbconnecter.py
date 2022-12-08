@@ -721,34 +721,35 @@ def report(request):  # 신고접수
 
     try:
         cursor.execute(sql)
-        db.commit()
-        return "success"
+        # db.commit()
+        return res
     except Exception as e:
         return "err : " + str(e)
 
-
-
-
 def notifyidx(body_data):  # 신고접수번호
-    db = conn_db
+    db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
     sql = f""" SELECT A.NOTIFY_IDX 
                FROM NOTIFY AS A
                LEFT JOIN USER AS B ON A.USER_IDX = B.USER_IDX
-               WHERE A.USER_IDX = '{body_data["user_idx"]}'
+               WHERE A.USER_IDX = {body_data["user_idx"]}
                ORDER BY A.NOTIFY_IDX DESC
                LIMIT 1; """
 
-    notify_idx = body_data["notify_idx"]
-    
-    try : 
-        cursor.execute(sql)
-        db.commit()
-        close_conn(db)
-        return "success"
+    try:
+        row_cnt = cursor.execute(sql)
+        if row_cnt > 0:
+            res = cursor.fetchall()  # select문이라면 요거로 리턴시켜야 디비에서 검색한 결과 넘겨줄수있음
+            close_conn(db)
+            return res
+        else:
+            close_conn(db)
+            return "nothing"
+
     except Exception as e:
         close_conn(db)
+        return "err : " + str(e)
 
 def update_userinfo(body_data):  # 사용자 정보 수정하기
     db = conn_db()
