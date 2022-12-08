@@ -7,14 +7,176 @@
     }
 }
 
+.adminSearchBar {
+    width: 100%;
+    margin-bottom: 30px;
 
-/**************************************************************
-AdminInformation.js 관리자 정보
-***************************************************************/
+    input,
+    select {
+        padding: 10px;
+        min-height: auto !important;
+        font-size: 15px !important;
+        border-radius: 0;
 
-.tableBtnWrap {
-    display: flex;
-    justify-content: space-evenly;
+        &::placeholder {
+            font-size: 15px;
+        }
+    }
+
+    select {
+        padding: 13.5px !important;
+        box-sizing: border-box;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+    .searchContents {
+        display: flex;
+        justify-content: space-between;
+
+        .searchBox {
+            width: 32%;
+
+            input[type=date] {
+                width: 45%;
+            }
+
+            .searchWrap {
+                margin: 0;
+
+                .searchCate {
+                    width: 90%;
+                    box-sizing: border-box;
+                }
+            }
+
+            input[type=text] {
+                width: 90%;
+
+                &::placeholder {
+                    color: #888;
+                    font-weight: 300;
+                }
+            }
+
+        }
+
+        .searchType {
+            margin-bottom: 10px;
+
+            h4 {
+                font-size: 17px;
+                color: #444;
+                font-weight: 500;
+            }
+        }
+
+        .searchCkWrap {
+            display: flex;
+            justify-content: space-between;
+
+            .searchCk {
+                width: 23%;
+                display: block;
+
+                label {
+                    width: 100%;
+                    font-size: 16px;
+                    text-align: center;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    border-radius: 5px;
+                    transition: all 0.4s;
+                    border: 1px solid transparent;
+                    background: #fff;
+                    display: block;
+                }
+
+                &:first-child label {
+                    border-color: #f77357;
+                    color: #f77357;
+                }
+
+                &:nth-child(2) label {
+                    border-color: rgba(125, 105, 204, 0.9);
+                    color: #7969cc;
+                }
+
+                &:nth-child(3) label {
+                    border-color: rgba(76, 66, 159, 0.9);
+                    color: #4c429f;
+                }
+
+                &:nth-child(4) label {
+                    border-color: #191d73;
+                    color: #191d73;
+                }
+
+
+                &.on {
+
+                    &:first-child label {
+                        background: #f77357;
+                    }
+
+                    &:nth-child(2) label {
+                        background: rgba(125, 105, 204, 0.9);
+                    }
+
+                    &:nth-child(3) label {
+                        background: rgba(76, 66, 159, 0.9);
+                    }
+
+                    &:nth-child(4) {
+                        background: #191d73;
+                    }
+
+                    label {
+                        color: #fff;
+                    }
+
+                }
+
+            }
+        }
+    }
+}
+
+.subTitle {
+    margin-bottom: 20px;
+
+    h3 {
+        font-size: 22px;
+        color: #444;
+    }
+}
+
+.subTitle2 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ededed;
+}
+
+.totalNumber {
+    p {
+        font-size: 16px;
+        color: #666;
+        padding-right: 15px;
+        font-weight: 300;
+    }
+}
+
+.adminBtnWrap {
+    margin: 30px auto 0;
+    width: 100%;
+    text-align: center;
+}
+
+.adminBtnWrap2 {
+    button {
+        margin: 0 10px;
+    }
 }
 
 .adminBtn {
@@ -25,11 +187,59 @@ AdminInformation.js 관리자 정보
     color: #555;
 }
 
+.adminBtn2 {
+    padding: 15px 80px;
+    border-radius: 0;
+    background: #333;
+    color: #fff;
+}
+
 .adminBtnNavy {
     background: #191d73;
     color: #fff;
 }
 
+.btnUndo {
+    border-radius: 0;
+    margin-left: 10px;
+    background: #ddd;
+    color: #555;
+    padding: 15px 40px;
+}
+
+.btnRight {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+.noSearch {
+    padding: 7% 0;
+    box-sizing: border-box;
+
+    p {
+        font-size: 16px;
+        text-align: center;
+        color: #888;
+        font-weight: 300;
+    }
+}
+
+.noSearch2 {
+    padding: 10% 0;
+    background: #fafafa;
+}
+
+
+/**************************************************************
+AdminInformation.js 관리자 정보
+***************************************************************/
+
+.tableBtnWrap {
+    display: flex;
+    justify-content: space-evenly;
+}
 
 
 /**************************************************************
@@ -37,22 +247,24 @@ BoardManagement.js 공지사항 관리
 ***************************************************************/
 
 .searchWrap {
-    margin: 20px 0;
+    // margin: 20px 0;
     display: flex;
 
     .searchCate {
         border: 1px solid #ddd;
         box-sizing: border-box;
-        width: 100px;
+        width: 200px;
         position: relative;
 
         select {
             width: 100%;
+            height: 100%;
             font-size: 14px;
             color: #666;
             border: 0;
             min-height: auto;
-            padding: 15px;
+            padding: 0 15px;
+            box-sizing: border-box;
         }
 
         &:after {
@@ -70,9 +282,10 @@ BoardManagement.js 공지사항 관리
     .searchTxt {
         border-radius: 0;
         margin-left: -1px;
-        min-height: 45px;
+        min-height: auto;
         font-size: 16px;
-        padding: 0 15px;
+        padding: 10px 15px;
+        width: 100%;
     }
 
     .searchBtn {
@@ -84,13 +297,28 @@ BoardManagement.js 공지사항 관리
     }
 }
 
+.searchWrap2 {
+    align-items: center;
+    justify-content: space-between;
+
+    .searchCate {
+        width: 120px !important;
+    }
+
+    input[type=date] {
+        width: calc(45% - 60px) !important;
+    }
+
+}
+
+
 .flexBetween {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 20px;
 
     .searchWrap {
+        width: 30%;
         margin-bottom: 0;
     }
 }
@@ -98,4 +326,360 @@ BoardManagement.js 공지사항 관리
 .fileIcon {
     font-size: 20px;
     vertical-align: middle;
+}
+
+.boardViewTop {
+    .boardTitle {
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        padding: 20px;
+        border-left: 0;
+        border-right: 0;
+
+        h3 {
+            font-size: 22px;
+            color: #444;
+
+            span {
+                font-weight: 400;
+            }
+        }
+    }
+
+    ul {
+        width: 100%;
+        background: #fafafa;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        display: flex;
+
+        li {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.65;
+            padding-right: 30px;
+
+            &:last-child {
+                padding-right: 0;
+            }
+
+            a {
+                color: #555;
+                position: relative;
+
+                i {
+                    margin-right: 10px;
+                    transform: rotate(135deg);
+                    font-size: 20px;
+                    color: #888;
+                    vertical-align: text-bottom;
+                }
+
+                &:before {
+                    content: '';
+                    width: 0;
+                    height: 1px;
+                    background: #888;
+                    position: absolute;
+                    left: 28px;
+                    bottom: 0;
+                    transition: all 0.4s;
+                }
+
+                &:hover::before {
+                    width: calc(100% - 28px);
+                }
+            }
+        }
+    }
+}
+
+.boardTxt {
+    min-height: 400px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    box-sizing: border-box;
+
+    p {
+        font-size: 16px;
+    }
+}
+
+
+
+
+/**************************************************************
+Disposereport.js 신고처리
+***************************************************************/
+
+.subTitleFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    .excelbtn {
+        background: #333;
+        color: rgba(255, 255, 255, 0.9);
+        position: relative;
+        padding-left: 60px;
+
+        &:before {
+            content: "\ea83";
+            font-family: 'xeicon';
+            position: absolute;
+            left: 35px;
+            font-size: 16px;
+            font-weight: 100;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+
+/**************************************************************
+UserManagement.js 회원관리
+***************************************************************/
+
+.userContainer {
+    display: flex;
+    flex-wrap: wrap;
+
+    .userBox {
+        width: 20%;
+        padding: 10px;
+        box-sizing: border-box;
+
+        .userShow {
+            cursor: pointer;
+            background: #fafafa;
+            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 20px;
+            border: 1px solid #fafafa;
+            transition: all 0.4s;
+            min-height: 150px;
+
+            ul {
+                li {
+                    font-size: 16px;
+                    color: #444;
+                    line-height: 1.65;
+                    position: relative;
+                    padding: 5px 0 5px 30px;
+                    box-sizing: border-box;
+
+                    &::before {
+                        font-family: "xeicon";
+                        color: #aaa;
+                        font-size: 20px;
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+
+                    &.userName {
+                        font-weight: 500;
+
+                        &::before {
+                            content: "\ea2a";
+                        }
+                    }
+
+                    &.userTel::before {
+                        content: "\e9d3";
+                    }
+
+                    &.userMail::before {
+                        content: "\ea07";
+                    }
+                }
+            }
+
+            &:hover {
+                border-color: #191d73;
+                background: #fff;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+
+                ul li::before {
+                    color: #191d73;
+                    opacity: 0.6;
+                }
+            }
+
+        }
+    }
+}
+
+
+/**************************************************************
+GoodsManagement.js 상품권 관리
+***************************************************************/
+
+.Goods {
+    .goodsImgUp {
+        width: 90%;
+        display: flex;
+        // position: relative;
+        // padding-left: 80px;
+        // display: flex;
+        // align-items: center;
+
+        // input[type=file] {
+        //     padding: 0;
+        //     width: 100%;
+
+        //     &::file-selector-button {
+        //         // display: none;
+        //         font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+        //         font-size: 15px;
+        //         color: #555;
+        //         background: #ededed;
+        //         border: none;
+        //         padding: 10px 40px;
+        //         box-sizing: border-box;
+        //         border-radius: 5px;
+        //     }
+        // }
+
+        // &::before {
+        //     content: "\ea4e";
+        //     font-family: 'xeicon';
+        //     font-size: 20px;
+        //     color: #555;
+        //     background: #ededed;
+        //     width: 40px;
+        //     height: 40px;
+        //     position: absolute;
+        //     left: 0;
+        //     border-radius: 10px;
+        //     text-align: center;
+        // }
+
+        input[type=file] {
+            border: 1px solid #ddd;
+            background: #fafafa;
+
+            &::file-selector-button {
+                display: none;
+            }
+        }
+
+        input.upload-name {
+            width: calc(100% - 150px);
+        }
+
+        label {
+            width: 50%;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            font-size: 15px;
+            color: #555;
+            background: #ddd;
+            display: block;
+            text-align: center;
+
+            i {
+                margin-right: 10px;
+                font-size: 20px;
+                vertical-align: bottom;
+            }
+        }
+
+    }
+
+    .goodsList {
+        display: flex;
+        flex-wrap: wrap;
+
+        .goodsWrap {
+            width: 20%;
+            padding: 10px;
+            box-sizing: border-box;
+
+            .goodsBox {
+                cursor: pointer;
+                padding: 20px;
+                box-sizing: border-box;
+                background: #fafafa;
+                border-radius: 10px;
+                text-align: center;
+                border: 1px solid #fafafa;
+                transition: all 0.4s;
+                position: relative;
+                min-height: 380px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+
+                .goodsImg {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    height: 260px;
+                    overflow: hidden;
+
+                    img {
+                        max-width: 100%;
+                        max-height: 100%;
+                        display: block;
+                        margin: 0 auto;
+                    }
+                }
+
+                .goodsInfo {
+                    width: 100%;
+
+                    h4 {
+                        font-size: 16px;
+                        color: #444;
+                        font-weight: 500;
+                        margin-bottom: 5px;
+                    }
+
+                    p {
+                        font-size: 16px;
+                    }
+                }
+
+                .btnTrash {
+                    position: absolute;
+                    z-index: 5;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(25, 29, 115, 0.9);
+                    border: 1px solid rgba(25, 29, 115, 0.9);
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 25px;
+                    transition: all 0.4s;
+                    opacity: 0;
+                    visibility: hidden;
+
+                    i {
+                        color: rgba(255, 255, 255, 0.8);
+                        font-size: 22px;
+                    }
+
+                    &:hover {
+                        background: #333;
+                        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+                    }
+                }
+
+                &:hover {
+                    background: #fff;
+                    border-color: #191d73;
+                    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+
+                    .btnTrash {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
 }

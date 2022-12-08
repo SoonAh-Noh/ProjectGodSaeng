@@ -40,18 +40,12 @@ const BoardManagement = () => {
   };
   return (
     <div className="Contents">
-      <div className="pageWrap">
-        <div className="adminTitle"><h3>공지사항 관리</h3></div>
+      <div className="adminTitle"><h3>공지사항 관리</h3></div>
 
-        {/* <div className="searchWrap">
-          <select name="search_option" id="search_option" ref={optionRef}>
-            <option value="BOARD_TIT">제목</option>
-            <option value="USER_NAME">작성자</option>
-          </select>
-          <input type="text" name="search" id="search" ref={searchRef} />
-          <button onClick={getList}>검색</button>
-        </div> */}
-
+      <div className="pageWrap subPageWrap adminSearchBar">
+        <div className="subTitle subTitle2">
+          <h3>공지사항 검색</h3>
+        </div>
         <div className="flexBetween">
           <div className="searchWrap">
             <div className="searchCate">
@@ -61,11 +55,19 @@ const BoardManagement = () => {
               </select>
             </div>
             <input type="text" name="search" id="search" ref={searchRef} className="searchTxt" />
-            <button onClick={getList} className="searchBtn">검색</button>
           </div>
-          
-          <div className="adminBtnWrap right">
-            <button onClick={() => navigate('/admin/writenoti')} className="adminBtn adminBtnNavy">글쓰기</button>
+
+          <div className="adminBtnWrap2">            
+            <button onClick={getList} className="adminBtn adminBtn2 searchBtn">검색</button>
+          </div>
+        </div>
+      </div>
+
+      <div className="pageWrap subPageWrap">
+        <div className="subTitle subTitleFlex">
+          <h3>공지사항 리스트</h3>
+          <div className="totalNumber">
+            <p>총 {board_list.length}건</p>
           </div>
         </div>
 
@@ -117,6 +119,11 @@ const BoardManagement = () => {
             )}
           </tbody>
         </table>
+
+        <div className="btnRight">
+          <button onClick={() => navigate('/admin/writenoti')} className="adminBtn adminBtn2 adminBtnNavy">글쓰기</button>
+        </div>
+
         <div>
           {typeof body !== 'string' && (
             <Page //페이지네이션 객체(component/admin/Page.js)

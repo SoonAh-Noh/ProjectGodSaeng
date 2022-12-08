@@ -36,7 +36,7 @@ const Main = () => {
     //const res = await server_bridge.axios_instace.get("/pythonserver", { params: { testdata: "from_client" } });
     console.log(res.data);
   };
-  
+
   const getList = async () => {
     //게시글 리스트를 가져온다.
 
@@ -46,10 +46,9 @@ const Main = () => {
       where_clause: '',
     };
     const res = await server_bridge.axios_instace.post('/board_list', where);
-    
+
     setList(res.data);
   };
-
 
   return (
     <div id="Main">
@@ -128,7 +127,7 @@ const Main = () => {
 
           <div className="nBoxWrap">
             {typeof board_list !== 'string' && board_list.length > 0
-              ? board_list.slice(itemcount).map((data, idx) => (
+              ? board_list.slice(0, itemcount).map((data, idx) => (
                   <div className="nBox">
                     <Link
                       to={'/noticeview'}
@@ -147,7 +146,11 @@ const Main = () => {
                     </Link>
                   </div>
                 ))
-              : ''}
+              : (
+                <div className="noContents">
+                  <p>등록된 게시물이 없습니다.</p>
+                </div>
+              )}
             {/* nBox */}
           </div>
           {/* nBoxWrap */}

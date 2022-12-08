@@ -44,36 +44,50 @@ const BoardView = () => {
 
     return;
   };
+
+  const goBack = () =>{
+    navigate('/admin/boardmanage');
+  }
+
   return (
     <div className="Contents">
-      <div className="pageWrap">
-        <div className="adminTitle"><h3>공지사항 글쓰기</h3></div>
+      <div className="adminTitle flexBetween">
+        <h3>공지사항 글쓰기</h3>
+        <button type="button" className="adminBtn" onClick={goBack}>목록으로</button>
+      </div>
 
-        <div>
-          제목 : {board.BOARD_TIT} <br />
-          작성자 : {board.USER_NAME}
-          <br />
-          작성일 : {board.BOARD_DATE}
-          <br />
-          <button onClick={updateBoard}>수정하기</button>
-          <br />
-          <button onClick={deleteBoard}>삭제하기</button>
-          <br />
+      <div className="pageWrap">
+        <div className="boardViewTop">
+          <div className="boardTitle">
+            <h3><span>{board.BOARD_IDX}.</span> {board.BOARD_TIT}</h3>
+          </div>
+          <ul>
+            <li>{board.USER_NAME}</li>
+            <li>{board.BOARD_DATE}</li>
+            <li>
+              {board.BOARD_FILE !== '' ? (
+                <a
+                  href={
+                    server_bridge.py_url + '/download_file/' + board.BOARD_FILE.dir
+                  }
+                >
+                  <i className="xi-attachment"></i>{board.BOARD_FILE.filename}
+                </a>
+              ) : (
+                ''
+              )}
+            </li>
+          </ul>
         </div>
-        <div>
-          {board.BOARD_FILE !== '' ? (
-            <a
-              href={
-                server_bridge.py_url + '/download_file/' + board.BOARD_FILE.dir
-              }
-            >
-              {board.BOARD_FILE.filename}
-            </a>
-          ) : (
-            ''
-          )}
+
+        <div className="boardTxt">
+          <p>{board.BOARD_TXT}</p>
         </div>
-        <div>{board.BOARD_TXT}</div>
+        
+        <div className="adminBtnWrap adminBtnWrap2">
+          <button onClick={deleteBoard} className="adminBtn adminBtn2">삭제하기</button>
+          <button onClick={updateBoard} className="adminBtn adminBtn2 adminBtnNavy">수정하기</button>
+        </div>
       </div>
     </div>
   );

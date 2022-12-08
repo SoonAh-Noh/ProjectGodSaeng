@@ -15,6 +15,7 @@ const DisposeReport = () => {
   const start_dateRef = useRef(); //검색할 시작날짜 ref
   const end_dateRef = useRef(); //검색할 마지막 날짜 ref
   const categoryRef = useRef(); //카테고리 ref
+  const dateoptRef = useRef();
 
   const [page, setPage] = useState(1); //페이징 처리되어 나눠지는 총 게시판의 페이지 갯수
   const itemcount = 5; //한 페이지에 보여줄 게시글 갯수
@@ -26,6 +27,13 @@ const DisposeReport = () => {
     getComponentData();
     handleReportList();
   }, []);
+
+  
+  // 처리상태 css변경
+  const searchClick = (e) => {
+    // e.preventDefault();
+    e.target.parentElement.classList.toggle('on');
+  }
 
   const getComponentData = async () => {
     //컴포넌트 생성용 리스트 받아오기
@@ -49,8 +57,10 @@ const DisposeReport = () => {
 
     //카테고리 값 가져오기
     const cate = categoryRef.current.value;
+    const dateOpt = dateoptRef.current.value;
     const req_data = {
       process: proc_arr.length > 0 ? proc_arr : '',
+      dateopt: dateOpt,
       range: { start_date: start_date, end_date: end_date },
       category: cate === 'default' ? '' : parseInt(cate),
       mode: 'admin',
@@ -117,64 +127,107 @@ const DisposeReport = () => {
 
   return (
     <div className="Contents">
-      <div className="pageWrap">
-        <div className="adminTitle"><h3>신고 처리</h3></div>
-        
-        <div>
-          기간 : <input type="date" ref={start_dateRef} /> ~{' '}
-          <input type="date" ref={end_dateRef} />
+      <div className="adminTitle"><h3>신고 처리</h3></div>
+
+      <div className="pageWrap subPageWrap adminSearchBar">
+        <div className="subTitle subTitle2">
+          <h3>검색 조건</h3>
         </div>
-        <div>
-          카테고리 :
-          <select name="cate_sel" id="cate_sel" ref={categoryRef}>
-            <option value="default">전체</option>
-            {category.length > 1 &&
-              category.map((val, key) => (
-                <option key={key} value={val.CATEGORY_IDX}>
-                  {val.CATEGORY}
-                </option>
-              ))}
-          </select>
+
+        <div className="searchContents">
+          <div className="searchBox">
+            <div className="searchType"><h4>기간</h4></div>
+            <div className="searchWrap searchWrap2">
+              <div className="searchCate">
+                <select ref={dateoptRef}>
+                  <option value="NOTIFY_DATE">신고일시</option>
+                  <option value="NOTIFY_REPORT_DATE">접수일시</option>
+                </select>
+              </div>
+              
+              <input type="date" ref={start_dateRef} /> ~{' '}
+              <input type="date" ref={end_dateRef} />
+            </div>
+          </div>
+
+          <div className="searchBox">
+            <div className="searchType"><h4>카테고리</h4></div>
+            <div className="searchWrap">
+              <div className="searchCate">
+                <select name="cate_sel" id="cate_sel" ref={categoryRef}>
+                  <option value="default">전체</option>
+                  {category.length > 1 &&
+                    category.map((val, key) => (
+                      <option key={key} value={val.CATEGORY_IDX}>
+                        {val.CATEGORY}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div className="searchBox">
+            <div className="searchType"><h4>처리상태</h4></div>
+            <div className="searchCkWrap">
+              {process.length > 1 &&
+                process.map((val, key) => (
+                  <span key={key} className="searchCk">
+                    <input
+                      type="checkbox"
+                      id={`process_` + key}
+                      name={`process_` + key}
+                      value={val.NOTIFY_PNUM}
+                      ref={addToRefs}
+                    />
+                    <label htmlFor={`process_` + key} onClick={searchClick}>{val.NOTIFY_STATUS}</label>
+                  </span>
+                ))}
+            </div>
+          </div>
         </div>
-        <div>
-          처리 상태 :
-          {process.length > 1 &&
-            process.map((val, key) => (
-              <span key={key}>
-                <input
-                  type="checkbox"
-                  id={`process_` + key}
-                  name={`process_` + key}
-                  value={val.NOTIFY_PNUM}
-                  ref={addToRefs}
-                />
-                <label htmlFor={`process_` + key}>{val.NOTIFY_STATUS}</label>
-              </span>
-            ))}
-          <button onClick={handleReportList}>검색</button>
+
+        <div className="adminBtnWrap">
+          <button onClick={handleReportList} className="adminBtn adminBtn2">검색</button>
         </div>
-        <CsvDownload
-          className="excelbtn"
-          // data : object 또는 object의 배열
-          data={disport}
-          delimiter={','}
-          // filename : 파일이름
-          filename="신고내역.csv"
-        >
-          엑셀 다운로드
-        </CsvDownload>
-        {/* <button onClick={downloadCSV}>엑셀 다운로드</button> */}
-        {/* <div>월별 그래프를 이 페이지에서 굳이 봐야하나 하는 생각이 들어서 일단 제외</div>  */}
+      </div>
+
+      <div className="pageWrap subPageWrap">
+        <div className="subTitle subTitleFlex">
+          <h3>신고 처리 내역</h3>
+          <CsvDownload
+            className="adminBtn excelbtn"
+            // data : object 또는 object의 배열
+            data={disport}
+            delimiter={','}
+            // filename : 파일이름
+            filename="신고내역.csv"
+          >
+            엑셀 다운로드
+          </CsvDownload>
+          {/* <button onClick={downloadCSV}>엑셀 다운로드</button> */}
+          {/* <div>월별 그래프를 이 페이지에서 굳이 봐야하나 하는 생각이 들어서 일단 제외</div>  */}
+        </div>
         <div>
           <div>
-            <table border={1}>
+            <table className="adminTable2" border="0" cellPadding="0" cellSpacing="0">
+              <colgroup>
+                <col width="80px" />
+                <col width="10%" />
+                <col />
+                <col width="10%" />
+                <col width="15%" />
+                <col width="15%" />
+                <col width="15%" />
+              </colgroup>
               <thead>
                 <tr>
-                  <th>no</th>
+                  <th>No.</th>
                   <th>신고자</th>
-                  <th>처리상태</th>
                   <th>카테고리</th>
+                  <th>처리상태</th>
                   <th>신고일시</th>
+                  <th>접수일시</th>
                   <th>더보기</th>
                 </tr>
               </thead>
@@ -186,16 +239,17 @@ const DisposeReport = () => {
                       //disport.map((val, key) => (
                       //<DisposeDetail val={val} key={key} process={process} />
 
-                      <tr key={key}>
+                      <tr key={key} align="center">
                         <td>{data.NOTIFY_IDX}</td>
                         <td>
                           {data.USER_NAME === null ? '비회원' : data.USER_NAME}
                         </td>
-                        <td>{data.NOTIFY_STATUS}</td>
                         <td>{data.CATEGORY}</td>
+                        <td>{data.NOTIFY_STATUS}</td>
                         <td>{data.NOTIFY_DATE}</td>
+                        <td>{data.NOTIFY_REPORT_DATE}</td>
                         <td>
-                          <button onClick={() => move2Detail(data)}>
+                          <button onClick={() => move2Detail(data)} className="adminBtn">
                             상세보기
                           </button>
                         </td>
@@ -203,7 +257,7 @@ const DisposeReport = () => {
                     ))
                 ) : (
                   <tr>
-                    <td colSpan={6}></td>
+                    <td colSpan={7}><div className="noSearch"><p>검색결과가 없습니다.</p></div></td>
                   </tr>
                 )}
               </tbody>

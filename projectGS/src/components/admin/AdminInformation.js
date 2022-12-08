@@ -36,9 +36,12 @@ const AdminInformation = () => {
   };
   return (
     <div className="adminInformation Contents">
+      <div className="adminTitle"><h3>관리자 정보</h3></div>
+      
       <div className="adminInformationContent pageWrap">
-        <div className="adminTitle"><h3>관리자 정보</h3></div>
-        
+        <div className="subTitle">
+          <h3>관리자 리스트</h3>
+        </div>        
         <table className="adminTable2" border="0" cellPadding="0" cellSpacing="0">
           <colgroup>
             <col width="50px" />

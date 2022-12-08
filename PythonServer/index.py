@@ -9,8 +9,11 @@ from functools import wraps
 import time
 import summary
 import urllib.parse
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
+app.secret_key = "secret"
+socket_io = SocketIO(app, cors_allowed_origins='*')
 CORS(app)
 
 
@@ -69,7 +72,6 @@ def upload_board():  # 게시판(공지사항) 업로드
 
 @app.route("/updatenoti", methods=["GET", "POST"])
 def update_board():  # 게시판(공지사항) 수정
-    print("tetesfasdfsd")
     return dbconnecter.update_board(request)
 
 
@@ -105,10 +107,9 @@ def join():  # 회원가입
 
 
 @app.route("/idCheck", methods=["GET", "POST"])
-def idCheck():  # 아이디 중복 체크
+def idCheck():  # 아이디 체크
     body_data = get_body_data(request)
     return dbconnecter.idCheck(body_data)
-
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -126,12 +127,9 @@ def adminlogin():  # 관리자 로그인
 @app.route("/report", methods=["GET", "POST"])
 def report():  # 신고접수
     # body_data = get_body_data(request)
+    # 221208 선우 신고접수되면 관리자페이지에 알림을 날린다
+    socket_io.emit("response", {"data": "insert"})
     return dbconnecter.report(request)
-
-@app.route("/notifyidx", methods=["GET", "POST"])
-def notifyidx():  # 신고접수번호
-    body_data = get_body_data(request)
-    return dbconnecter.notifyidx(body_data)
 
 
 @app.route("/get_cate_list", methods=["GET"])
@@ -178,7 +176,7 @@ def get_dispose_detail():  # 신고 내역 상세 가져오기
 def get_daily_summary_per_weeks():  # 오늘로부터 1주일간의 일별 통계
     sendData = dbconnecter.get_daily_summary_per_weeks()
     result = summary.summay_daily_record(sendData)
-    #decoded_data = urllib.parse.unquote(result, encoding='utf-8')
+    # decoded_data = urllib.parse.unquote(result, encoding='utf-8')
     return result
 
 
@@ -194,28 +192,28 @@ def get_board_list_mini():  # 메인페이지용 공지사항 통계
     return jsonify(sendData)
 
 
-@app.route("/updateadmininfo", methods=["GET", "POST"])
+@ app.route("/updateadmininfo", methods=["GET", "POST"])
 def update_admin_info():  # 사용자 정보 업데이트
     body_data = get_body_data(request)
     sendData = dbconnecter.update_userinfo(body_data)
     return jsonify(sendData)
 
 
-@app.route("/getuserinfo", methods=["GET", "POST"])
+@ app.route("/getuserinfo", methods=["GET", "POST"])
 def get_user_info():  # 유저 단일 데이터 가져오기
     body_data = get_body_data(request)
     sendData = dbconnecter.get_user_info(body_data)
     return jsonify(sendData)
 
 
-@app.route("/getuserlist", methods=["GET", "POST"])
+@ app.route("/getuserlist", methods=["GET", "POST"])
 def get_user_list():  # 유저 목록 가져오기
     body_data = get_body_data(request)
     sendData = dbconnecter.search_user_info(body_data)
     return jsonify(sendData)
 
 
-@app.route("/readplate", methods=["GET", "POST"])
+@ app.route("/readplate", methods=["GET", "POST"])
 def read_plate():  # 자동차 번호판 인식시키기
 
     timestamp = int(time.time())
@@ -233,40 +231,47 @@ def read_plate():  # 자동차 번호판 인식시키기
     return jsonify({"result": res, "dir": file_dir})
 
 
-@app.route("/pointlistbyuser", methods=["GET", "POST"])
+@ app.route("/pointlistbyuser", methods=["GET", "POST"])
 def get_poit_list_by_user():  # 사용자 포인트 목록 가져오기
     body_data = get_body_data(request)
     sendData = dbconnecter.get_poit_list_by_user(body_data)
     return jsonify(sendData)
 
 
-@app.route("/insertgoods", methods=["GET", "POST"])
+@ app.route("/insertgoods", methods=["GET", "POST"])
 def insert_goods():  # 상품권 등록하기
     sendData = dbconnecter.insert_goods(request)
     return jsonify(sendData)
 
 
-@app.route("/goodslist", methods=["GET", "POST"])
+@ app.route("/goodslist", methods=["GET", "POST"])
 def get_goods_list():  # 상품권 목록 가져오기
     body_data = get_body_data(request)
     sendData = dbconnecter.get_goods_list()
     return jsonify(sendData)
 
 
-@app.route("/updategoods", methods=["GET", "POST"])
+@ app.route("/updategoods", methods=["GET", "POST"])
 def update_goods():  # 상품권 수정하기
     sendData = dbconnecter.update_goods(request)
     return jsonify(sendData)
 
 
-@app.route("/getDisposeListByuser", methods=["GET", "POST"])
+@ app.route("/deletegoods", methods=["GET", "POST"])
+def delete_goods():  # 상품권 수정하기
+    body_data = get_body_data(request)
+    sendData = dbconnecter.delete_goods(body_data)
+    return jsonify(sendData)
+
+
+@ app.route("/getDisposeListByuser", methods=["GET", "POST"])
 def get_dispose_list_byuser():  # 신고 리스트 받아오기
     body_data = get_body_data(request)
     sendData = dbconnecter.get_dispose_list_byuser(body_data)
     return jsonify(sendData)
 
 
-@app.route("/insertpoint", methods=["GET", "POST"])
+@ app.route("/insertpoint", methods=["GET", "POST"])
 def insert_point():
     body_data = get_body_data(request)
     # print("푹-",  body_data)
@@ -274,5 +279,17 @@ def insert_point():
     return jsonify(sendData)
 
 
+@ socket_io.on('request')
+def handle_my_custom_event(json, methods=['GET', 'POST']):
+    print('received my event: ' + str(json))
+    socket_io.emit('response', json,
+                   callback='received my event: ' + str(json))
+
+
+def send_message():
+    socket_io.emit('response2', json, callback='sendmessagetest')
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    socket_io.run(app, debug=True, port=5000)  # 221208 선우 소켓형 서버로 사용방법 전환
+    # app.run(debug=True)

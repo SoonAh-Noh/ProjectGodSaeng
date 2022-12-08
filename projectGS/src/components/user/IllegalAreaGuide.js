@@ -30,7 +30,7 @@ import disabled1_1 from "../../images/guide6-1.jpg";
 import disabled1_2 from "../../images/guide6-2.jpg";
 import fire1_1 from "../../images/guide7-1.jpg";
 import fire1_2 from "../../images/guide7-2.jpg";
-// import elect1 from "../../images/guide8-1.jpg";
+import elect_1 from "../../images/guide8-1.png";
 // import elect2 from "../../images/guide8-2.jpg";
 
 
@@ -80,6 +80,7 @@ const IllegalAreaGuide = () => {
   let disabled2 = {backgroundImage: `url(${disabled1_2})`};  
   let fire1 = {backgroundImage: `url(${fire1_1})`};
   let fire2 = {backgroundImage: `url(${fire1_2})`};
+  let elect1 = {backgroundImage: `url(${elect_1})`};
 
   const [value, setValue] = React.useState(0);
 
@@ -381,7 +382,7 @@ const IllegalAreaGuide = () => {
                     speed={1400}
                   >
                     <SwiperSlide>
-                      <div style={fire2} className="slideImg"></div>
+                      <div style={elect1} className="slideImg"></div>
                     </SwiperSlide>
                     {/* <SwiperSlide>
                       <div style={bus2} className="slideImg"></div>

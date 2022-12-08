@@ -18,14 +18,6 @@ const QuickReport = () => {
   const notifyTxtRef = useRef();
   const userTelRef = useRef();
 
-  const [img, setImg] = useState('');
-  const [company, setcompanyRef] = useState('');
-  const [notifySpot, setNotifySpot] = useState('');
-  const [notifyDate, setNotifyDate] = useState();
-  const [notifyTxt, setNotifyTxt] = useState('');
-  const [notifyPnum, setNotifyPnum] = useState('');
-  const [userTel, setUserTel] = useState('');
-
   // 이미지 파일 업로드 & 미리보기 =====================================
   const [imageSrc, setImageSrc] = useState('');
 
@@ -42,7 +34,6 @@ const QuickReport = () => {
 
   const writeReport = async (e) => {
     e.preventDefault();
-
     // 사진 업로드 확인
     if (imgRef.current.value === '' || imgRef.current.value === undefined) {
       alert('불법주정차 공유킥보드 사진을 등록하세요');

@@ -78,6 +78,7 @@ const Report = () => {
     carNumRef.current.value = result.result; //인식한 번호판 결과를 인풋에 전달
     setUploadedSrc(result.dir); //저장된 번호판 이미지파일의 경로를 세팅
   };
+
   const writeReport = async (e) => {
     e.preventDefault();
 
@@ -90,7 +91,7 @@ const Report = () => {
       categoryRef.current.focus();
       return false;
     }
-    // console.log(categoryRef.current.value);
+    console.log(categoryRef.current.value);
 
     // 사진 업로드 확인
     if (imgRef.current.value === '' || imgRef.current.value === undefined) {
@@ -162,14 +163,14 @@ const Report = () => {
 
     formData.append('user_idx', window.sessionStorage.getItem('USER_IDX'));
 
-    // console.log(window.sessionStorage.getItem('USER_IDX'));
+    console.log(window.sessionStorage.getItem('USER_IDX'));
 
     const res = await server_bridge.axios_instace.post('/report', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
 
     if (res.data === 'success') {
-      // console.log('성공', res.data);
+      console.log('성공', res.data);
       // alert('신고 접수가 완료되었습니다.');
       navigate('/reportend');
     } else {
@@ -205,7 +206,7 @@ const Report = () => {
   };
 
   const onCompletePost = (data) => {
-    // console.log(data.address);
+    console.log(data.address);
     setAddress(data.address);
     setOpenPostcode(false);
   };

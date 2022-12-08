@@ -4,7 +4,6 @@ import time
 import os
 
 from pymysql.constants import CLIENT
-from pymysql.err import IntegrityError
 import bcrypt
 from datetime import datetime, timedelta
 
@@ -181,6 +180,7 @@ def get_board_list(where_clause):  # 공지사항 관리의 게시판 리스트
               date_format(A.BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE,
               A.BOARD_TIT AS BOARD_TIT,
               A.BOARD_TXT AS BOARD_TXT,
+              A.BOARD_FILE AS BOARD_FILE,
               B.USER_NAME AS USER_NAME
     FROM BOARD AS A
                    INNER JOIN USER AS B ON A.USER_IDX = B.USER_IDX """
@@ -307,14 +307,11 @@ def join(data):  # 회원가입
     print("회원가입 데이터야 나와랏", data)
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
-
-    # 비밀번호 암호화 처리
     pw = (bcrypt.hashpw(data["pw"].encode('UTF-8'),
           bcrypt.gensalt())).decode('utf-8')
     print(pw)
-
-    # join_tuple = (data["id"], data["pw"], data["name"],
-    #               data["mail"], data["tel"], "O")  # 입력하고자 하는 데이터의 튜플
+    join_tuple = (data["id"], data["pw"], data["name"],
+                  data["mail"], data["tel"], "O")  # 입력하고자 하는 데이터의 튜플
     # sql = """
     #         INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_MAIL, USER_TEL, USER_OX)
     #         VALUES(%s, %s, %s, %s, %s, %s);
@@ -323,7 +320,7 @@ def join(data):  # 회원가입
     sql = f"""INSERT INTO USER(USER_ID, USER_PW, USER_NAME, USER_MAIL, USER_TEL, USER_OX)
               VALUES ('{data["id"]}', '{data["pw"]}', '{data["name"]}', '{data["mail"]}', '{data["tel"]}', 'O');"""
     print("회원가입 sql", sql)
-    
+
     try:
         cursor.execute(sql)
         db.commit()
@@ -335,12 +332,12 @@ def join(data):  # 회원가입
 
 
 def idCheck(data):  # 아이디 중복 가입 체크
-    # print("데이터 출력", data)
+    print("데이터 출력", data)
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
     sql = f"SELECT COUNT(*) AS CNT FROM USER WHERE USER_ID='{data['id']}';"
-    # print(sql)
+    print(sql)
 
     try:
         row_cnt = cursor.execute(sql)
@@ -353,14 +350,13 @@ def idCheck(data):  # 아이디 중복 가입 체크
             close_conn(db)
             return "nothing"
 
-    except IntegrityError as ie :
+    except IntegrityError as ie:
         close_conn(db)
         return "ierr : " + str(ie)
 
     except Exception as e:
         close_conn(db)
         return "err : " + str(e)
-
 
 
 def get_cate_list():  # 카테고리 리스트
@@ -393,6 +389,7 @@ def get_dispose_list(body_data):  # 신고 리스트
                     A.NOTIFY_IDX, A.USER_IDX, B.USER_NAME, B.USER_ID, B.USER_MAIL, B.USER_TEL, B.USER_OX,
                     A.CATEGORY_IDX, C.CATEGORY, A.CAR_NUM, 
                     date_format(A.NOTIFY_DATE, '%Y-%m-%d %H:%i:%S') AS NOTIFY_DATE, 
+                    date_format(A.NOTIFY_REPORT_DATE, '%Y-%m-%d %H:%i:%S') AS NOTIFY_REPORT_DATE, 
                     A.NOTIFY_SPOT,
                     A.NOTIFY_TXT, A.NOTIFY_PNUM, D.NOTIFY_STATUS, A.NOTIFY_RESULT,
                     E.IMG_IDX, E.IMG_PATH                    
@@ -419,9 +416,10 @@ def get_dispose_list(body_data):  # 신고 리스트
             where_proc += " A.NOTIFY_PNUM = " + str(proc_val)
         where_proc += ")"
 
-    where_start_date = " A.NOTIFY_DATE >='" + \
+    where_start_date = f""" A.{body_data["dateopt"]} >='""" + \
         start_date if start_date != "" else ""
-    where_end_date = " A.NOTIFY_DATE <='"+end_date if end_date != "" else ""
+    where_end_date = f""" A.{body_data["dateopt"]} <='""" + \
+        end_date if end_date != "" else ""
 
     where_temp = ""
 
@@ -588,6 +586,7 @@ def get_nofity_mini():  # 신고내역 미니리스트
                     A.NOTIFY_IDX, A.USER_IDX, B.USER_NAME, B.USER_ID, B.USER_MAIL, B.USER_TEL, B.USER_OX,
                     A.CATEGORY_IDX, C.CATEGORY, A.CAR_NUM, 
                     date_format(A.NOTIFY_DATE, '%Y-%m-%d %H:%i:%S') AS NOTIFY_DATE, 
+                    date_format(A.NOTIFY_REPORT_DATE, '%Y-%m-%d %H:%i:%S') AS NOTIFY_REPORT_DATE,
                     A.NOTIFY_SPOT,
                     A.NOTIFY_TXT, A.NOTIFY_PNUM, D.NOTIFY_STATUS, A.NOTIFY_RESULT,
                     E.IMG_IDX, E.IMG_PATH                    
@@ -597,7 +596,7 @@ def get_nofity_mini():  # 신고내역 미니리스트
                     LEFT JOIN CATEGORY  AS C ON A.CATEGORY_IDX  = C.CATEGORY_IDX
                     LEFT JOIN PROCESS   AS D ON A.NOTIFY_PNUM   = D.NOTIFY_PNUM 
                 WHERE A.NOTIFY_PNUM != 4
-                ORDER BY A.NOTIFY_IDX DESC LIMIT 5;"""
+                ORDER BY A.NOTIFY_IDX DESC LIMIT 3;"""
 
     try:
         row_cnt = cursor.execute(sql)
@@ -669,7 +668,6 @@ def adminlogin(data):  # 관리자 로그인
 
 
 def report(request):  # 신고접수
-    
 
     form_data = request.form.to_dict()
     # 221130 선우 - 파일 업로드는 번호판 인식을 위해 먼저 업로드하므로 이제는 필요없음
@@ -683,7 +681,7 @@ def report(request):  # 신고접수
     # file.save(os.path.join(path, filename))
     # file_dir = path+"/"+request.files["img"].filename
     # print(file_dir)
-    print(type(form_data["user_idx"]))
+
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
@@ -718,7 +716,7 @@ def report(request):  # 신고접수
                             '{form_data["notifyTxt"]}', 
                             '1');
                     INSERT INTO IMG(NOTIFY_IDX, IMG_PATH) VALUES (LAST_INSERT_ID(), '{form_data["img_path"]}');"""
-                
+
         sql += sql3
 
     try:
@@ -727,33 +725,6 @@ def report(request):  # 신고접수
         return "success"
     except Exception as e:
         return "err : " + str(e)
-
-
-def notifyidx(body_data):  # 신고접수번호
-    db = conn_db()
-    cursor = db.cursor(pymysql.cursors.DictCursor)
-
-    sql = f"""SELECT A.NOTIFY_IDX 
-              FROM NOTIFY AS A
-              LEFT JOIN USER AS B ON A.USER_IDX = B.USER_IDX
-              WHERE USER_IDX = '{body_data["USER_IDX"]}'
-              ORDER BY A.NOTIFY_IDX DESC
-              LIMIT 1;"""
-
-    notify_idx = body_data["NOTIFY_IDX"]
-
-    print("접수번호", sql)
-    print(notify_idx)
-
-    try:
-        cursor.execute(sql)
-        db.commit()
-        close_conn(db)
-        return "success"
-    except Exception as e:
-        close_conn(db)
-        return "err : " + str(e)
-
 
 
 def update_userinfo(body_data):  # 사용자 정보 수정하기
@@ -779,9 +750,8 @@ def update_userinfo(body_data):  # 사용자 정보 수정하기
 def get_user_info(body_data):  # 사용자 상세 정보 가져오기
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
-    print(body_data)
 
-    # sql = f"""SELECT * FROM USER WHERE USER_ID={body_data["user_id"]}; """
+    sql = f"""SELECT * FROM USER WHERE USER_IDX={body_data["user_idx"]}; """
 
     try:
         row_cnt = cursor.execute(sql)
@@ -1001,8 +971,8 @@ def insert_point(body_data):  # 포인트 증감
     print("타입 확인", type(body_data["NOTIFY_IDX"]))
 
     sql = f"""INSERT INTO """
-    
-    if body_data["NOTIFY_IDX"] !=  None:
+
+    if body_data["NOTIFY_IDX"] != None:
         sql2 = f"""POINT(NOTIFY_IDX, USER_IDX, POINT_PLUS, POINT_MINUS, POINT_CHANGE)
             VALUES(
                 '{body_data["NOTIFY_IDX"]}', 
@@ -1013,7 +983,7 @@ def insert_point(body_data):  # 포인트 증감
                  );"""
         # sql += sql2 + ";"
         sql += sql2
-    else :
+    else:
         sql3 = f"""POINT(USER_IDX, POINT_PLUS, POINT_MINUS, POINT_CHANGE)
             VALUES(
                 '{body_data["USER_IDX"]}',
@@ -1021,8 +991,8 @@ def insert_point(body_data):  # 포인트 증감
                 '{body_data["POINT_MINUS"]}',
                 '{body_data["POINT_CHANGE"]}'
                  );"""
-        # sql += sql3 + ";" 
-        sql += sql3 
+        # sql += sql3 + ";"
+        sql += sql3
 
     print('sql출력', sql)
     # print('타입', type of body_data["NOTIFY_IDX"])

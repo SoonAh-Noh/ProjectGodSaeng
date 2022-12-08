@@ -84,7 +84,7 @@ const PointPay = () => {
       });
       console.log(response.data);
       if (response.data === 'success') {
-        alert(`구매가 완료 되었습니다. `);
+        alert(`구매가 완료 되었습니다.`);
         // navigate('/');
       } else {
         alert('실패');
@@ -102,17 +102,13 @@ const PointPay = () => {
       </div>
 
       <div className="section">
-        <div className="sub-title">
-          <h2>상품권 결제하기</h2>
-        </div>
+        <div className="sub-title"><h2>상품권 결제하기</h2></div>
 
         <form>
           <div className="payWrap">
             <div className="orderWrap">
               <div className="orderList">
-                <h3>
-                  <span className="num">1</span>주문 내역 확인
-                </h3>
+                <h3><span className="num">1</span>주문 내역 확인</h3>
 
                 <table border="0" cellPadding="0" cellSpacing="0">
                   <thead>
@@ -127,43 +123,26 @@ const PointPay = () => {
                     <tr>
                       <td className="textLeft goods">
                         <div className="orderImg">
-                          <img
-                            src={
-                              server_bridge.py_url +
-                              '/' +
-                              state.state.article.GOODS_IMG
-                            }
-                            alt="상품권이미지"
-                          />
+                          <img src={server_bridge.py_url + '/' + state.state.article.GOODS_IMG} alt="상품권이미지" />
                         </div>
                         <div className="orderGoods">
-                          <span>소상공인시장진흥공단</span>
-                          <br />
+                          <span>소상공인시장진흥공단</span><br />
                           {state.state.article.GOODS_NAME}
                         </div>
                       </td>
                       <td>{state.num.count}</td>
                       <td>{addComma(state.state.article.GOODS_PRICE)}</td>
                       <td>
-                        {addComma(
-                          state.state.article.GOODS_PRICE * state.num.count,
-                        )}
+                        {addComma(state.state.article.GOODS_PRICE * state.num.count)}
                       </td>
                     </tr>
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th colSpan="3" className="textRight">
-                        총 상품금액
-                      </th>
+                      <th colSpan="3" className="textRight">총 상품금액</th>
                       <td>
                         {/* 총 상품금액{' '} */}
-                        <strong className="ft_og totalPrice">
-                          {addComma(
-                            state.state.article.GOODS_PRICE * state.num.count,
-                          )}
-                        </strong>{' '}
-                        <i>point</i>
+                        <strong className="ft_og totalPrice">{addComma(state.state.article.GOODS_PRICE * state.num.count)}</strong> <i>point</i>
                       </td>
                     </tr>
                   </tfoot>
@@ -171,9 +150,7 @@ const PointPay = () => {
               </div>
 
               <div className="orderInfo">
-                <h3>
-                  <span className="num">2</span>수신자 정보 입력
-                </h3>
+                <h3><span className="num">2</span>수신자 정보 입력</h3>
 
                 <table border="0" cellPadding="0" cellSpacing="0">
                   <colgroup>
@@ -182,57 +159,41 @@ const PointPay = () => {
                   </colgroup>
                   <tr>
                     <th>받는 분</th>
-                    <td>
-                      <input type="text" ref={nameRef} />
-                    </td>
+                    <td><input type="text" ref={nameRef} /></td>
                   </tr>
                   <tr>
                     <th>휴대폰 번호</th>
-                    <td>
-                      <input type="text" ref={phoneRef} />
-                    </td>
+                    <td><input type="text" ref={phoneRef} /></td>
                   </tr>
                 </table>
               </div>
             </div>
 
+
             <div className="userPoint">
-              <h3>
-                <span className="num">3</span>결제하기
-              </h3>
+              <h3><span className="num">3</span>결제하기</h3>
 
               <table border="0" cellPadding="0" cellSpacing="0">
                 <tr>
                   <td></td>
                   <th>보유 포인트</th>
-                  <td>
-                    {addComma(lave)} <i>point</i>
-                  </td>
+                  <td>{addComma(lave)} <i>point</i></td>
                 </tr>
                 <tr>
                   <td>-</td>
                   <th>사용 포인트</th>
-                  <td>
-                    {addComma(totalPrice)} <i>point</i>
-                  </td>
+                  <td>{addComma(totalPrice)} <i>point</i></td>
                 </tr>
                 <tr>
                   <td>=</td>
                   <th>잔여 포인트</th>
-                  <td>
-                    {addComma(lave - totalPrice)} <i>point</i>
-                  </td>
+                  <td>{addComma(lave - totalPrice)} <i>point</i></td>
                 </tr>
               </table>
 
-              <button
-                type="button"
-                onClick={pointForm}
-                className="btn btn-navy"
-              >
-                결제하기
-              </button>
+              <button type="button" onClick={pointForm} className="btn btn-navy">결제하기</button>
             </div>
+
           </div>
         </form>
       </div>

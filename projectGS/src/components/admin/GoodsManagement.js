@@ -12,7 +12,7 @@ const GoodsManagement = () => {
   }, []);
   const deleteGoods = async (goods_idx) => {
     if (window.confirm('정말로 삭제하시겠습니까?')) {
-      const response = await server_bridge.axios_instace.post('/goodslist', {
+      const response = await server_bridge.axios_instace.post('/deletegoods', {
         goods_idx: goods_idx,
       });
       if (response.data === 'success') {
@@ -50,53 +50,81 @@ const GoodsManagement = () => {
   };
 
   return (
-    <div className="Contents">
-      <div className="pageWrap">
-        <div className="adminTitle"><h3>상품권 관리</h3></div>
+    <div className="Goods Contents">
+      <div className="adminTitle"><h3>상품권 관리</h3></div>
 
-        <div>상품권 목록</div>
+      <div className="pageWrap subPageWrap adminSearchBar">
         <div>
-          상품권 추가하기 <br />
-          상품권 이미지 : <input type="file" accept="image/*" ref={imgRef} />
-          <br />
-          상품권명 : <input type="text" ref={nameRef} />
-          <br />
-          가격 :{' '}
-          <input
-            type="text"
-            ref={priceRef}
-            placeholder="숫자만 입력해주세요! ex)9000"
-            style={{ width: '300px' }}
-          />
-          <br />
-          <button onClick={insertGoods}>추가하기</button>
-        </div>
-        {typeof goods !== 'string' && goods.length > 0 ? (
-          goods.map((item, idx) => (
-            <div
-              key={idx}
-              onClick={() =>
-                navigate('/admin/goodsview', { state: { data: item } })
-              }
-              style={{ cursor: 'pointer' }}
-            >
-              <img
-                src={server_bridge.py_url + '/' + item.GOODS_IMG}
-                alt="상품권 이미지"
-              />
-              <br />
-              {item.GOODS_NAME}
-              <br />
-              {item.GOODS_PRICE} 원
-              <br />
-              <button onClick={() => deleteGoods(item.GOODS_IDX)}>
-                삭제하기
-              </button>
+          <div className="subTitle subTitle2"><h3>상품권 추가하기</h3></div>
+          
+          <div className="searchContents">
+            <div className="searchBox">
+              <div className="searchType"><h4>상품권 이미지</h4></div>
+              <div className="goodsImgUp">                
+                <input type="file" accept="image/*" ref={imgRef} id="goodsImg" />
+                <label htmlFor="goodsImg"><i className="xi-image-o"></i>이미지 선택</label>
+              </div>
+              
             </div>
-          ))
-        ) : (
-          <div>등록한 상품이 없습니다!</div>
-        )}
+            <div className="searchBox">
+              <div className="searchType"><h4>상품권 명</h4></div>
+              <input type="text" ref={nameRef} />
+            </div>
+            <div className="searchBox">
+              <div className="searchType"><h4>가격</h4></div>
+              <input
+                type="text"
+                ref={priceRef}
+                placeholder="숫자만 입력해주세요! (ex. 9000)"
+              />
+            </div>
+          </div>
+          <div className="adminBtnWrap">
+            <button onClick={insertGoods} className="adminBtn adminBtn2">추가하기</button>
+          </div>
+        </div>
+      </div>
+      
+      <div className="pageWrap subPageWrap">
+        <div className="subTitle subTitleFlex">
+          <h3>상품 리스트</h3>
+          <div className="totalNumber">
+            <p>총 {goods.length}건</p>
+          </div>
+        </div>
+        <div className="goodsList">
+          {typeof goods !== 'string' && goods.length > 0 ? (
+            goods.map((item, idx) => (
+              <div className="goodsWrap">
+                <div
+                  key={idx}
+                  onClick={() =>
+                    navigate('/admin/goodsview', { state: { data: item } })
+                  }
+                  className="goodsBox"
+                >
+                  <div className="goodsImg">
+                    <img
+                      src={server_bridge.py_url + '/' + item.GOODS_IMG}
+                      alt="상품권 이미지"
+                    />
+                  </div>
+                  <div className="goodsInfo">
+                    <h4>{item.GOODS_NAME}</h4>
+                    <p>{item.GOODS_PRICE} 원</p>
+                  </div>
+
+                  
+                  <button onClick={() => deleteGoods(item.GOODS_IDX)} className="btnTrash" title="삭제하기">
+                    <i className="xi-trash-o"></i>
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="noSearch noSearch2"><p>등록된 상품이 없습니다.</p></div>
+          )}
+        </div>
       </div>
     </div>
   );

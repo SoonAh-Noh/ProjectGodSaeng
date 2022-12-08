@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../css/userManagement.css';
+// import '../../css/userManagement.css';
 import * as server_bridge from '../../controller/server_bridge';
 const UserManagement = () => {
   const navigate = useNavigate(); //페이지 이동용 네비게이터
@@ -38,57 +38,62 @@ const UserManagement = () => {
   };
   return (
     <div className="userManagement Contents">
-      <div className="userTitleContainer pageWrap">
-        <div className="adminTitle"><h3>회원 관리</h3></div>
+      <div className="adminTitle"><h3>회원 관리</h3></div>
 
-        {/* <div>
-          <select ref={optionRef}>
-            <option value="USER_ID">아이디</option>
-            <option value="USER_NAME">이름</option>
-            <option value="USER_TEL">연락처</option>
-            <option value="USER_MAIL">이메일</option>
-          </select>
-          <input
-            type="text"
-            ref={keywordRef}
-            placeholder="검색어를 입력해주세요"
-          />
-          <button onClick={() => getUserList(1)}>검색</button>
-          <button onClick={reset}>초기화</button>
-        </div> */}
-        
-        <div className="searchWrap">
-          <div className="searchCate">
-            <select ref={optionRef}>
-              <option value="USER_ID">아이디</option>
-              <option value="USER_NAME">이름</option>
-              <option value="USER_TEL">연락처</option>
-              <option value="USER_MAIL">이메일</option>
-            </select>
-          </div>
-          <input type="text" ref={keywordRef} className="searchTxt" />
-          <button onClick={() => getUserList(1)} className="searchBtn">검색</button>
-          
-          <button onClick={reset}>초기화</button>
+      <div className="pageWrap subPageWrap adminSearchBar">
+        <div className="subTitle subTitle2">
+          <h3>회원 검색</h3>
         </div>
+
+        <div className="flexBetween">
+          <div className="searchWrap">
+            <div className="searchCate">
+              <select ref={optionRef}>
+                <option value="USER_ID">아이디</option>
+                <option value="USER_NAME">이름</option>
+                <option value="USER_TEL">연락처</option>
+                <option value="USER_MAIL">이메일</option>
+              </select>
+            </div>
+            <input type="text" ref={keywordRef} className="searchTxt" />
+          </div>
+
+          <div className="adminBtnWrap2">
+            <button onClick={() => getUserList(1)} className="adminBtn adminBtn2 searchBtn">검색</button>
+            
+            <button onClick={reset} className="adminBtn btnUndo" title="검색 초기화">초기화</button>
+          </div>
+        </div>
+      </div>
+      <div className="userTitleContainer pageWrap">
+        <div className="subTitle subTitleFlex">
+          <h3>회원 리스트</h3>
+          <div className="totalNumber">
+            <p>총 {user.length}건</p>
+          </div>
+         </div>
         
         <div className="userContainer">
           {typeof user !== 'string' && user.length > 0 ? ( //사용자가 1명 이상일때만 리스트를 활성화
             user.map((data, idx) => (
-              <div
-                key={idx}
-                className="userShow"
-                onClick={() => move2userdetail(data.USER_IDX, data.USER_ID)}
-              >
-                <ul>
-                  <li>{data.USER_NAME}</li>
-                  <li>{data.USER_TEL}</li>
-                  <li>{data.USER_MAIL}</li>
-                </ul>
+              <div className="userBox">
+                <div
+                  key={idx}
+                  className="userShow"
+                  onClick={() => move2userdetail(data.USER_IDX, data.USER_ID)}
+                >
+                  <ul>
+                    <li className="userName">&nbsp;{data.USER_NAME}</li>
+                    <li className="userTel">&nbsp;{data.USER_TEL}</li>
+                    <li className="userMail">&nbsp;{data.USER_MAIL}</li>
+                  </ul>
+                </div>
               </div>
             ))
           ) : (
-            <div></div>
+            <div>
+              <div className="noSearch noSearch2"><p>검색결과가 없습니다.</p></div>
+            </div>
           )}
         </div>
       </div>

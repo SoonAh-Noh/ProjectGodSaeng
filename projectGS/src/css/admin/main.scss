@@ -33,6 +33,7 @@
     .todoListItem {
         flex: 1;
         padding: 20px;
+        cursor: default;
 
         .todoContainer {
             padding: 20px;
@@ -79,14 +80,122 @@
         font-size: 18px;
         color: #333;
     }
+
+    .explain {
+        vertical-align: middle;
+
+        i {
+            font-size: 22px;
+            padding-left: 5px;
+            color: #aaa;
+            font-weight: 100;
+        }
+
+        .explainTxt {
+            margin-left: 10px;
+            font-size: 14px;
+            font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+            color: #888;
+            font-weight: 400;
+            border: 2px solid rgba(25, 29, 115, 0.2);
+            border-radius: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+            letter-spacing: 0.01em;
+            opacity: 0;
+            transition: all 0.4s;
+        }
+    }
 }
 
 .cell-a {
     height: auto !important;
-    max-height: 320px;
+    max-height: 360px;
 
     .recharts-responsive-container {
         padding-bottom: 20px;
         box-sizing: border-box;
+    }
+}
+
+
+/**************************************************************
+신고내역
+***************************************************************/
+
+.notifyBoxWrap {
+    display: flex;
+    justify-content: space-between;
+
+    .notifyBox {
+        width: 33.33%;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
+
+        button {
+            border-radius: 10px;
+            background: #fafafa;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: 240px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            transition: all 0.4s;
+            border: 1px solid #fafafa;
+
+            &:hover {
+                background: #fff;
+                box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+                border-color: #191d73;
+            }
+        }
+
+        .notifyThumb {
+            width: 100%;
+            height: 100px;
+
+            img {
+                max-width: 100%;
+                display: block;
+                border: 1px solid #eee;
+                box-sizing: border-box;
+            }
+        }
+
+        .notifyTxt {
+            width: 100%;
+            height: calc(100% - 100px);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: space-between;
+
+            h4 {
+                font-size: 16px;
+                color: #444;
+                font-weight: 500;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 15px;
+            }
+        }
+    }
+
+    .noReport {
+        width: 100%;
+        padding: 5% 0;
+        box-sizing: border-box;
+        text-align: center;
+        background: #fafafa;
+
+        p {
+            font-size: 16px;
+        }
     }
 }

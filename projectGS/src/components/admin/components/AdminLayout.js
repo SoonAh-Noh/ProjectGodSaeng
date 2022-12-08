@@ -12,30 +12,47 @@ import AdminLogin from '../AdminLogin';
 import Sidebar from './Sidebar';
 
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { io } from 'socket.io-client';
 
 import styles from '../css/AdminLayout.module.scss';
-import "../../../css/admin/sub.scss";
-
+import '../../../css/admin/sub.scss';
+//import Backgroundworker from '../../../controller/Backgroundworker.js';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
+  //let socket = '';
+  const [txt, setTxt] = useState('');
   const logout = () => {
     window.sessionStorage.clear();
     console.log('세션초기화');
 
     window.location.href = '/admin';
   };
+
+  let socket = io('http://localhost:5000', {
+    //소켓통신(실시간 양방향 통신)
+    transports: ['websocket'],
+  });
+  socket.connect(); // 소켓연결
+  socket.on('response', function (msg) {
+    //대기하다가 response로 데이터가 날라오면(신고접수되면) 반응
+    setTxt('새로운 신고가 들어왔습니다!');
+  });
+
   return (
     <div id="Admin">
-      {window.sessionStorage.getItem('USER_ID') == 'admin'? (
+      {window.sessionStorage.getItem('USER_ID') == 'admin' ? (
         <div>
           <header>
-              <h1>안전꽹과리 관리자 페이지</h1>
-              <button onClick={logout}>
-                <LogoutIcon />
-                로그아웃
-              </button>
-              {/*window.sessionStorage.getItem('USER_ID') !== null ? (
+            <h1>안전꽹과리 관리자 페이지</h1>
+            <p>{txt}</p>
+            <button onClick={logout}>
+              <LogoutIcon />
+              로그아웃
+            </button>
+            {/*window.sessionStorage.getItem('USER_ID') !== null ? (
                 <>
                   <button
                     onClick={() => {
@@ -53,7 +70,7 @@ const AdminLayout = () => {
                 ''
               )*/}
           </header>
-          
+
           <Sidebar />
           <main id="AdminLayout" className={styles.main}>
             <Outlet />
@@ -64,7 +81,7 @@ const AdminLayout = () => {
           <AdminLogin />
         </div>
       )}
-    </div> 
+    </div>
   );
 };
 export default AdminLayout;
