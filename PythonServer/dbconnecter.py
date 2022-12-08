@@ -692,6 +692,9 @@ def report(request):  # 신고접수
     # report_tuple = (form_data["user_idx"], form_data["category"], form_data["carNum"], form_data["notifySpot"],
     #                 form_data["notifyDate"], form_data["notifyTxt"], "1", form_data["img_path"])
 
+
+    print(form_data["user_idx"])
+
     sql = f"INSERT INTO "
     if form_data["user_idx"] != "null":
         sql2 = f""" NOTIFY(USER_IDX, CATEGORY_IDX, CAR_NUM, NOTIFY_SPOT, NOTIFY_DATE, NOTIFY_TXT, NOTIFY_PNUM) 

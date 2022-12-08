@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import * as server_bridge from '../../controller/server_bridge';
 
 import '../../css/user/sub.scss';
+import exImg from '../../images/exImg.png';
 
 const Report = () => {
   // ==============================================
@@ -338,6 +339,16 @@ const Report = () => {
                   accept="image/*"
                   onChange={recognitionPlateNo}
                 />
+
+                <div className="viewImg">
+                  <img
+                    src={exImg}
+                    alt="eximg"
+                    className="eximg"
+                    horizontal-align="left"
+                  />{' '}
+                  <p></p>
+                </div>
 
                 {imageSrc && (
                   <div className="viewImg">
