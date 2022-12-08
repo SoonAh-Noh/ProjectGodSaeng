@@ -727,6 +727,29 @@ def report(request):  # 신고접수
         return "err : " + str(e)
 
 
+
+
+def notifyidx(body_data):  # 신고접수번호
+    db = conn_db
+    cursor = db.cursor(pymysql.cursors.DictCursor)
+
+    sql = f""" SELECT A.NOTIFY_IDX 
+               FROM NOTIFY AS A
+               LEFT JOIN USER AS B ON A.USER_IDX = B.USER_IDX
+               WHERE A.USER_IDX = '{body_data["user_idx"]}'
+               ORDER BY A.NOTIFY_IDX DESC
+               LIMIT 1; """
+
+    notify_idx = body_data["notify_idx"]
+    
+    try : 
+        cursor.execute(sql)
+        db.commit()
+        close_conn(db)
+        return "success"
+    except Exception as e:
+        close_conn(db)
+
 def update_userinfo(body_data):  # 사용자 정보 수정하기
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)

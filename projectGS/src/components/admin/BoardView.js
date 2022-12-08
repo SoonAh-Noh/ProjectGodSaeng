@@ -45,21 +45,25 @@ const BoardView = () => {
     return;
   };
 
-  const goBack = () =>{
+  const goBack = () => {
     navigate('/admin/boardmanage');
-  }
+  };
 
   return (
     <div className="Contents">
       <div className="adminTitle flexBetween">
         <h3>공지사항 글쓰기</h3>
-        <button type="button" className="adminBtn" onClick={goBack}>목록으로</button>
+        <button type="button" className="adminBtn" onClick={goBack}>
+          목록으로
+        </button>
       </div>
 
       <div className="pageWrap">
         <div className="boardViewTop">
           <div className="boardTitle">
-            <h3><span>{board.BOARD_IDX}.</span> {board.BOARD_TIT}</h3>
+            <h3>
+              <span>{board.BOARD_IDX}.</span> {board.BOARD_TIT}
+            </h3>
           </div>
           <ul>
             <li>{board.USER_NAME}</li>
@@ -68,10 +72,13 @@ const BoardView = () => {
               {board.BOARD_FILE !== '' ? (
                 <a
                   href={
-                    server_bridge.py_url + '/download_file/' + board.BOARD_FILE.dir
+                    server_bridge.py_url +
+                    '/download_file/' +
+                    board.BOARD_FILE.dir
                   }
                 >
-                  <i className="xi-attachment"></i>{board.BOARD_FILE.filename}
+                  <i className="xi-attachment"></i>
+                  {board.BOARD_FILE.filename}
                 </a>
               ) : (
                 ''
@@ -83,10 +90,17 @@ const BoardView = () => {
         <div className="boardTxt">
           <p>{board.BOARD_TXT}</p>
         </div>
-        
+
         <div className="adminBtnWrap adminBtnWrap2">
-          <button onClick={deleteBoard} className="adminBtn adminBtn2">삭제하기</button>
-          <button onClick={updateBoard} className="adminBtn adminBtn2 adminBtnNavy">수정하기</button>
+          <button onClick={deleteBoard} className="adminBtn adminBtn2">
+            삭제하기
+          </button>
+          <button
+            onClick={updateBoard}
+            className="adminBtn adminBtn2 adminBtnNavy"
+          >
+            수정하기
+          </button>
         </div>
       </div>
     </div>
