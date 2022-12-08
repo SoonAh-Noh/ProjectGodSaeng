@@ -17,6 +17,7 @@ const QuickReport = () => {
   const notifyDateRef = useRef();
   const notifyTxtRef = useRef();
   const userTelRef = useRef();
+  const btnRef = useRef();
 
   // 이미지 파일 업로드 & 미리보기 =====================================
   const [imageSrc, setImageSrc] = useState('');
@@ -87,6 +88,13 @@ const QuickReport = () => {
       userTelRef.current.value === undefined
     ) {
       alert('휴대폰 번호를 입력하세요');
+      userTelRef.current.focus();
+      return false;
+    }
+
+    // 개인정보 수집 동의 체크 확인
+    if (btnRef.current.checked === false) {
+      alert('개인정보 수집 동의하세요');
       userTelRef.current.focus();
       return false;
     }

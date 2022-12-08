@@ -19,6 +19,7 @@ const Report = () => {
   const notifyDateRef = useRef();
   const notifyTxtRef = useRef();
   const userTelRef = useRef();
+  const btnRef = useRef();
 
   const [category, setCategory] = useState('');
   const [img, setImg] = useState('');
@@ -147,6 +148,13 @@ const Report = () => {
       userTelRef.current.value === undefined
     ) {
       alert('휴대폰 번호를 입력하세요');
+      userTelRef.current.focus();
+      return false;
+    }
+
+    // 개인정보 수집 동의 체크 확인
+    if (btnRef.current.checked === false) {
+      alert('개인정보 수집 동의하세요');
       userTelRef.current.focus();
       return false;
     }
@@ -487,7 +495,7 @@ const Report = () => {
                   <label for="checkNo">아니오</label> */}
 
                   <div className="half checkWrap">
-                    <input type="checkbox" id="checkOk" />
+                    <input type="checkbox" id="checkOk" ref={btnRef} />
                     <label for="checkOk">개인정보 수집 동의</label>
 
                     <button
