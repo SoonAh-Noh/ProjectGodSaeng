@@ -44,6 +44,7 @@ const Report = () => {
   const handleClick = () => {
     show ? setShow(false) : setShow(true);
   };
+
   // 이미지 파일 업로드 & 미리보기 =====================================
 
   const [imageSrc, setImageSrc] = useState('');
@@ -73,7 +74,7 @@ const Report = () => {
 
     const response = await server_bridge.axios_instace.post(
       //서버에 번호판 인식 요청
-      'readplate',
+      '/readplate',
       formData,
       {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -175,7 +176,22 @@ const Report = () => {
     formData.append('notifyDate', notifyDateRef.current.value);
     formData.append('notifyTxt', notifyTxtRef.current.value);
 
-    formData.append('user_idx', window.sessionStorage.getItem('USER_IDX'));
+    // 221208 선우 비회원의 회원가리 처리용 데이터
+    formData.append(
+      'user_idx',
+      window.sessionStorage.getItem('USER_IDX') !== null
+        ? window.sessionStorage.getItem('USER_IDX')
+        : 'null',
+    ); //비회원 신고일경우 'null'
+    formData.append('user_tel', userTelRef.current.value); //비회원이던 아니던 전화번호는 일단 보낸다.
+
+    let timestamp = '';
+    timestamp += Date.now();
+    let name = 'member_' + timestamp; //비회원용 아이디, 이름
+    formData.append(
+      'user_name',
+      window.sessionStorage.getItem('USER_IDX') === null ? name : '',
+    ); //비회원 신고용 user_name
 
     console.log(window.sessionStorage.getItem('USER_IDX'));
 
@@ -186,7 +202,15 @@ const Report = () => {
     if (res.data === 'success') {
       console.log('성공', res.data);
       // alert('신고 접수가 완료되었습니다.');
-      navigate('/reportend');
+      navigate('/reportend', {
+        state: {
+          is_non_member:
+            window.sessionStorage.getItem('USER_IDX') === null ? true : false,
+          name: name,
+        },
+      });
+      //반약에 비회원 신고였을 경우에는 여기서 미리 설정한 비회원 아이디를 넘겨줘서
+      //신고 완료 페이지에서 비회원신고일 경우 회원번호를 state로 넘겨준 비회원아이디로 검색한다.
     } else {
       console.log('실패', res.data);
       alert('신고 접수가 정상적으로 이루어지지 않았습니다.');
@@ -233,6 +257,10 @@ const Report = () => {
   const onReset = () => {
     setText('');
   };
+
+  // 유저 핸드폰 번호
+  const tel = window.sessionStorage.getItem('USER_TEL');
+  console.log(window.sessionStorage.getItem('USER_TEL'));
 
   // 개인정보 동의 내용 숨기기
   const [value, setValue] = useState(true);
@@ -493,6 +521,7 @@ const Report = () => {
                     ref={userTelRef}
                     type="text"
                     placeholder="핸드폰 번호를 입력해주세요"
+                    defaultValue={tel}
                   />
                 </div>
 
