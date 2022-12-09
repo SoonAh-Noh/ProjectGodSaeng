@@ -246,7 +246,7 @@ const Join = () => {
               ref={pwCkRef}
               placeholder=" "
             />
-            <label>비밀번호 재입력</label>
+            <label>비밀번호 확인</label>
           </div>
 
           <div className="input-box">

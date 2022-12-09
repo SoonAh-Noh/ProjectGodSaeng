@@ -734,7 +734,9 @@ def update_userinfo(body_data):  # 사용자 정보 수정하기
     sql = f"""UPDATE USER SET 
                 USER_PW = '{body_data['user_pw']}', 
                 USER_NAME='{body_data['user_name']}', 
-                USER_TEL='{body_data['user_tel']}' 
+                USER_MAIL='{body_data['user_mail']}',
+                USER_TEL='{body_data['user_tel']}',
+                ADMIN_OX='{body_data["admin_ox"]}'
               WHERE USER_IDX = {body_data['user_idx']}; """
 
     try:

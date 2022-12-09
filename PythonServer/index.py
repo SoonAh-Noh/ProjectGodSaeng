@@ -296,6 +296,11 @@ def notifyidx(): # 신고접수번호
     sendData = dbconnecter.notifyidx(body_data)
     return jsonify(sendData)
 
+@ app.route("/updateuserinfo", methods=["GET", "POST"])
+def update_user_info():  # 사용자 정보 업데이트
+    body_data = get_body_data(request)
+    sendData = dbconnecter.update_userinfo(body_data)
+    return jsonify(sendData)
 
 if __name__ == "__main__":
     socket_io.run(app, debug=True, port=5000)  # 221208 선우 소켓형 서버로 사용방법 전환

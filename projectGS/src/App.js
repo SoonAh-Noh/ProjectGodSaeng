@@ -27,6 +27,7 @@ import Login from './components/user/Login';
 import PointItem from './components/user/PointItem';
 import PointOrder from './components/user/PointOrder';
 import PointPay from './components/user/PointPay';
+import MyInfo from './components/user/MyInfo';
 
 /* 221115 선우 - 관리자용 페이지 관련 */
 //import AdminMain from './components/admin/AdminMain';
@@ -92,6 +93,7 @@ function App() {
             <Route path="/join" element={<Join />} /> {/* 회원가입 */}
             <Route path="/mypage" element={<MyPage />} /> {/* 마이페이지 */}
             <Route path="/Forgot" element={<Forgot />} /> {/* 비밀번호 찾기 */}
+            <Route path="/myinfo" element={<MyInfo />} /> {/* 개인정보 수정 */}
             <Route path="/myreport" element={<UserReportList />} />
             {/* 221130 선우 - 내 신고내역 */}
             <Route path="/myreportview" element={<UserReportView />} />
