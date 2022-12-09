@@ -30,6 +30,7 @@ const Report = () => {
   const [notifyPnum, setNotifyPnum] = useState('');
   const [userTel, setUserTel] = useState('');
   const [userIdx, setuserIdx] = useState('');
+  const [show, setShow] = useState(false);
 
   // 신고 유형 선택 ====================================================
   let CATEGORY_VALUE = ''; // 값이 계속 바뀌기 때문에 let으로 선언.
@@ -39,6 +40,10 @@ const Report = () => {
     console.log(CATEGORY_VALUE);
   }; // data(인자)를 받아 lifeArr(select name 속성) LIFE_VALUE의 값에 반영한다.
 
+  // 예시 이미지 보이기 감추기
+  const handleClick = () => {
+    show ? setShow(false) : setShow(true);
+  };
   // 이미지 파일 업로드 & 미리보기 =====================================
 
   const [imageSrc, setImageSrc] = useState('');
@@ -346,17 +351,20 @@ const Report = () => {
                   type="file"
                   accept="image/*"
                   onChange={recognitionPlateNo}
+                  onClick={handleClick}
                 />
 
-                <div className="viewImg">
-                  <img
-                    src={exImg}
-                    alt="eximg"
-                    className="eximg"
-                    horizontal-align="left"
-                  />{' '}
-                  <p></p>
-                </div>
+                {show || (
+                  <div className="viewImg">
+                    <img
+                      src={exImg}
+                      alt="eximg"
+                      className="eximg"
+                      horizontal-align="left"
+                    />{' '}
+                    <p></p>
+                  </div>
+                )}
 
                 {imageSrc && (
                   <div className="viewImg">
