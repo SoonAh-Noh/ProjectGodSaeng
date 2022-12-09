@@ -2,6 +2,9 @@ import React from 'react';
 import '../../css/user/Forgot.scss';
 
 const Forgot = () => {
+  const sendpw = () => {
+    alert('입력하신 이메일로 임시비밀번호 전송했습니다.');
+  };
   return (
     <div id="findpw">
       <div className="find">
@@ -35,6 +38,7 @@ const Forgot = () => {
               className="btn-f"
               type="button"
               value="찾기"
+              onClick={sendpw}
             />
           </div>
         </from>
