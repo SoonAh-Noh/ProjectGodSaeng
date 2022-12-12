@@ -41,17 +41,6 @@ const MyPage = () => {
     return num.toString().replace(regexp, ',');
   };
 
-  // 신고건수 가져오는 작업 ====================================
-  const [totalcnt, setCnt] = useState(0);
-
-  const getUserReport = async () => {
-    const res = await server_bridge.axios_instace.post('/getDisposeList', {
-      user_id: user_id,
-    });
-    console.log(res.data.length);
-    setCnt(res.data.length);
-  };
-
   return (
     <div id="MyPage">
       <div className="memberSection">
@@ -83,7 +72,7 @@ const MyPage = () => {
               className="mypage_report"
               type="text"
               size="20"
-              defaultValue={'아직'}
+              defaultValue={'건'}
               placeholder=" "
             />
           </div>

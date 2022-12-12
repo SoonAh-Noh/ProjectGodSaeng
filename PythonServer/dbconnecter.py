@@ -805,12 +805,12 @@ def update_userinfo(body_data):  # 사용자 정보 수정하기
     #             USER_OX='{body_data["user_ox"]}'
     #           WHERE USER_IDX = {body_data['user_idx']}; """
     sql = f"""UPDATE USER SET 
-                USER_PW = '{body_data['user_pw']}', 
-                USER_NAME='{body_data['user_name']}', 
-                USER_MAIL='{body_data['user_mail']}',
-                USER_TEL='{body_data['user_tel']}',
-                USER_OX='{"O"}'
-              WHERE USER_IDX = {body_data['user_idx']}; """
+            USER_PW = '{body_data['user_pw']}', 
+            USER_NAME='{body_data['user_name']}', 
+            USER_MAIL='{body_data['user_mail']}',
+            USER_TEL='{body_data['user_tel']}',
+            USER_OX='{"O"}'
+            WHERE USER_IDX = {body_data['user_idx']}; """
 
     try:
         cursor.execute(sql)
@@ -1077,6 +1077,37 @@ def insert_point(body_data):  # 포인트 증감
         db.commit()
         close_conn(db)
         return "success"
+    except Exception as e:
+        close_conn(db)
+        return "err : " + str(e)
+
+
+def get_process_cnt(body_data):  # 신고 건수
+    db = conn_db()
+    cursor = db.cursor(pymysql.cursors.DictCursor)
+
+    sql = """   SELECT USER_IDX AS A
+                                   
+                FROM NOTIFY
+    
+                LEFT JOIN USER  AS B ON 
+                
+                A.USER_IDX = B.USER_IDX
+        """
+
+    print(sql)
+
+    try:
+        row_cnt = cursor.execute(sql)
+        # db.commit()
+        if row_cnt > 0:
+            res = cursor.fetchall()
+            close_conn(db)
+            return res
+        else:
+            close_conn(db)
+            return "nothing"
+
     except Exception as e:
         close_conn(db)
         return "err : " + str(e)

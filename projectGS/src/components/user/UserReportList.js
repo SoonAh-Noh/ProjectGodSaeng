@@ -197,7 +197,7 @@ const UserReportList = () => {
                           })
                         }
                       >
-                        <td>{cnt}</td>
+                        <td>{totalcnt}</td>
                         <td>{data.NOTIFY_IDX}</td>
                         <td>{data.CATEGORY}</td>
                         <td>{data.NOTIFY_DATE}</td>
