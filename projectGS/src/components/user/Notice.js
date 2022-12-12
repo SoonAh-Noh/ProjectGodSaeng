@@ -82,9 +82,9 @@ const Notice = () => {
                     .slice(page * itemcount - itemcount, page * itemcount) //여기서 보여주려고 하는 리스트를 잘라내서 페이징 처리
                     .map((data, key) => {
                       return (
-                        <tr key={key}>
+                        <tr key={key} align="center">
                           <td>{data.BOARD_IDX}</td>
-                          <td>
+                          <td align="left">
                             <Link
                               to={'/noticeview'}
                               state={{

@@ -136,3 +136,45 @@
         max-height: 90px;
     }
 }
+
+@media all and (max-width:525px) {
+
+    #Login .log,
+    #Join .jo,
+    #findpw .find {
+        width: 95%;
+        height: auto;
+        padding: 60px;
+        margin-top: 100px;
+    }
+
+    #Login .log .sub-title h2,
+    #Join .jo .sub-title h2,
+    #findpw .find .sub-title h2 {
+        font-size: 22px;
+    }
+
+    #Login .id_login:placeholder-shown+label,
+    #Login .pw_login:placeholder-shown+label,
+    #Login .btn-login[type=button],
+    #Join .join_id:placeholder-shown+label,
+    #Join .join_pw:placeholder-shown+label,
+    #Join .join_pwck:placeholder-shown+label,
+    #Join .join_name:placeholder-shown+label,
+    #Join .join_email:placeholder-shown+label,
+    #Join .join_tel:placeholder-shown+label,
+    #Join .sign_up[type=button],
+    #findpw .id_find:placeholder-shown+label,
+    #findpw .email_find:placeholder-shown+label,
+    #findpw .btn-f[type=button] {
+        font-size: 15px;
+    }
+
+    #Login .btn-login[type=button],
+    #Join .sign_up[type=button],
+    #findpw .btn-f[type=button] {
+        height: 40px;
+        line-height: inherit;
+        font-weight: 500;
+    }
+}

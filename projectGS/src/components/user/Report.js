@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as server_bridge from '../../controller/server_bridge';
-
+import Swal from 'sweetalert2';
 import '../../css/user/sub.scss';
 import exImg from '../../images/exImg.png';
 
@@ -95,7 +95,14 @@ const Report = () => {
       categoryRef.current.value === 'none' ||
       categoryRef.current.value === undefined
     ) {
-      alert('불법주정차 유형을 선택하세요');
+      // alert('불법주정차 유형을 선택하세요');
+      Swal.fire({
+        title: '불법주정차 유형을 선택하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       categoryRef.current.focus();
       return false;
     }
@@ -103,7 +110,14 @@ const Report = () => {
 
     // 사진 업로드 확인
     if (imgRef.current.value === '' || imgRef.current.value === undefined) {
-      alert('불법주정차 사진을 등록하세요');
+      // alert('불법주정차 사진을 등록하세요');
+      Swal.fire({
+        title: '불법주정차 사진을 등록하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       imgRef.current.focus();
       return false;
     }
@@ -113,7 +127,14 @@ const Report = () => {
       carNumRef.current.value === '' ||
       carNumRef.current.value === undefined
     ) {
-      alert('불법주정차 차량번호를 입력하세요');
+      // alert('불법주정차 차량번호를 입력하세요');
+      Swal.fire({
+        title: '불법주정차 차량번호를 입력하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       carNumRef.current.focus();
       return false;
     }
@@ -123,7 +144,14 @@ const Report = () => {
       notifyDateRef.current.value === '' ||
       notifyDateRef.current.value === undefined
     ) {
-      alert('불법주정차 발생 일자를 입력하세요');
+      // alert('불법주정차 발생 일자를 입력하세요');
+      Swal.fire({
+        title: '불법주정차 발생 일자를 입력하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       notifyDateRef.current.focus();
       return false;
     }
@@ -133,7 +161,14 @@ const Report = () => {
       notifySpotRef.current.value === '' ||
       notifySpotRef.current.value === undefined
     ) {
-      alert('불법주정차 발생 지역을 입력하세요');
+      // alert('불법주정차 발생 지역을 입력하세요');
+      Swal.fire({
+        title: '불법주정차 발생 지역을 입력하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       notifySpotRef.current.focus();
       return false;
     }
@@ -143,7 +178,14 @@ const Report = () => {
       notifyTxtRef.current.value === '' ||
       notifyTxtRef.current.value === undefined
     ) {
-      alert('불법주정차 신고내용을 입력하세요');
+      // alert('불법주정차 신고내용을 입력하세요');
+      Swal.fire({
+        title: '불법주정차 신고내용을 입력하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       notifyTxtRef.current.focus();
       return false;
     }
@@ -153,14 +195,28 @@ const Report = () => {
       userTelRef.current.value === '' ||
       userTelRef.current.value === undefined
     ) {
-      alert('휴대폰 번호를 입력하세요');
+      // alert('휴대폰 번호를 입력하세요');
+      Swal.fire({
+        title: '휴대폰 번호를 입력하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       userTelRef.current.focus();
       return false;
     }
 
     // 개인정보 수집 동의 체크 확인
     if (btnRef.current.checked === false) {
-      alert('개인정보 수집 동의하세요');
+      // alert('개인정보 수집 동의하세요');
+      Swal.fire({
+        title: '개인정보 수집 동의하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       userTelRef.current.focus();
       return false;
     }
@@ -213,7 +269,14 @@ const Report = () => {
       //신고 완료 페이지에서 비회원신고일 경우 회원번호를 state로 넘겨준 비회원아이디로 검색한다.
     } else {
       console.log('실패', res.data);
-      alert('신고 접수가 정상적으로 이루어지지 않았습니다.');
+      // alert('신고 접수가 정상적으로 이루어지지 않았습니다.');
+      Swal.fire({
+        title: '신고 접수가 정상적으로 이루어지지 않았습니다.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
     }
     // navigate('/');
   };
@@ -351,7 +414,7 @@ const Report = () => {
               </div>
             </div>
 
-            <div className="row">
+            <div className="row notAlign">
               <div className="col-2 col-sm-12">
                 <div className="rTitle">
                   <h3>사진 업로드</h3>
@@ -490,7 +553,7 @@ const Report = () => {
               </div>
             </div>
 
-            <div className="row">
+            <div className="row notAlign">
               <div className="col-2 col-sm-12">
                 <div className="rTitle">
                   <h3>신고 내용</h3>
@@ -506,7 +569,7 @@ const Report = () => {
               </div>
             </div>
 
-            <div className="row">
+            <div className="row notAlign">
               <div className="col-2 col-sm-12">
                 <div className="rTitle">
                   <h3>휴대전화</h3>
@@ -521,7 +584,7 @@ const Report = () => {
                     ref={userTelRef}
                     type="text"
                     placeholder="핸드폰 번호를 입력해주세요"
-                    defaultValue={tel}
+                    efaultValue={tel}
                   />
                 </div>
 
@@ -607,7 +670,7 @@ const Report = () => {
             {/* <div>비고</div> */}
 
             <div className="btn-wrap">
-              <button className="btn btn-navy">신고하기</button>
+              <button className="button btn btn-navy">신고하기</button>
             </div>
           </form>
         </div>

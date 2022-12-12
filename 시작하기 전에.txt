@@ -8,13 +8,11 @@ yarn add react-daum-postcode
 yarn add react-hook-form
 yarn add recharts
 yarn add @mui/material @emotion/react @emotion/styled @material-ui/icons
-yarn add buffer 
-yarn add react-simple-captcha
-yarn add react-client-captcha
 
 **** 지형 추가 ****
 yarn add @mui/lab swiper
 yarn add jquery --save
+yarn add sweetalert2
 
 yarn add sass react-icons styled-components 
 yarn add react-router-dom

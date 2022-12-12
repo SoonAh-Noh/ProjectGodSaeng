@@ -1,0 +1,31 @@
+.notifyListWidgets {
+  margin: 20px;
+  padding: 20px;
+  flex: 1;
+
+  /* box-shadow: 0px 0px 12px -1px #333; */
+}
+
+.notifyListImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.notifyListAll {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notifyListItem {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.notifyListContent {
+  display: flex;
+  flex-direction: column;
+}

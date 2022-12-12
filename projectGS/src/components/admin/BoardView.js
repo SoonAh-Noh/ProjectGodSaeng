@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as server_bridge from '../../controller/server_bridge';
+import Swal from 'sweetalert2';
 let board_idx = 0; //게시판 리스트에서 받아온 게시글 번호를 담을 글로벌 변수
 const BoardView = () => {
   useEffect(() => {
@@ -28,19 +29,47 @@ const BoardView = () => {
   };
   const deleteBoard = async () => {
     //게시글 삭제 기능
-    var result = window.confirm('정말로 삭제하시겠습니까?');
-    if (result) {
-      const res = await server_bridge.axios_instace.post('/delete_board', {
-        board_idx: board_idx,
-      });
+    // var result = window.confirm('정말로 삭제하시겠습니까?');
+    // if (result) {
+    //   const res = await server_bridge.axios_instace.post('/delete_board', {
+    //     board_idx: board_idx,
+    //   });
 
-      if (res.data === 'success') {
-        alert('삭제 완료!');
-      } else {
-        alert('삭제 실패!');
+    //   if (res.data === 'success') {
+    //     alert('삭제 완료!');
+    //   } else {
+    //     alert('삭제 실패!');
+    //   }
+    //   navigate('/admin/boardmanage');
+    // }
+
+    Swal.fire({
+      icon: 'warning',
+
+      title: '정말로 삭제하시겠습니까?',
+      showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+      confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+      cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+      confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+      cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+
+      reverseButtons: true, // 버튼 순서 거꾸로
+    }).then((willDelete) => {
+      if (willDelete) {
+        server_bridge.axios_instace
+          .post('/delete_board', {
+            board_idx: board_idx,
+          })
+          .then((res) => {
+            if (res.data === 'success') {
+              server_bridge.normalInfoAlert('삭제 성공!');
+            } else {
+              server_bridge.normalAlert('삭제실패!' + '\r\n' + res.data);
+            }
+            navigate('/admin/boardmanage');
+          });
       }
-      navigate('/admin/boardmanage');
-    }
+    });
 
     return;
   };

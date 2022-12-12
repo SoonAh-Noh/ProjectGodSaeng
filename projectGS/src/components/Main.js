@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as server_bridge from '../controller/server_bridge';
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
 
 // Swiper-slider
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,6 +17,16 @@ const Main = () => {
 
   useEffect(() => {
     getList();
+
+    // swiper button
+    $('.swiperBtn .btnPause').click(function(){
+      $(this).removeClass('on');
+      $('.btnPlay').addClass('on');
+    });
+    $('.swiperBtn .btnPlay').click(function(){
+      $(this).removeClass('on');
+      $('.btnPause').addClass('on');
+    });
   }, []);
 
   const [board_list, setList] = useState([]); // 게시판 리스트
@@ -50,6 +61,14 @@ const Main = () => {
     setList(res.data);
   };
 
+  // slide pause/play btn
+  
+  const [mainSlide, setMainSlide] = useState(null);
+
+  const playSlide = () => {mainSlide.autoplay.start()};
+  const pauseSlide = () => {mainSlide.autoplay.stop()};
+
+
   return (
     <div id="Main">
       <div className="main-slider">
@@ -61,6 +80,15 @@ const Main = () => {
           slidesPerView={'auto'}
           centeredSlides={true}
           navigation={true}
+          onSwiper={setMainSlide}
+          breakpoints={{
+            1200:{
+              slidesPerView:'auto'
+            },
+            525:{
+              slidesPerView:1
+            }
+          }}
         >
           <SwiperSlide>
             <div className="msImg msImg1">
@@ -73,7 +101,7 @@ const Main = () => {
                   <li>✌️ 둘. 안전꽹과리 접속 후 신고한다. </li>
                   <li>👌 셋. 포인트를 받는다.</li>
                 </ul>
-                <a href="/report" className="btn btn-navy">
+                <a href="/report" className="button btn btn-navy">
                   바로 신고하기
                 </a>
               </div>
@@ -92,7 +120,7 @@ const Main = () => {
                   <li>✌️ 둘. 안전꽹과리 접속 후 신고한다. </li>
                   <li>👌 셋. 포인트를 받는다.</li>
                 </ul>
-                <a href="/quickreport" className="btn btn-navy">
+                <a href="/quickreport" className="button btn btn-navy">
                   바로 신고하기
                 </a>
               </div>
@@ -110,15 +138,21 @@ const Main = () => {
                     <br /> 오프라인에서 사용 가능한 상품권으로 교환할 수 있어요!
                   </li>
                 </ul>
-                <a href="/point" className="btn btn-navy">
+                <a href="/point" className="button btn btn-navy">
                   포인트 사용하기
                 </a>
               </div>
             </div>
           </SwiperSlide>
+
+          <div className="swiperBtn">
+            <button type="button" onPointerUp={playSlide} className="btnPlay"><i className="xi-play"></i></button>
+            <button type="button" onPointerUp={pauseSlide} className="btnPause on"><i className="xi-pause"></i></button>
+          </div>
         </Swiper>
       </div>{' '}
       {/* mainSlider */}
+      
       <div className="mSection">
         <div className="Notice">
           <div className="s-title">

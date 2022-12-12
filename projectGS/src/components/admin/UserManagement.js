@@ -91,9 +91,7 @@ const UserManagement = () => {
               </div>
             ))
           ) : (
-            <div>
-              <div className="noSearch noSearch2"><p>검색결과가 없습니다.</p></div>
-            </div>
+            <div className="noSearch noSearch2"><p>검색결과가 없습니다.</p></div>
           )}
         </div>
       </div>

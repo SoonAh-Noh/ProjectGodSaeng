@@ -121,7 +121,7 @@ const PointOrder = () => {
                     </tbody>
                   </table>
 
-                  <button type="button" className="btn btn-navy" onClick={handleClick}>
+                  <button type="button" className="button btn btn-navy" onClick={handleClick}>
                     주문하기
                   </button>
                 </div>

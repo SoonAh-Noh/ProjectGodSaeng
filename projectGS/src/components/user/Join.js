@@ -1,7 +1,8 @@
 import axios from 'axios';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../css/user/Join.scss';
+import Swal from 'sweetalert2';
 
 const Join = () => {
   // 페이지 이동 navigate
@@ -105,65 +106,136 @@ const Join = () => {
   const handleRegister = () => {
     // 아이디 입력 확인
     if (idRef.current.value === '' || idRef.current.value === undefined) {
-      alert('아이디를 입력하세요');
+      // alert('아이디를 입력하세요');
+      Swal.fire({
+        title: '아이디를 입력하세요',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       idRef.current.focus();
       return false;
     }
     // 비밀번호 입력 확인
     if (pwRef.current.value === '' || pwRef.current.value === undefined) {
-      alert('비밀번호를 입력하세요');
+      // alert('비밀번호를 입력하세요');
+      Swal.fire({
+        title: '비밀번호를 입력하세요',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       pwRef.current.focus();
       return false;
     }
     // 비밀번호 재입력 확인
     if (pwCkRef.current.value === '' || pwCkRef.current.value === undefined) {
-      alert('비밀번호를 재입력하세요');
+      // alert('비밀번호를 재입력하세요');
+      Swal.fire({
+        title: '비밀번호를 재입력하세요',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       pwCkRef.current.focus();
       return false;
     }
     // 이름 입력 확인
     if (nameRef.current.value === '' || nameRef.current.value === undefined) {
-      alert('이름을 입력하세요');
+      // alert('이름을 입력하세요');
+      Swal.fire({
+        title: '이름을 입력하세요',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       nameRef.current.focus();
       return false;
     }
     // 이메일 입력 확인
     if (mailRef.current.value === '' || mailRef.current.value === undefined) {
-      alert('이메일을 입력하세요');
+      // alert('이메일을 입력하세요');
+      Swal.fire({
+        title: '이메일을 입력하세요',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       mailRef.current.focus();
       return false;
     }
     // 휴대폰 번호 입력 확인
     if (telRef.current.value === '' || telRef.current.value === undefined) {
-      alert('핸드폰 번호를 입력하세요');
+      // alert('핸드폰 번호를 입력하세요');
+      Swal.fire({
+        title: '핸드폰 번호를 입력하세요',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       telRef.current.focus();
       return false;
     }
 
     // 비밀번호 와 비밀번호 체크 값 비교
     if (pwRef.current.value !== pwCkRef.current.value) {
-      alert('비밀번호가 서로 다릅니다');
+      // alert('비밀번호가 서로 다릅니다');
+      Swal.fire({
+        title: '비밀번호가 서로 다릅니다',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       pwCkRef.current.focus();
       return false;
     }
 
     // 비밀번호 유효성 검사
     if (checkPassword(pwRef.current.value) == false) {
-      alert('비밀번호 형식이 아닙니다');
+      // alert('비밀번호 형식이 아닙니다');
+      Swal.fire({
+        title: '비밀번호 형식이 아닙니다',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       pwRef.current.focus();
       return false;
     }
 
     // 이메일 유효성 검사
     if (checkEmail(mailRef.current.value) == false) {
-      alert('이메일 형식이 아닙니다');
+      // alert('이메일 형식이 아닙니다');
+      Swal.fire({
+        title: '이메일 형식이 아닙니다',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
+
       mailRef.current.focus();
       return false;
     }
 
     // 핸드폰 유효성 검사
     if (checkPhonenumber(telRef.current.value) == false) {
-      alert('핸드폰 형식이 아닙니다');
+      // alert('핸드폰 형식이 아닙니다');
+      Swal.fire({
+        title: '핸드폰 형식이 아닙니다',
+        icon: 'warning',
+        confirmButtonText: '확인',
+        confirmButtonColor: '#191d73',
+        backdrop: `rgba(0,0,0,0.4)`,
+      });
       telRef.current.focus();
       return false;
     }
@@ -180,7 +252,15 @@ const Join = () => {
         console.log(res);
         //회원가입에 성공하면
         if (res.data === 'success') {
-          alert('회원가입 성공');
+          // alert('회원가입 성공');
+          Swal.fire({
+            title: '회원가입 성공',
+            icon: 'warning',
+            confirmButtonText: '확인',
+            confirmButtonColor: '#191d73',
+            backdrop: `rgba(0,0,0,0.4)`,
+          });
+
           //로그인 페이지로 이동
           navigate('/login');
         } else {
@@ -246,7 +326,7 @@ const Join = () => {
               ref={pwCkRef}
               placeholder=" "
             />
-            <label>비밀번호 확인</label>
+            <label>비밀번호 재입력</label>
           </div>
 
           <div className="input-box">

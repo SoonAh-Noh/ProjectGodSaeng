@@ -10,14 +10,17 @@ import '../../css/user/sub.scss';
 
 const ReportEnd = () => {
   const [idx, setIdx] = useState();
+  const { state } = useLocation();
 
   useEffect(() => {
     notifyidx();
+    console.log(state);
   }, []);
 
   const notifyidx = async () => {
     const res = await server_bridge.axios_instace.post('./notifyidx', {
       user_idx: window.sessionStorage.getItem('USER_IDX'),
+      user_name: state.is_non_member ? state.name : '',
     });
     setIdx(res.data[0].NOTIFY_IDX);
     console.log('나와라', res.data[0]);
@@ -69,7 +72,7 @@ const ReportEnd = () => {
         </div>
 
         <div className="btn-wrap">
-          <a className="btn btn-navy" href="/">
+          <a className="button btn btn-navy" href="/">
             메인으로
           </a>
         </div>

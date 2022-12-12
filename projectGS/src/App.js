@@ -93,13 +93,13 @@ function App() {
             <Route path="/join" element={<Join />} /> {/* 회원가입 */}
             <Route path="/mypage" element={<MyPage />} /> {/* 마이페이지 */}
             <Route path="/Forgot" element={<Forgot />} /> {/* 비밀번호 찾기 */}
-            <Route path="/myinfo" element={<MyInfo />} /> {/* 개인정보 수정 */}
             <Route path="/myreport" element={<UserReportList />} />
             {/* 221130 선우 - 내 신고내역 */}
             <Route path="/myreportview" element={<UserReportView />} />
             {/* 221130 선우 - 내 신고내역 상세 */}
             <Route path="/mypoint" element={<MyPoint />} />
             {/* 221201 선우 - 내 포인트 조회 */}
+            <Route path="/myinfo" element={<MyInfo />} /> {/* 개인정보 수정 */}
           </Route>
           {/* ===================== 여기가 관리자단 ===================================*/}
           <Route path="/admin" element={<AdminLayout />}>

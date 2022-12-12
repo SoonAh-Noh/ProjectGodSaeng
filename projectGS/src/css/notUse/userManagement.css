@@ -1,0 +1,18 @@
+.userManagement {
+  flex: 4;
+}
+
+.userContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.userShow {
+  flex: 1;
+  margin: 20px;
+  padding: 20px;
+  width:150px;
+  height:100px;
+  box-shadow: 0px 0px 12px -1px #333;
+  cursor: pointer;
+}

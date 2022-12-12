@@ -5,7 +5,10 @@ import $ from 'jquery';
 
 export default function TodoList({ data }) {
   useEffect(() => {
-    //animate('.todoCnt1', data.c1_sum)//이런식으로 하면 되지 싶음?
+    animate('.todoCnt1', data.c1_sum);
+    animate('.todoCnt2', data.c2_sum);
+    animate('.todoCnt3', data.c3_sum);
+    animate('.todoCnt4', data.c4_sum);
   }, []);
 
   const animate = (c_name, data) => {
@@ -24,66 +27,6 @@ export default function TodoList({ data }) {
       },
     );
   };
-  // 코드를 줄이고 싶다,,
-  $({ val: 0 }).animate(
-    { val: data.c1_sum },
-    {
-      duration: 400,
-      step: function () {
-        var num = numberWithCommas(Math.floor(this.val));
-        $('.todoCnt1').text(num);
-      },
-      complete: function () {
-        var num = numberWithCommas(Math.floor(this.val));
-        $('.todoCnt1').text(num);
-      },
-    },
-  );
-
-  $({ val: 0 }).animate(
-    { val: data.c2_sum },
-    {
-      duration: 400,
-      step: function () {
-        var num = numberWithCommas(Math.floor(this.val));
-        $('.todoCnt2').text(num);
-      },
-      complete: function () {
-        var num = numberWithCommas(Math.floor(this.val));
-        $('.todoCnt2').text(num);
-      },
-    },
-  );
-
-  $({ val: 0 }).animate(
-    { val: data.c3_sum },
-    {
-      duration: 400,
-      step: function () {
-        var num = numberWithCommas(Math.floor(this.val));
-        $('.todoCnt3').text(num);
-      },
-      complete: function () {
-        var num = numberWithCommas(Math.floor(this.val));
-        $('.todoCnt3').text(num);
-      },
-    },
-  );
-
-  $({ val: 0 }).animate(
-    { val: data.c4_sum },
-    {
-      duration: 400,
-      step: function () {
-        var num = numberWithCommas(Math.floor(this.val));
-        $('.todoCnt4').text(num);
-      },
-      complete: function () {
-        var num = numberWithCommas(Math.floor(this.val));
-        $('.todoCnt4').text(num);
-      },
-    },
-  );
 
   // 천단위 컴마
   function numberWithCommas(x) {

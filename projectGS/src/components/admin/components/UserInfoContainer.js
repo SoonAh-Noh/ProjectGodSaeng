@@ -1,129 +1,177 @@
-import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  FormControl,
-  FormControlLabel,
-  Checkbox,
-  FormHelperText,
-  Grid,
-  Box,
-  Typography,
-  Container,
-  FormLabel,
-  RadioGroup,
-  Radio,
-} from '@mui/material/';
-import styled from 'styled-components';
 import { useState, useRef, useReducer } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Swal from 'sweetalert2';
+import * as server_bridge from '../../../controller/server_bridge';
 
-const Boxs = styled(Box)`
-  padding-bottom: 40px !important;
-`;
-const handleSubmit = (e) => {
-  e.preventDefault();
-  alert('adsfasdf');
-  const data = new FormData(e.currentTarget);
-  //   const joinData = {
-  //     email: data.get('email'),
-  //     name: data.get('name'),
-  //     password: data.get('password'),
-  //     rePassword: data.get('rePassword'),
-  //   };
-  console.log();
-};
+import userIcon from '../../../images/profile.png';
 
-const theme = createTheme();
-function reducer(state, action) {
-  return { ...state, [action.name]: action.value };
-}
 const UserInfoContainer = ({ data }) => {
+  const pwRef = useRef();
+  const nameRef = useRef();
+  const telRef = useRef();
+  const mailRef = useRef();
+  const oRef = useRef();
+  const xRef = useRef();
+
+  const updateUser = async (e) => {
+    e.preventDefault();
+
+    Swal.fire({
+      icon: 'warning',
+
+      title: '정말로 수정하시겠습니까?',
+      showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+      confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+      cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+      confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+      cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+
+      reverseButtons: true, // 버튼 순서 거꾸로
+    }).then((update) => {
+      if (update) {
+        server_bridge.axios_instace
+          .post('/updateuserinfo', {
+            user_pw: data.USER_PW,
+            user_name: nameRef.current.value,
+            user_tel: telRef.current.value,
+            user_mail: mailRef.current.value,
+            user_idx: data.USER_IDX,
+            user_ox: oRef.current.checked ? 'O' : 'X',
+          })
+          .then((res) => {
+            if (res.data === 'success') {
+              server_bridge.normalInfoAlert('수정 성공!');
+            } else {
+              server_bridge.normalAlert('수정 실패!' + '\r\n' + res.data);
+            }
+          });
+      }
+    });
+
+    // if (window.confirm('정말로 수정하시겠습니까?')) {
+    //     const res = await server_bridge.axios_instace.post('/updateuserinfo', {
+    //         user_pw: data.USER_PW,
+    //         user_name: nameRef.current.value,
+    //         user_tel: telRef.current.value,
+    //         user_mail: mailRef.current.value,
+    //         user_idx: data.USER_IDX,
+    //         user_ox: oRef.current.checked ? 'O' : 'X',
+    //     });
+    //     if (res.data === 'success') {
+    //         alert('회원 정보 수정에 성공했습니다!');
+    //     } else {
+    //         alert('회원 정보 수정에 실패했습니다!' + '\r\n' + res.data);
+    //     }
+    // }
+  };
+  //console.log('관리자여부가아닌 회원여부확인', data);
+
   //사용자 정보 핸들링용 공용 컴포넌트
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }} />
-          <Typography component="h1" variant="h5">
-            회원정보
-          </Typography>
-          <Boxs
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <FormControl component="fieldset" variant="standard">
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  아이디 <input type="text" defaultValue={data.USER_ID} />
-                </Grid>
-                <Grid item xs={12}>
-                  이름 <input type="text" defaultValue={data.USER_NAME} />
-                </Grid>
-                <Grid item xs={12}>
-                  이메일 <input type="text" defaultValue={data.USER_MAIL} />
-                </Grid>
-
-                <Grid item xs={12}>
-                  연락처 <input type="text" defaultValue={data.USER_TEL} />
-                </Grid>
-
-                <Grid item xs={12}>
-                  관리자 여부
-                  {data.ADMIN_OX === 'O' ? (
+    <div className="userWrap">
+      <div className="userImg">
+        <img src={userIcon} alt="Profile" />
+      </div>
+      <div className="user">
+        <table className="userTable" border="0" cellPadding="0" cellSpacing="0">
+          <colgroup>
+            <col width="120px;" />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>이름</th>
+              <td>
+                <input
+                  type="text"
+                  ref={nameRef}
+                  defaultValue={data.USER_NAME}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>아이디</th>
+              <td>
+                <input type="text" defaultValue={data.USER_ID} disabled />
+              </td>
+            </tr>
+            <tr>
+              <th>이메일</th>
+              <td>
+                <input
+                  type="text"
+                  ref={mailRef}
+                  defaultValue={data.USER_MAIL}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>연락처</th>
+              <td>
+                <input type="text" ref={telRef} defaultValue={data.USER_TEL} />
+              </td>
+            </tr>
+            <tr>
+              <th>회원 여부</th>
+              <td>
+                <div className="radioWrap">
+                  {data.USER_OX === 'O' ? (
                     <>
                       <input
                         type="radio"
-                        id="admin_o"
-                        name="admin"
+                        id="user_o"
+                        name="user"
                         value="O"
+                        ref={oRef}
                         defaultChecked
                       />
-                      <label htmlFor="admin_o">O</label>
-                      <input type="radio" id="admin_x" name="admin" value="X" />
-                      <label htmlFor="admin_x">X</label>
+                      <label htmlFor="user_o">일반회원</label>
+                      <input
+                        type="radio"
+                        id="user_x"
+                        name="user"
+                        value="X"
+                        ref={xRef}
+                      />
+                      <label htmlFor="user_x">비회원</label>
                     </>
                   ) : (
                     <>
-                      <input type="radio" id="admin_o" name="admin" value="O" />
-                      <label htmlFor="admin_o">O</label>
                       <input
                         type="radio"
-                        id="admin_x"
-                        name="admin"
+                        id="user_o"
+                        name="user"
+                        value="O"
+                        ref={oRef}
+                      />
+                      <label htmlFor="user_o">일반회원</label>
+                      <input
+                        type="radio"
+                        id="user_x"
+                        name="user"
                         value="X"
+                        ref={xRef}
                         defaultChecked
                       />
-                      <label htmlFor="admin_x">X</label>
+                      <label htmlFor="user_x">비회원</label>
                     </>
                   )}
-                </Grid>
-              </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                size="large"
-              >
-                수정하기
-              </Button>
-            </FormControl>
-          </Boxs>
-        </Box>
-      </Container>
-    </ThemeProvider>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className="adminBtnWrap">
+          <button
+            type="submit"
+            className="adminBtn adminBtn2 adminBtnNavy"
+            onClick={updateUser}
+          >
+            수정하기
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 export default UserInfoContainer;

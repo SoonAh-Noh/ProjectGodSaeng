@@ -1,11 +1,10 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import { Outlet, Link, useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 
 import StraightIcon from '@mui/icons-material/Straight';
-import "../../css/user/basic.css"
-import { useEffect, useState } from "react";
+import "../../css/user/basic.css";
 
 const Layout = () => {
   const [scrollY, setScrollY] = useState(0);

@@ -14,12 +14,10 @@ import ReportChart from './home_components/ReportChart';
 import AdminLogin from './AdminLogin';
 import * as server_bridge from '../../controller/server_bridge';
 
-
-import "../../css/admin/main.scss";
+import '../../css/admin/main.scss';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 
 const Home = () => {
   const navigate = useNavigate();
@@ -35,7 +33,7 @@ const Home = () => {
       session.getItem('USER_ID') !== null &&
       session.getItem('ADMIN_OX') !== 'O'
     ) {
-      alert('잘못된 접근입니다! 메인 페이지로 이동합니다.');
+      server_bridge.normalAlert('잘못된 접근입니다! 메인 페이지로 이동합니다.');
       navigate('/');
     } else {
       get_daily_summary();
@@ -136,7 +134,7 @@ const Home = () => {
     <div className="Contents">
       <div className="Wrap">
         <TodoList data={sum_data} />
-        
+
         <div className="container">
           <ReportChart data={daily_summary} />
           {/* 시각화자료 */}
@@ -152,19 +150,3 @@ const Home = () => {
   );
 };
 export default Home;
-
-// export default function Home() {
-//   return (
-//     <div className="home">
-//       <TodoList />
-//       <div className="homeWidgets">
-//         <ChartWidgets />
-//         <SummaryWidgets />
-//       </div>
-//       <div className="homeWidgets">
-//         <NotifyListWidgets />
-//         <NoticeWidgets />
-//       </div>
-//     </div>
-//   );
-// }

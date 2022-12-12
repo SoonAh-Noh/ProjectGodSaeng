@@ -41,15 +41,18 @@ const AdminLayout = () => {
     setTxt('새로운 신고가 들어왔습니다!');
   });
 
+  const handleClose = () => {
+    document.getElementById('popUp').classList.add('off');
+  };
+
   return (
     <div id="Admin">
-      {window.sessionStorage.getItem('USER_ID') == 'admin' ? (
+      {window.sessionStorage.getItem('ADMIN_OX') == 'O' ? (
         <div>
           <header>
             <h1>안전꽹과리 관리자 페이지</h1>
-            <p>{txt}</p>
             <button onClick={logout}>
-              <LogoutIcon />
+              <i className="xi-log-out"></i>
               로그아웃
             </button>
             {/*window.sessionStorage.getItem('USER_ID') !== null ? (
@@ -75,6 +78,23 @@ const AdminLayout = () => {
           <main id="AdminLayout" className={styles.main}>
             <Outlet />
           </main>
+
+          <div id="popUp" className={txt !== '' ? 'on' : 'off'}>
+            <button type="button" className="close" onClick={handleClose}>
+              <i className="xi-close"></i>
+            </button>
+            <div className="popupTxt">
+              <iframe
+                src="https://giphy.com/embed/HZvKgdDvta65uAyg0r"
+                width="60"
+                height="60"
+                frameBorder="0"
+                class="giphy-embed"
+                allowFullScreen
+              ></iframe>
+              <p>{txt}</p>
+            </div>
+          </div>
         </div>
       ) : (
         <div>

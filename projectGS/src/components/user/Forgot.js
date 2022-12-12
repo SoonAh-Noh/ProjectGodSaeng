@@ -1,9 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import '../../css/user/Forgot.scss';
 
 const Forgot = () => {
+  const navigate = useNavigate();
   const sendpw = () => {
-    alert('입력하신 이메일로 임시비밀번호 전송했습니다.');
+    // alert('입력하신 이메일로 임시 비밀번호를 전송했습니다.');
+    Swal.fire({
+      title: '입력하신 이메일로 임시 비밀번호를 전송했습니다.',
+      icon: 'warning',
+      confirmButtonText: '확인',
+      confirmButtonColor: '#191d73',
+      backdrop: `rgba(0,0,0,0.4)`,
+    });
+
+    //로그인 페이지로 이동
+    navigate('/login');
   };
   return (
     <div id="findpw">

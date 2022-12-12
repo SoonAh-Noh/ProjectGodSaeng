@@ -132,6 +132,13 @@ def report():  # 신고접수
     return dbconnecter.report(request)
 
 
+@app.route("/notifyidx", methods=["GET", "POST"])
+def notifyidx():  # 신고접수번호
+    body_data = get_body_data(request)
+    sendData = dbconnecter.notifyidx(body_data)
+    return jsonify(sendData)
+
+
 @app.route("/get_cate_list", methods=["GET"])
 def get_cate_list():  # 등록한 파일 다운로드하기
     sendData = dbconnecter.get_cate_list()
@@ -199,10 +206,25 @@ def update_admin_info():  # 사용자 정보 업데이트
     return jsonify(sendData)
 
 
+@ app.route("/updateuserinfo", methods=["GET", "POST"])
+def update_user_info():  # 사용자 정보 업데이트
+    body_data = get_body_data(request)
+    sendData = dbconnecter.update_userinfo(body_data)
+    return jsonify(sendData)
+
+
 @ app.route("/getuserinfo", methods=["GET", "POST"])
 def get_user_info():  # 유저 단일 데이터 가져오기
     body_data = get_body_data(request)
     sendData = dbconnecter.get_user_info(body_data)
+    return jsonify(sendData)
+
+
+@ app.route("/getuserpass", methods=["GET", "POST"])
+def get_user_pass():  # 유저 단일 데이터 가져오기
+    body_data = get_body_data(request)
+    print(body_data)
+    sendData = dbconnecter.get_userpass(body_data)
     return jsonify(sendData)
 
 
@@ -229,6 +251,22 @@ def read_plate():  # 자동차 번호판 인식시키기
     res = ml_easyOCR.find_plate_no(file_dir)
 
     return jsonify({"result": res, "dir": file_dir})
+
+
+@ app.route("/savequick", methods=["GET", "POST"])
+def save_quick():  # 자동차 번호판 인식시키기
+
+    timestamp = int(time.time())
+    path = 'static/images/quick/' + str(timestamp)
+    os.makedirs(path, exist_ok=True)  # 폴더 생성
+    file = request.files["img"]
+    # print('파일 이름', file)
+    filename = secure_filename(file.filename)  # 파일명과 경로를 합치기
+    # print('파일 네임', filename)
+    file.save(os.path.join(path, filename))
+    file_dir = path+"/"+request.files["img"].filename
+
+    return jsonify({"result": 'success', "dir": file_dir})
 
 
 @ app.route("/pointlistbyuser", methods=["GET", "POST"])
@@ -289,18 +327,6 @@ def handle_my_custom_event(json, methods=['GET', 'POST']):
 def send_message():
     socket_io.emit('response2', json, callback='sendmessagetest')
 
-
-@app.route("/notifyidx", methods=["GET", "POST"])
-def notifyidx(): # 신고접수번호
-    body_data = get_body_data(request)
-    sendData = dbconnecter.notifyidx(body_data)
-    return jsonify(sendData)
-
-@ app.route("/updateuserinfo", methods=["GET", "POST"])
-def update_user_info():  # 사용자 정보 업데이트
-    body_data = get_body_data(request)
-    sendData = dbconnecter.update_userinfo(body_data)
-    return jsonify(sendData)
 
 if __name__ == "__main__":
     socket_io.run(app, debug=True, port=5000)  # 221208 선우 소켓형 서버로 사용방법 전환

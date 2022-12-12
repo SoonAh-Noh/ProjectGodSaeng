@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Page from '../admin/components/Page';
 import * as server_bridge from '../../controller/server_bridge';
+
 const UserDisposeList = ({ user_idx }) => {
   useEffect(() => {
     handleReportList();
@@ -40,16 +41,16 @@ const UserDisposeList = ({ user_idx }) => {
   return (
     <>
       <div className="noticeBoard">
-        <table border="0" cellPadding="0" cellSpacing="0">
+        <table className="adminTable" border="0" cellPadding="0" cellSpacing="0">
           <colgroup>
             <col width="80px" />
-            <col width="60%" />
+            <col width="40%" />
             <col width="" />
             <col width="" />
           </colgroup>
           <thead>
             <tr>
-              <th>No</th>
+              <th>No.</th>
               <th>카테고리</th>
               <th>신고일시</th>
               <th>처리상태</th>
@@ -71,6 +72,7 @@ const UserDisposeList = ({ user_idx }) => {
                         state: { data: data, process: process },
                       })
                     }
+                    align="center"
                   >
                     <td>{data.NOTIFY_IDX}</td>
                     <td>{data.CATEGORY}</td>
@@ -80,7 +82,9 @@ const UserDisposeList = ({ user_idx }) => {
                 ))
             ) : (
               <tr>
-                <td colSpan={4}></td>
+                <td colSpan={4}>
+                  <div className="noSearch"><p>신고내역이 없습니다.</p></div>
+                </td>
               </tr>
             )}
           </tbody>

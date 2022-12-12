@@ -105,20 +105,71 @@
 }
 
 .btn {
-    font-size: 16px;
+    // font-size: 16px;
     width: 100%;
     max-width: 220px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #333;
-    border-radius: 5px;
+    // height: 60px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // background: #333;
+    // border-radius: 5px;
 }
 
 .btn-navy {
-    background: #191D73;
-    color: rgba(255, 255, 255, 0.9);
+    --background: #191d73;
+    --text: rgba(255, 255, 255, 0.9);
+    --font-size: 17px;
+    --duration: .44s;
+    --move-hover: -4px;
+    --shadow: 0 2px 8px -1px #{rgba(#191D73, .32)};
+    --shadow-hover: 0 4px 20px -2px #{rgba(#333, .5)};
+    --font-shadow: var(--font-size);
+    padding: 25px 40px;
+    line-height: var(--font-size);
+    border-radius: 5px;
+    display: block;
+    font-size: var(--font-size);
+    background: var(--background);
+    color: var(--text);
+    box-shadow: var(--shadow);
+    transform: translateY(var(--y)) translateZ(0);
+    transition: transform var(--duration) ease, box-shadow var(--duration) ease, background var(--duration) ease;
+
+    div {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        overflow: hidden;
+        text-shadow: 0 var(--font-shadow) 0 var(--text);
+
+        span {
+            display: block;
+            backface-visibility: hidden;
+            font-style: normal;
+            transition: transform var(--duration) ease;
+            transform: translateY(var(--m)) translateZ(0);
+            $i: 1;
+
+            @while $i < 12 {
+                &:nth-child(#{$i}) {
+                    transition-delay: $i / 20 + s;
+                }
+
+                $i: $i + 1;
+            }
+        }
+    }
+
+    &:hover {
+        --y: var(--move-hover);
+        --shadow: var(--shadow-hover);
+        background: #333;
+
+        span {
+            --m: calc(var(--font-size) * -1);
+        }
+    }
 }
 
 input {
@@ -226,7 +277,7 @@ Report.js 불법주정차 신고
                 text-align: center;
                 box-sizing: border-box;
                 color: #fff;
-                font-size: 14px;
+                font-size: 15px;
                 background: #ccc;
                 font-weight: 300;
             }
@@ -326,16 +377,37 @@ Report.js 불법주정차 신고
     .row {
         padding: 10px 0;
         display: flex;
-        // align-items: center;
         box-sizing: border-box;
         min-height: 60px;
+
+        &:not(.notAlign) {
+            align-items: center;
+        }
     }
 
     .rTitle h3 {
         font-size: 18px;
         font-weight: 500;
         color: #444;
+        position: relative;
+        display: inline-block;
 
+        &::after {
+            content: "\e929";
+            font-family: 'xeicon';
+            color: #F77357;
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+    }
+
+    .row.notAlign {
+        .rTitle {
+            padding-top: 16px;
+        }
     }
 
     .reportCate {
@@ -410,7 +482,7 @@ Report.js 불법주정차 신고
 
         input.carNum {
             width: 100%;
-            padding-right: 130px;
+            // padding-right: 130px;
         }
 
         .inputBtn {
@@ -421,6 +493,7 @@ Report.js 불법주정차 신고
             border: 0;
             background: #333;
             color: rgba(255, 255, 255, 0.9);
+            box-sizing: border-box;
         }
     }
 
@@ -468,10 +541,11 @@ Report.js 불법주정차 신고
         }
 
         &:checked+label:before {
-            content: '';
+            content: "\e928";
+            font-family: 'xeicon';
             background: #191D73;
             color: #fff;
-            font-size: 14px;
+            font-size: 15px;
         }
     }
 
@@ -483,7 +557,7 @@ Report.js 불법주정차 신고
 
 
         // .privacyBtn {
-        //     font-size: 14px;
+        //     font-size: 15px;
         //     width: 100%;
         //     max-width: 120px;
         //     background: #ededed;
@@ -529,7 +603,7 @@ Report.js 불법주정차 신고
         max-height: 200px;
         overflow-y: scroll;
         border: 1px solid #ddd;
-        font-size: 14px;
+        font-size: 15px;
         color: #666;
         line-height: 1.65;
     }
@@ -699,6 +773,7 @@ Point.js 포인트 사용
     .goodsWrap {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
 
         .goodsItem {
             padding: 40px;
@@ -706,9 +781,10 @@ Point.js 포인트 사용
             background: #fafafa;
             border-radius: 10px;
             border: 1px solid #fafafa;
-            width: 30%;
+            width: 32%;
             cursor: pointer;
             transition: all 0.6s;
+            margin: 1% 0;
 
             img {
                 max-width: 100%;
@@ -738,6 +814,7 @@ Point.js 포인트 사용
         display: flex;
         justify-content: space-between;
         margin-bottom: 60px;
+        flex-wrap: wrap;
 
         .goodsImg {
             width: 46%;
@@ -937,7 +1014,7 @@ Point.js 포인트 사용
                 }
 
                 span {
-                    font-size: 14px;
+                    font-size: 15px;
                     color: #666;
                 }
             }
@@ -948,7 +1025,6 @@ Point.js 포인트 사용
 
             .totalPrice {
                 font-size: 22px;
-                padding-left: 20px;
             }
         }
 
@@ -1079,7 +1155,6 @@ Notice.js 공지사항
             color: #444;
             padding: 15px;
             box-sizing: border-box;
-            text-align: center;
         }
 
         th {
@@ -1105,7 +1180,7 @@ Notice.js 공지사항
 
             select {
                 width: 100%;
-                font-size: 14px;
+                font-size: 15px;
                 color: #666;
                 border: 0;
                 min-height: auto;
@@ -1116,7 +1191,7 @@ Notice.js 공지사항
                 content: "\e936";
                 font-family: 'xeicon';
                 color: #aaa;
-                font-size: 14px;
+                font-size: 15px;
                 position: absolute;
                 right: 15px;
                 top: 50%;
@@ -1143,12 +1218,19 @@ Notice.js 공지사항
 
     .noticeView {
         .title {
+            text-align: center;
+            border-bottom: 1px solid #424242;
+            border-top: 3px solid #424242;
+            line-height: 30px;
+            color: #333333;
+
             width: 100%;
             // border: 1px solid #191D73;
             border-left: 0;
             border-right: 0;
             padding: 20px;
             box-sizing: border-box;
+
 
             h3 {
                 font-size: 22px;
@@ -1167,11 +1249,333 @@ Notice.js 공지사항
         }
 
         .contents {
-            // border-bottom: 1px solid #666;
-            padding: 20px;
+            border-top: 1px solid #424242;
+            border-bottom: 1px solid #424242;
+            padding: 50px 75px 50px;
             box-sizing: border-box;
             overflow: hidden;
+            min-height: 400px;
+        }
 
+        .notice_info {
+            width: 100%;
+
+            li {
+                padding: 10px 10px 10px 95px;
+                border-bottom: 1px solid #dddddd;
+                font-size: 17px;
+
+                span {
+                    display: inline-block;
+                    width: 180px;
+                    margin-left: -30px;
+                    padding-left: 12px;
+                    color: #424242;
+                    font-weight: bold;
+                    letter-spacing: -1px;
+                    font-size: 17px;
+                }
+            }
         }
     }
+}
+
+@media all and (max-width:525px) {
+    .subTop {
+        padding: 60px 0;
+    }
+
+    .subTop h1 {
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+
+    .subTop ul li a {
+        font-size: 18px;
+    }
+
+    .subTop ul li::before {
+        height: 16px;
+    }
+
+    .section {
+        width: 95%;
+        padding: 40px 20px;
+    }
+
+    .section .sub-title {
+        margin-bottom: 30px;
+    }
+
+    .section .sub-title h2 {
+        font-size: 22px;
+    }
+
+    .reportProcess {
+        margin: 0 0 30px;
+    }
+
+    .reportProcess ul li {
+        margin: 0 10px;
+        font-size: 16px;
+    }
+
+    .reportProcess ul li:nth-child(2) i {
+        border: 4px solid transparent;
+        border-left-color: #191D73;
+    }
+
+    .reportForm .row {
+        display: block;
+    }
+
+    .reportForm .rTitle {
+        margin-bottom: 15px;
+    }
+
+    .reportForm .rTitle h3 {
+        font-size: 16px;
+    }
+
+    .reportForm .reportCate {
+        width: 100%;
+    }
+
+    select {
+        font-size: 15px;
+        min-height: auto;
+    }
+
+    .reportForm .inputWrap {
+        width: 100%;
+    }
+
+    input {
+        font-size: 15px;
+        min-height: auto;
+    }
+
+    .half {
+        width: 100%;
+    }
+
+    .reportForm .row.notAlign .rTitle {
+        padding-top: 0;
+    }
+
+    .reportForm .inputWrap2 input.notifySpot {
+        padding-right: 15px;
+    }
+
+    .resultBox h2 {
+        font-size: 16px;
+    }
+
+    .btn-wrap {
+        margin: 30px 0;
+    }
+
+    .resultBox img {
+        max-width: 50px;
+    }
+
+    .mSection .nBox a .nBoxBottom span,
+    .reportForm input[type=checkbox]+label,
+    .reportForm .checkWrap .privacyBtn,
+    input::placeholder,
+    textarea {
+        font-size: 15px;
+    }
+
+    .reportForm .inputWrap .inputBtn {
+        position: static;
+        width: 100%;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+        font-size: 15px !important;
+        margin: 1% !important;
+        flex: 1 1 48% !important;
+    }
+
+    .guideImg {
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .guideImg .slideImg {
+        height: 220px;
+    }
+
+    .guideTxt {
+        min-height: auto;
+    }
+
+    .guideTxt .gtTop {
+        margin-bottom: 20px;
+    }
+
+    .guideTxt .gtTop h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .guideTxt .gtTop p,
+    .guideTxt .checkTxt li {
+        font-size: 15px;
+    }
+
+    #Point .goods .goodsList span {
+        font-size: 13px;
+    }
+
+    #Point .goods .goodsList h3 {
+        font-size: 18px;
+    }
+
+    #Point .goodsWrap .goodsItem {
+        width: 100%;
+        padding: 30px;
+    }
+
+    #Point .goodsWrap .goodsItem h4,
+    #PointOrder .goodsDetail h4 {
+        font-size: 16px;
+    }
+
+    #PointOrder .goodsTop .goodsImg,
+    #PointOrder .goodsTop .goodsInfo {
+        width: 100%;
+    }
+
+    #PointOrder .goodsTop .goodsImg {
+        padding: 30px;
+        margin-bottom: 20px;
+    }
+
+    #PointOrder .goodsTop .goodsInfo .goodsTitle {
+        margin-bottom: 20px;
+    }
+
+    #PointOrder .goodsTop .goodsInfo .goodsTitle span {
+        font-size: 13px;
+    }
+
+    #PointOrder .goodsTop .goodsInfo .goodsTitle h3 {
+        font-size: 18px;
+    }
+
+    #PointOrder .goodsTop .goodsInfo .goodsContents table th,
+    #PointOrder .goodsTop .goodsInfo .goodsContents table td,
+    #PointOrder .goodsDetail ul li {
+        font-size: 15px;
+    }
+
+    #PointOrder .goodsTop .goodsInfo .goodsContents table th {
+        width: 30%;
+    }
+
+    #PointPay .orderWrap {
+        width: 100%;
+        padding: 0;
+    }
+
+    #PointPay .userPoint {
+        position: static;
+        padding: 30px;
+    }
+
+    #PointPay h3 {
+        font-size: 18px;
+    }
+
+    #PointPay h3 .num {
+        font-size: 14px;
+    }
+
+    #PointPay .orderWrap table th,
+    #PointPay .orderWrap table td {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    #PointPay .orderWrap .orderInfo table th {
+        width: 30%;
+    }
+
+    #PointPay .orderWrap table .goods {
+        display: block;
+    }
+
+    #PointPay .orderWrap table .goods .orderImg {
+        width: 100%;
+    }
+
+    #PointPay .orderWrap table .goods .orderGoods {
+        text-align: center;
+    }
+
+    #PointPay .orderWrap table .goods span {
+        font-size: 13px;
+    }
+
+    #PointPay .orderWrap table .totalPrice {
+        font-size: 18px;
+    }
+
+    #PointPay .orderInfo table input {
+        width: 100%;
+    }
+
+    #PointPay .userPoint table th,
+    #PointPay .userPoint table td {
+        font-size: 15px;
+    }
+
+    #Notice .noticeWrap p {
+        font-size: 14px;
+    }
+
+    .noticeBoard {
+        overflow-x: auto;
+    }
+
+    #Notice table {
+        min-width: 600px;
+    }
+
+    #Notice table th,
+    #Notice table td {
+        font-size: 15px;
+    }
+
+    #Notice .noticeView .title {
+        padding: 15px;
+    }
+
+    #Notice .noticeView .title h1 {
+        font-size: 18px;
+    }
+
+    #Notice .noticeView .notice_info li,
+    #Notice .noticeView .notice_info li span {
+        font-size: 15px;
+    }
+
+    #Notice .noticeView .notice_info li {
+        padding-left: 15px;
+    }
+
+    #Notice .noticeView .notice_info li span {
+        width: 80px;
+        margin-left: 0;
+    }
+
+    #Notice .noticeView .contents {
+        padding: 20px 15px;
+        min-height: 300px;
+    }
+
 }

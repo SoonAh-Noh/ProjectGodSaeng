@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as server_bridge from '../../controller/server_bridge';
 import '../../css/admin/AdminLogin.scss';
 
 const AdminLogin = () => {
@@ -23,14 +24,16 @@ const AdminLogin = () => {
   const handleLogin = () => {
     // 아이디 입력 확인
     if (idRef.current.value === '' || idRef.current.value === undefined) {
-      alert('아이디를 입력하세요!!!');
+      //alert('아이디를 입력하세요!!!');
+      server_bridge.normalAlert('아이디를 입력하세요!!');
       idRef.current.focus();
       return false;
     }
 
     // 패스워드 입력 확인
     if (pwRef.current.value === '' || pwRef.current.value === undefined) {
-      alert('패스워드를 입력하세요!!!');
+      //alert('패스워드를 입력하세요!!!');
+      server_bridge.normalAlert('패스워드를 입력하세요!!');
       pwRef.current.focus();
       return false;
     }
@@ -60,10 +63,16 @@ const AdminLogin = () => {
             window.sessionStorage.setItem('USER_TEL', res.data[0].USER_TEL);
             window.sessionStorage.setItem('ADMIN_OX', res.data[0].ADMIN_OX);
 
-            alert(res.data[0].USER_NAME + '님 환영합니다!');
-            window.location.href = '/admin';
+            //alert(res.data[0].USER_NAME + '님 환영합니다!');
+
+            server_bridge.normalInfoAlert(
+              res.data[0].USER_NAME + '님 환영합니다!',
+            );
+            //window.location.href = '/admin';
+            navigate('/admin');
           } else {
-            alert('관리자 권한이 없는 아이디입니다!');
+            //alert('관리자 권한이 없는 아이디입니다!');
+            server_bridge.normalAlert('관리자 권한이 없는 아이디입니다!');
             idRef.current.value = '';
             pwRef.current.value = '';
           }
@@ -72,7 +81,8 @@ const AdminLogin = () => {
           // navigate("/home");
         } else {
           //아이디 비밀번호 잘못 입력할 경우 input value 초기화
-          alert('잘못된 아이디와 비밀번호입니다!');
+          //alert('잘못된 아이디와 비밀번호입니다!');
+          server_bridge.normalAlert('잘못된 아이디와 비밀번호입니다!');
           idRef.current.value = '';
           pwRef.current.value = '';
 

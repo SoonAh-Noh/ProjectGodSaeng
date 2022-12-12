@@ -129,7 +129,7 @@
                         background: rgba(76, 66, 159, 0.9);
                     }
 
-                    &:nth-child(4) {
+                    &:nth-child(4) label {
                         background: #191d73;
                     }
 
@@ -151,12 +151,18 @@
         font-size: 22px;
         color: #444;
     }
+
+    h4 {
+        font-size: 18px;
+        color: #444;
+    }
 }
 
 .subTitle2 {
     padding-bottom: 10px;
     border-bottom: 1px solid #ededed;
 }
+
 
 .totalNumber {
     p {
@@ -190,7 +196,7 @@
 .adminBtn2 {
     padding: 15px 80px;
     border-radius: 0;
-    background: #333;
+    background: #444;
     color: #fff;
 }
 
@@ -229,6 +235,7 @@
 .noSearch2 {
     padding: 10% 0;
     background: #fafafa;
+    flex: 1;
 }
 
 
@@ -406,6 +413,138 @@ BoardManagement.js 공지사항 관리
     }
 }
 
+.boardTable {
+    width: 100%;
+
+    th,
+    td {
+        font-size: 16px;
+        color: #444;
+        line-height: 1.65;
+        padding: 15px;
+        border-top: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    tr:last-child th,
+    tr:last-child td {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    th {
+        font-weight: 500;
+    }
+
+    input[type=text] {
+        width: 100%;
+        border-radius: 0;
+        font-size: 16px;
+        min-height: auto;
+    }
+
+    textarea {
+        border-radius: 0 !important;
+        font-size: 16px !important;
+        color: #555 !important;
+    }
+
+    img {
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .goodsImgWrap {
+        background: #fafafa;
+        padding: 20px;
+    }
+
+    .goodsImgUp {
+        display: flex;
+
+        input[type=file] {
+            border: 1px solid #ddd;
+            background: #fafafa;
+            border-radius: 0 !important;
+            min-height: auto !important;
+            font-size: 16px !important;
+            padding: 10px 15px !important;
+
+            &::file-selector-button {
+                display: none;
+            }
+        }
+
+        input.upload-name {
+            width: calc(100% - 150px);
+        }
+
+        label {
+            padding: 10px 20px;
+            box-sizing: border-box;
+            font-size: 15px;
+            color: #555;
+            background: #ddd;
+            display: block;
+            text-align: center;
+
+            i {
+                margin-right: 10px;
+                font-size: 20px;
+                vertical-align: bottom;
+            }
+        }
+    }
+}
+
+.attachFile {
+    display: flex;
+
+    input[type=file] {
+        // border: 1px solid #ddd;
+        // background: #fafafa;
+        // border-radius: 0;
+        // padding: 10px 15px;
+        // font-size: 15px;
+        // font-weight: 300;
+        // min-height: auto;
+        // color: #666;
+
+        // &::file-selector-button {
+        //     display: none;
+        // }
+        display: none;
+    }
+
+    .fileName {
+        font-size: 15px;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        color: #555;
+        box-sizing: border-box;
+        width: 200px;
+        background: #fafafa;
+    }
+
+    .chooseFile {
+        font-size: 15px;
+        padding: 10px 40px;
+        background: #ddd;
+        color: #555;
+        box-sizing: border-box;
+    }
+
+    .deleteFile {
+        font-size: 15px;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        background: #666;
+        min-height: auto;
+        border-radius: 0;
+        color: rgba(255, 255, 255, 0.8);
+        border: 0;
+        margin-left: 10px;
+    }
+}
 
 
 
@@ -434,6 +573,57 @@ Disposereport.js 신고처리
             top: 50%;
             transform: translateY(-50%);
         }
+    }
+}
+
+.status {
+    display: block;
+    position: relative;
+
+    &::before {
+        content: '';
+        width: 15px;
+        height: 15px;
+        border-radius: 10px;
+        background: #fafafa;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &.status1::before {
+        background: #f77357;
+    }
+
+    &.status2::before {
+        background: #7969cc;
+    }
+
+    &.status3::before {
+        background: #4c429f;
+    }
+
+    &.status4::before {
+        background: #191d73;
+    }
+
+}
+
+
+.reportInfo,
+.reportDetail {
+    margin-bottom: 30px;
+}
+
+.boardTable2 {
+    th {
+        background: rgba(25, 29, 115, 0.05)
+    }
+
+    .searchWrap .searchCate select {
+        padding: 10px 15px;
+        font-size: 15px;
     }
 }
 
@@ -513,6 +703,170 @@ UserManagement.js 회원관리
     }
 }
 
+.userLayout {
+    display: grid;
+    width: 100%;
+    // height: 100vh;
+    grid-template-columns: 1fr 1fr;
+    // grid-auto-rows: 50%;
+    grid-gap: 30px;
+
+    .pageWrap {
+        height: 100%;
+    }
+
+    .userInfo {
+        grid-row: 1/3;
+
+        .userImg {
+            width: 180px;
+            height: 180px;
+            background: rgba(25, 29, 115, 0.1);
+            box-shadow: -5px -5px 10px rgba(25, 29, 115, 0.1) inset;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100px;
+            margin: 40px auto;
+
+            img {
+                max-width: 100%;
+                display: block;
+            }
+        }
+
+        .userTable {
+            width: 100%;
+            max-width: 400px;
+            margin: 50px auto;
+
+            th,
+            td {
+                font-size: 16px;
+                color: #444;
+                padding: 5px 10px;
+                text-align: left;
+            }
+
+            th {
+                font-weight: 500;
+                background: #fafafa;
+                padding: 5px 20px;
+                border-bottom: 5px solid #fff;
+            }
+
+            tr:last-child th {
+                border-bottom: 0;
+            }
+
+            input[type=text] {
+                font-size: 16px;
+                min-height: auto;
+                border: 0;
+                border-bottom: 1px solid #ddd;
+                border-radius: 0;
+                transition: all 0.4s;
+                width: 100%;
+
+                &:focus {
+                    outline: none;
+                    border-color: #191d73;
+                }
+            }
+
+            .radioWrap {
+                display: flex;
+                justify-content: space-between;
+
+                input[type=radio] {
+                    display: none;
+                    min-height: auto;
+
+                    &+label {
+                        width: 48%;
+                        font-size: 16px;
+                        padding: 10px 20px;
+                        border: 1px solid #ddd;
+                        box-sizing: border-box;
+                        text-align: center;
+                        transition: all 0.4s;
+                        border-radius: 40px;
+                    }
+
+                    &:checked+label {
+                        background: #4c429f;
+                        color: rgba(255, 255, 255, 0.9);
+                        border-color: #4c429f;
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    .adminTable {
+
+        th,
+        td {
+            font-size: 15px;
+        }
+    }
+
+    .userPoint {
+        .totalPoint {
+            background: #fafafa;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+
+            h4 {
+                font-size: 16px;
+                color: #444;
+                font-weight: 500;
+                margin-right: 20px;
+            }
+
+            p {
+                font-weight: 500;
+                color: #333;
+                font-size: 20px;
+
+                i {
+                    font-weight: 300;
+                }
+            }
+        }
+
+        .totalNumber {
+            text-align: right;
+            margin-bottom: 5px;
+
+            p {
+                padding-right: 0;
+                font-size: 15px;
+            }
+
+        }
+
+    }
+
+    .pagination {
+        margin: 20px 0 0;
+
+        li a {
+            font-size: 14px;
+        }
+
+    }
+}
+
+
 
 /**************************************************************
 GoodsManagement.js 상품권 관리
@@ -522,41 +876,6 @@ GoodsManagement.js 상품권 관리
     .goodsImgUp {
         width: 90%;
         display: flex;
-        // position: relative;
-        // padding-left: 80px;
-        // display: flex;
-        // align-items: center;
-
-        // input[type=file] {
-        //     padding: 0;
-        //     width: 100%;
-
-        //     &::file-selector-button {
-        //         // display: none;
-        //         font-family: 'Roboto', 'Noto Sans KR', sans-serif;
-        //         font-size: 15px;
-        //         color: #555;
-        //         background: #ededed;
-        //         border: none;
-        //         padding: 10px 40px;
-        //         box-sizing: border-box;
-        //         border-radius: 5px;
-        //     }
-        // }
-
-        // &::before {
-        //     content: "\ea4e";
-        //     font-family: 'xeicon';
-        //     font-size: 20px;
-        //     color: #555;
-        //     background: #ededed;
-        //     width: 40px;
-        //     height: 40px;
-        //     position: absolute;
-        //     left: 0;
-        //     border-radius: 10px;
-        //     text-align: center;
-        // }
 
         input[type=file] {
             border: 1px solid #ddd;
@@ -595,24 +914,23 @@ GoodsManagement.js 상품권 관리
         flex-wrap: wrap;
 
         .goodsWrap {
-            width: 20%;
-            padding: 10px;
+            width: 19%;
+            cursor: pointer;
+            padding: 20px;
             box-sizing: border-box;
+            background: #fafafa;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #fafafa;
+            transition: all 0.4s;
+            position: relative;
+            margin: 0.5%;
 
             .goodsBox {
-                cursor: pointer;
-                padding: 20px;
-                box-sizing: border-box;
-                background: #fafafa;
-                border-radius: 10px;
-                text-align: center;
-                border: 1px solid #fafafa;
-                transition: all 0.4s;
-                position: relative;
-                min-height: 380px;
                 display: flex;
                 flex-wrap: wrap;
                 align-content: space-between;
+                min-height: 340px;
 
                 .goodsImg {
                     width: 100%;
@@ -643,41 +961,41 @@ GoodsManagement.js 상품권 관리
                         font-size: 16px;
                     }
                 }
+            }
+
+            &:hover {
+                background: #fff;
+                border-color: #191d73;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
 
                 .btnTrash {
-                    position: absolute;
-                    z-index: 5;
-                    top: 20px;
-                    right: 20px;
-                    background: rgba(25, 29, 115, 0.9);
-                    border: 1px solid rgba(25, 29, 115, 0.9);
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 25px;
-                    transition: all 0.4s;
-                    opacity: 0;
-                    visibility: hidden;
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
 
-                    i {
-                        color: rgba(255, 255, 255, 0.8);
-                        font-size: 22px;
-                    }
+            .btnTrash {
+                position: absolute;
+                z-index: 5;
+                top: 20px;
+                right: 20px;
+                background: rgba(25, 29, 115, 0.9);
+                border: 1px solid rgba(25, 29, 115, 0.9);
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+                transition: all 0.4s;
+                opacity: 0;
+                visibility: hidden;
 
-                    &:hover {
-                        background: #333;
-                        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-                    }
+                i {
+                    color: rgba(255, 255, 255, 0.8);
+                    font-size: 22px;
                 }
 
                 &:hover {
-                    background: #fff;
-                    border-color: #191d73;
-                    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-
-                    .btnTrash {
-                        opacity: 1;
-                        visibility: visible;
-                    }
+                    background: #333;
+                    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
                 }
             }
         }

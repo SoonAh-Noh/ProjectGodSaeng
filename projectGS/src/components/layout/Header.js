@@ -20,22 +20,32 @@ const Header = () => {
 
   const [login, setLogin] = useState(false);
 
-  // const onMouse = (e) => {
-  //   e.target.nextElementSibling.classList.add('on');
-  //   // e.target.classList.add('on');
-  // };
-
-  // const leaveMouse = (e) => {
-  //   e.target.classList.remove('on');
-  // };
   useEffect(() => {
-    $('.menu > ul > li').mouseover(function () {
+    $('.menu > ul > li').on('mouseover', function () {
       $(this).children('.submenu').addClass('on');
     });
-    $('.menu > ul > li').mouseleave(function () {
+    $('.menu > ul > li').on('mouseleave', function () {
       $(this).children('.submenu').removeClass('on');
     });
-  }, []);
+
+    // button
+    document
+      .querySelectorAll('.button')
+      .forEach(
+        (button) =>
+          (button.innerHTML =
+            '<div><span>' +
+            button.textContent.trim().split('').join('</span><span>') +
+            '</span></div>'),
+      );
+
+    // mobile
+    $('#hambtn').on('click', function () {
+      $(this).toggleClass('active');
+      $('.menu').toggleClass('active');
+      $('.login').toggleClass('active');
+    });
+  }, [$]);
 
   return (
     <div id="Header">
@@ -101,6 +111,12 @@ const Header = () => {
           </ul>
         )}
       </div>
+
+      <button type="button" id="hambtn" className="ham visible-lg">
+        <span className="line line1"></span>
+        <span className="line line2"></span>
+        <span className="line line3"></span>
+      </button>
     </div>
   );
 };

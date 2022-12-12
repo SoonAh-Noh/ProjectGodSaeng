@@ -245,7 +245,17 @@ const DisposeReport = () => {
                           {data.USER_NAME === null ? '비회원' : data.USER_NAME}
                         </td>
                         <td>{data.CATEGORY}</td>
-                        <td>{data.NOTIFY_STATUS}</td>
+                        {/* <td>{data.NOTIFY_STATUS}</td> */}
+                        <td>
+                          {data.NOTIFY_STATUS === '신고접수' ? 
+                            <span className="status status1">{data.NOTIFY_STATUS}</span> :
+                          data.NOTIFY_STATUS === '담당자배정' ? 
+                            <span className="status status2">{data.NOTIFY_STATUS}</span> :
+                          data.NOTIFY_STATUS === '신고처리중' ? 
+                            <span className="status status3">{data.NOTIFY_STATUS}</span> :
+                            <span className="status status4">{data.NOTIFY_STATUS}</span>
+                          }
+                        </td>
                         <td>{data.NOTIFY_DATE}</td>
                         <td>{data.NOTIFY_REPORT_DATE}</td>
                         <td>
