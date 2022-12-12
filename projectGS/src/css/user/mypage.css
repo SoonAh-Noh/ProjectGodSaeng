@@ -1,0 +1,17 @@
+.mypage-title {
+  text-align: center;
+}
+
+.mypage-btn {
+  text-align: right;
+}
+
+.mypage-btn > button {
+  padding: 0 10px;
+}
+
+.profile {
+  width: '30%';
+  height: '30%';
+  background-color: powderblue;
+}

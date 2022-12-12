@@ -1082,7 +1082,7 @@ def insert_point(body_data):  # 포인트 증감
         return "err : " + str(e)
 
 
-def get_process_cnt(body_data):  # 신고 건수
+def get_report_cnt(body_data):  # 신고 건수
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
@@ -1090,9 +1090,9 @@ def get_process_cnt(body_data):  # 신고 건수
                                    
                 FROM NOTIFY
     
-                LEFT JOIN USER  AS B ON 
-                
-                A.USER_IDX = B.USER_IDX
+                LEFT JOIN USER AS B 
+               
+                ON A.USER_IDX = B.USER_IDX
         """
 
     print(sql)
