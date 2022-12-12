@@ -105,7 +105,7 @@ const PointPay = () => {
       nameRef.current.focus();
     }
 
-    // 핸드폰 번호 확안
+    // 핸드폰 번호 확인
     if (phoneRef.current.value === '' || phoneRef.current.value === undefined) {
       Swal.fire({
         title: '휴대폰 번호를 입력해주세요!',
