@@ -1,0 +1,44 @@
+.wave {
+  padding: 0 20px;
+}
+
+.process {
+  padding: 0 20px;
+}
+
+.btn-navy_mini:hover {
+  --y: var(--move-hover);
+  --shadow: var(--shadow-hover);
+  background: #333;
+}
+
+.btn-navy_mini {
+  --background: #191d73;
+  --text: rgba(255, 255, 255, 0.9);
+  --font-size: 15px;
+  --duration: 0.44s;
+  --move-hover: -4px;
+  --shadow: 0 2px 8px -1px rgba(25, 29, 115, 0.32);
+  --shadow-hover: 0 4px 20px -2px rgba(51, 51, 51, 0.5);
+  --font-shadow: var(--font-size);
+
+  padding: 5px;
+  line-height: var(--font-size);
+  border-radius: 5px;
+  /* display: block; */
+  font-size: var(--font-size);
+  background: var(--background);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transform: translateY(var(--y)) translateZ(0);
+  transition: transform var(--duration) ease, box-shadow var(--duration) ease,
+    background var(--duration) ease;
+  cursor: pointer;
+  font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+  width: 100%;
+  max-width: 70px;
+}
+
+.userTable td {
+  text-align: center;
+}

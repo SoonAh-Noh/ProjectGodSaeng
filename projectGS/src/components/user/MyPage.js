@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as server_bridge from '../../controller/server_bridge';
 
@@ -9,18 +9,12 @@ const MyPage = () => {
   const handleInfo = () => {
     navigate('/myinfo');
   };
-
-  // 1000단위 컴마
-  const addComma = (num) => {
-    var regexp = /\B(?=(\d{3})+(?!\d))/g;
-    return num.toString().replace(regexp, ',');
-  };
-
-  // 포인트 가져오기 위한 작업
   const navigate = useNavigate();
   useEffect(() => {
     havePoint();
   }, []);
+
+  // 포인트 가져오기 위한 작업 ===============================
 
   const user_id = window.sessionStorage.getItem('USER_ID');
 
@@ -36,10 +30,26 @@ const MyPage = () => {
 
     let temp = 0;
     point_list.forEach((item) => {
-      console.log('나옴', item);
+      // console.log('나옴', item);
       temp += parseInt(item.POINT_PLUS) - parseInt(item.POINT_MINUS);
     });
     setPoint(temp);
+  };
+  // 1000단위 컴마
+  const addComma = (num) => {
+    var regexp = /\B(?=(\d{3})+(?!\d))/g;
+    return num.toString().replace(regexp, ',');
+  };
+
+  // 신고건수 가져오는 작업 ====================================
+  const [totalcnt, setCnt] = useState(0);
+
+  const getUserReport = async () => {
+    const res = await server_bridge.axios_instace.post('/getDisposeList', {
+      user_id: user_id,
+    });
+    console.log(res.data.length);
+    setCnt(res.data.length);
   };
 
   return (
@@ -73,7 +83,7 @@ const MyPage = () => {
               className="mypage_report"
               type="text"
               size="20"
-              defaultValue={'건수'}
+              defaultValue={'아직'}
               placeholder=" "
             />
           </div>
