@@ -797,12 +797,19 @@ def update_userinfo(body_data):  # 사용자 정보 수정하기
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
+    # sql = f"""UPDATE USER SET 
+    #             USER_PW = '{body_data['user_pw']}', 
+    #             USER_NAME='{body_data['user_name']}', 
+    #             USER_MAIL='{body_data['user_mail']}',
+    #             USER_TEL='{body_data['user_tel']}',
+    #             USER_OX='{body_data["user_ox"]}'
+    #           WHERE USER_IDX = {body_data['user_idx']}; """
     sql = f"""UPDATE USER SET 
                 USER_PW = '{body_data['user_pw']}', 
                 USER_NAME='{body_data['user_name']}', 
                 USER_MAIL='{body_data['user_mail']}',
                 USER_TEL='{body_data['user_tel']}',
-                USER_OX='{body_data["user_ox"]}'
+                USER_OX='{"O"}'
               WHERE USER_IDX = {body_data['user_idx']}; """
 
     try:

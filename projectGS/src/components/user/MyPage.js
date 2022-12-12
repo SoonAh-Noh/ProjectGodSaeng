@@ -6,6 +6,10 @@ import * as server_bridge from '../../controller/server_bridge';
 const MyPage = () => {
   const name = window.sessionStorage.getItem('USER_NAME');
 
+  const handleInfo = () => {
+    navigate('/myinfo');
+  };
+
   // 1000단위 컴마
   const addComma = (num) => {
     var regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -13,7 +17,6 @@ const MyPage = () => {
   };
 
   // 포인트 가져오기 위한 작업
-
   const navigate = useNavigate();
   useEffect(() => {
     havePoint();
@@ -74,6 +77,7 @@ const MyPage = () => {
               placeholder=" "
             />
           </div>
+          <button onClick={handleInfo}>회원정보 수정</button>
         </div>
       </div>
     </div>
