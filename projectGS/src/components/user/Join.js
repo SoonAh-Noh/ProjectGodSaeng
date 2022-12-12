@@ -255,7 +255,7 @@ const Join = () => {
           // alert('회원가입 성공');
           Swal.fire({
             title: '회원가입 성공',
-            icon: 'warning',
+            icon: 'success',
             confirmButtonText: '확인',
             confirmButtonColor: '#191d73',
             backdrop: `rgba(0,0,0,0.4)`,
