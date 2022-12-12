@@ -166,7 +166,7 @@ const DisposeDetail = () => {
 
         <div className="reportDispose">
           <div className="subTitle">
-            <h4>신고내용</h4>
+            <h4>신고처리</h4>
           </div>
 
           <table

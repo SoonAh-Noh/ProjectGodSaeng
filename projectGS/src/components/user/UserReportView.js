@@ -20,54 +20,158 @@ const UserReportView = () => {
     }
   }, []);
   return (
+    // <div>
+    //   <div className="container section">
+    //     <div className="sub-title my-title">
+    //       <h2>나의 신고 상세내역</h2>
+    //     </div>
+    //     <div>
+    //       <h4>신고자 정보</h4>
+    //       {data.USER_OX === 'O' ? '회원' : '비회원신고'}
+    //       <br />
+    //       id : {data.USER_ID}
+    //       <br />
+    //       이메일 : {data.USER_MAIL}
+    //       <br />
+    //       전화번호 : {data.USER_TEL}
+    //     </div>
+    //     <div>
+    //       <h4>신고내용</h4>
+    //       <br />
+    //       차량번호 : {data.CAR_NUM}
+    //       <br />
+    //       장소 : {data.NOTIFY_SPOT}
+    //       <br />
+    //       처리 상태 :
+    //       <select
+    //         key={uuid()}
+    //         defaultValue={data.NOTIFY_PNUM}
+    //         ref={processRef}
+    //         disabled
+    //       >
+    //         {process.map((val2, key2) => (
+    //           <option key={key2} value={val2.NOTIFY_PNUM}>
+    //             {val2.NOTIFY_STATUS}
+    //           </option>
+    //         ))}
+    //       </select>
+    //       <br />
+    //       신고 내용 : {data.NOTIFY_TXT}
+    //       <br />
+    //       사진 :{' '}
+    //       <img
+    //         src={server_bridge.py_url + '/' + data.IMG_PATH}
+    //         alt="사진샘플"
+    //       />
+    //       {/* 사진 : <img src="" alt="사진샘플" /> */}
+    //       <br />
+    //       신고 처리
+    //       <br />
+    //       <textarea
+    //         cols="30"
+    //         rows="10"
+    //         defaultValue={data.NOTIFY_RESULT}
+    //         ref={resultRef}
+    //         disabled
+    //       ></textarea>
+    //       <br />
+    //       {/* <button onClick={() => updateDispose(data.NOTIFY_IDX)}>처리반영</button> */}
+    //     </div>
+    //   </div>
+    // </div>
+
     <div>
-      <div>
-        - 신고자 정보 -<br />
-        {data.USER_OX === 'O' ? '회원' : '비회원신고'}
-        <br />
-        id : {data.USER_ID}
-        <br />
-        이메일 : {data.USER_MAIL}
-        <br />
-        전화번호 : {data.USER_TEL}
-      </div>
-      <div>
-        - 신고 내용 -<br />
-        차량번호 : {data.CAR_NUM}
-        <br />
-        장소 : {data.NOTIFY_SPOT}
-        <br />
-        처리 상태 :
-        <select
-          key={uuid()}
-          defaultValue={data.NOTIFY_PNUM}
-          ref={processRef}
-          disabled
+      <div className="container section">
+        <div className="sub-title my-title">
+          <h2>나의 신고 상세내역</h2>
+        </div>
+        <table
+          className="boardTable boardTable2"
+          border="0"
+          cellPadding="0"
+          cellSpacing="0"
         >
-          {process.map((val2, key2) => (
-            <option key={key2} value={val2.NOTIFY_PNUM}>
-              {val2.NOTIFY_STATUS}
-            </option>
-          ))}
-        </select>
+          <colgroup>
+            <col width="15%" />
+            <col width="35%" />
+            <col width="15%" />
+            <col width="35%" />
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>차량번호</th>
+              <td>{data.CAR_NUM}</td>
+              <th>위반장소</th>
+              <td>{data.NOTIFY_SPOT}</td>
+            </tr>
+            <tr>
+              <th>신고사진</th>
+              <td colSpan={3}>
+                <img
+                  src={server_bridge.py_url + '/' + data.IMG_PATH}
+                  alt={data.CAR_NUM}
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>신고내용</th>
+              <td colSpan={3}>{data.NOTIFY_TXT}</td>
+            </tr>
+          </tbody>
+        </table>
         <br />
-        신고 내용 : {data.NOTIFY_TXT}
-        <br />
-        사진 :{' '}
-        <img src={server_bridge.py_url + '/' + data.IMG_PATH} alt="사진샘플" />
-        {/* 사진 : <img src="" alt="사진샘플" /> */}
-        <br />
-        신고 처리
-        <br />
-        <textarea
-          cols="30"
-          rows="10"
-          defaultValue={data.NOTIFY_RESULT}
-          ref={resultRef}
-          disabled
-        ></textarea>
-        <br />
-        {/* <button onClick={() => updateDispose(data.NOTIFY_IDX)}>처리반영</button> */}
+        <div className="reportDispose">
+          <div className="subTitle">
+            <h4>신고처리</h4>
+          </div>
+
+          <table
+            className="boardTable boardTable2"
+            border="0"
+            cellPadding="0"
+            cellSpacing="0"
+          >
+            <colgroup>
+              <col width="15%" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>신고 처리</th>
+                <td>
+                  <div className="searchWrap">
+                    <div className="searchCate">
+                      <select
+                        key={uuid()}
+                        defaultValue={data.NOTIFY_PNUM}
+                        ref={processRef}
+                        disabled
+                      >
+                        {process.map((val2, key2) => (
+                          <option key={key2} value={val2.NOTIFY_PNUM}>
+                            {val2.NOTIFY_STATUS}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>처리 사유</th>
+                <td>
+                  <textarea
+                    cols="30"
+                    rows="10"
+                    defaultValue={data.NOTIFY_RESULT}
+                    ref={resultRef}
+                    disabled
+                  ></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
