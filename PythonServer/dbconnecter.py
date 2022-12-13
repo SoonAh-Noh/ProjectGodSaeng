@@ -1082,24 +1082,14 @@ def insert_point(body_data):  # 포인트 증감
         return "err : " + str(e)
 
 
-def get_report_cnt(body_data):  # 신고 건수
+def get_report_count(body_data):  # 사용자 신고 건수
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
-
-    sql = """   SELECT USER_IDX AS A
-                                   
-                FROM NOTIFY
-    
-                LEFT JOIN USER AS B 
-               
-                ON A.USER_IDX = B.USER_IDX
-        """
-
-    print(sql)
+    sql = f"""SELECT COUNT(*) AS CNT 
+              FROM NOTIFY WHERE USER_IDX = 1"""
 
     try:
         row_cnt = cursor.execute(sql)
-        # db.commit()
         if row_cnt > 0:
             res = cursor.fetchall()
             close_conn(db)
