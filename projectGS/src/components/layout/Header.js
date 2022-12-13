@@ -2,9 +2,17 @@ import { Outlet, Link, useNavigate } from 'react-router-dom';
 import * as server_bridge from '../../controller/server_bridge';
 import { useState, useEffect } from 'react';
 import $ from 'jquery';
+//==========================================
+import { BiChevronDown } from 'react-icons/bi';
+import { CiEdit } from 'react-icons/ci';
+import { CiDollar } from 'react-icons/ci';
+import { CiReceipt } from 'react-icons/ci';
+import { CiLogout } from 'react-icons/ci';
+import { FaRegUser } from 'react-icons/fa';
 
 import logo from '../../images/logo-w.png';
 import '../../css/user/common.scss';
+import '../../css/header.css';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,6 +27,7 @@ const Header = () => {
   };
 
   const [login, setLogin] = useState(false);
+  const name = window.sessionStorage.getItem('USER_NAME');
 
   useEffect(() => {
     $('.menu > ul > li').on('mouseover', function () {
@@ -90,14 +99,38 @@ const Header = () => {
       {/* 로그인 여부 확인 */}
       <div className="login">
         {window.sessionStorage.getItem('USER_ID') ? (
-          <ul className="logOn">
-            <li>
-              <a onClick={logout}>로그아웃</a>
-            </li>
-            <li>
-              <a href="/mypage" className="goMyPage">
-                마이페이지
+          <ul className="mydropmenu ">
+            <li className="logOn">
+              <a href="/mypage">
+                <FaRegUser />
+                {name} 님<BiChevronDown />
               </a>
+              <ul class="depth_1">
+                <li>
+                  <a href="/mypage">
+                    <CiEdit />
+                    회원정보
+                  </a>
+                </li>
+                <li>
+                  <a href="/ManagementP">
+                    <CiDollar />
+                    포인트 관리
+                  </a>
+                </li>
+                <li>
+                  <a href="/myreport">
+                    <CiReceipt />
+                    나의 신고현황
+                  </a>
+                </li>
+                <li>
+                  <a onClick={logout}>
+                    <CiLogout />
+                    로그아웃
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         ) : (

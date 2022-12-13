@@ -5,6 +5,10 @@ import * as server_bridge from '../../controller/server_bridge';
 import Swal from 'sweetalert2';
 import '../../css/user/mypage.css';
 import profile from '../../images/profile.png';
+//=============================================
+import { FaUserAlt } from 'react-icons/fa';
+import { SlArrowLeft } from 'react-icons/sl';
+import { MdOutlineSettings } from 'react-icons/md';
 
 const MyPage = () => {
   const name = window.sessionStorage.getItem('USER_NAME');
@@ -66,9 +70,9 @@ const MyPage = () => {
 
   const user_id = window.sessionStorage.getItem('USER_ID');
 
-  const [point, setPoint] = useState([]);
-  const [pluspoint, setPlusPoint] = useState([]);
-  const [minuspoint, setMinusPoint] = useState([]);
+  const [point, setPoint] = useState([0]);
+  const [pluspoint, setPlusPoint] = useState([0]);
+  const [minuspoint, setMinusPoint] = useState([0]);
   const havePoint = async () => {
     const response = await server_bridge.axios_instace.post(
       '/pointlistbyuser',
@@ -92,39 +96,6 @@ const MyPage = () => {
     setPlusPoint(plus);
     setMinusPoint(minus);
   };
-  const PlusPoint = async () => {
-    const response = await server_bridge.axios_instace.post(
-      '/pointlistbyuser',
-      {
-        user_id: user_id,
-      },
-    );
-    const point_list = response.data;
-
-    let plus = 0;
-    point_list.forEach((item) => {
-      //console.log('플러스', item);
-      plus += parseInt(item.POINT_PLUS);
-    });
-    setPlusPoint(plus);
-  };
-
-  const MinusPoint = async () => {
-    const response = await server_bridge.axios_instace.post(
-      '/pointlistbyuser',
-      {
-        user_id: user_id,
-      },
-    );
-    const point_list = response.data;
-
-    let minus = 0;
-    point_list.forEach((item) => {
-      //console.log('마이너스', item);
-      minus += parseInt(item.POINT_MINUS);
-    });
-    setMinusPoint(minus);
-  };
 
   // 신고 건수 확인 ===================================================
   const [totalcnt, setCnt] = useState(0); //총 게시글 갯수
@@ -140,35 +111,62 @@ const MyPage = () => {
   };
   return (
     <div id="MyPage">
-      <div className="container section">
-        <div className="sub-title my-title">
-          <h2>마이페이지</h2>
+      <div className="subTop">
+        <h1>마이페이지</h1>
+      </div>
+      <div className="section">
+        <div className="mypage-btn">
+          <button onClick={handleDel}>회원탈퇴</button>|
+          <button onClick={handleInfo}>
+            회원정보 수정
+            <MdOutlineSettings />
+          </button>
         </div>
-
         <div className="sub-title my-title mypage-title">
-          <h3>{name} 님 환영합니다</h3>
+          <h2>{name} 님 환영합니다</h2>
         </div>
-        <div className="reportForm">
-          <div className="mypage-btn">
-            <button onClick={handleInfo}>회원정보 수정</button>
-            <button onClick={handleDel}>회원탈퇴</button>
+        <div className="reportForm_myP">
+          <FaUserAlt className="myprofile" size="150" />
+
+          <table className="mypageTable">
+            <colgroup>
+              <col width="20%" />
+              <col width="20%" />
+              <col width="20%" />
+              <col width="20%" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>적립 포인트</th>
+                <th>사용 포인트</th>
+                <th>가용 포인트</th>
+                <th>신고 건수</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{addComma(pluspoint)}</td>
+                <td>{addComma(minuspoint)}</td>
+                <td>{addComma(point)}</td>
+                <td>{totalcnt}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="userBenefit">
+          <div>
+            <p>회원님의 혜택정보</p>
           </div>
-          <img className="profile" scr={profile} alt="프로필" />
-          <div className="subTitle">
-            <label>적립 포인트 </label>
-            <label>{addComma(pluspoint)}</label>
-          </div>
-          <div className="subTitle">
-            <label>사용 포인트 </label>
-            <label>{addComma(minuspoint)}</label>
-          </div>
-          <div className="subTitle">
-            <label>가용 포인트 </label>
-            <label>{addComma(point)}</label>
-          </div>
-          <div className="subTitle">
-            <label>신고 건수</label>
-            <label>{totalcnt}</label>
+          <div className="BenefitInfo">
+            - 담당자의 확인을 거쳐 정상처리된 신고건수당
+            <br />
+            50p가 적립되며, 포인트는 온누리 상품권으로 교환이 가능합니다.
+            <br />
+            <br />
+            - 온누리 상품권은 모바일로 발송되오니
+            <br />
+            개인정보 수집 이용에 동의하여 주시기 바랍니다.
+            <br />
           </div>
         </div>
       </div>

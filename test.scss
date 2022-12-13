@@ -1,0 +1,190 @@
+//   .login {
+//     position: absolute;
+//     right: 100px;
+//     top: 40%;
+
+//     li {
+//       margin: 0 15px;
+
+//       a {
+//         font-size: 16px;
+//         font-weight: 500;
+//         color: #ccc;
+//         display: flex;
+//         align-items: center;
+//         background: #fff;
+//         color: #191d73;
+//       }
+//     }
+
+//     .logOn {
+//       li {
+//         margin: 0;
+
+//         // a:hover {
+//         //   background: #fff;
+//         //   color: #191d73;
+//         // }
+
+//         a {
+//           border: 1px solid rgba(255, 255, 255, 0.5);
+//           padding: 10px 20px;
+//           box-sizing: border-box;
+//           border-radius: 10px;
+//           padding: 5px 5px 5px 15px;
+//         }
+//       }
+//     }
+//     .logOn:hover .dropDown {
+//       display: block;
+//     }
+//     .dropDown {
+//       //   display: none;
+//       padding-top: 15px;
+//       position: absolute;
+//       top: 50px;
+//       background: #fff;
+//       width: 150px;
+//       border-radius: 10px;
+//       right: -10%;
+//     }
+//     .myUsecon {
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       font-size: 14px;
+//     }
+//     .goPage {
+//       padding-top: 10px;
+
+//       a:hover {
+//         transform: scale(1);
+//         transition-duration: 0.3s;
+//         background: #fff;
+//         color: #191d73;
+//       }
+//     }
+//   }
+
+//=================================================
+.login {
+  position: absolute;
+  right: 100px;
+  top: 60%;
+  transform: translateY(-50%);
+
+  ul {
+    text-align: center;
+
+    li {
+      display: inline-block;
+      margin: 0 15px;
+      position: relative;
+
+      a {
+        font-size: 16px;
+        font-weight: 400;
+        color: #ccc;
+        opacity: 0.95;
+      }
+
+      &::before {
+        content: "";
+        width: 1px;
+        height: 12px;
+        background: #aaa;
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &:last-child::before {
+        width: 0;
+      }
+    }
+  }
+
+  .logOn {
+    li {
+      margin: 0;
+
+      a {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 10px 20px;
+        box-sizing: border-box;
+        transition: all 0.4s;
+        border-radius: 10px;
+
+        &:hover {
+          background: #fff;
+          color: #191d73;
+          border-color: #fff;
+        }
+      }
+
+      // &:first-child a {
+      //   border-radius: 10px 0 0 10px;
+      // }
+
+      // &:last-child a {
+      //   border-radius: 0 10px 10px 0;
+      //   border-left: 0;
+      //   // background: rgba(0, 0, 0, 0.6);
+      // }
+    }
+
+    li::before {
+      width: 0;
+    }
+  }
+  //   }
+  //==================================================
+  // .logOn {
+  //           li {
+  //             margin: 0;
+
+  //             // a:hover {
+  //             //   background: #fff;
+  //             //   color: #191d73;
+  //             // }
+
+  //             a {
+  //               border: 1px solid rgba(255, 255, 255, 0.5);
+  //               padding: 10px 20px;
+  //               box-sizing: border-box;
+  //               border-radius: 10px;
+  //               padding: 5px 5px 5px 15px;
+  //             }
+  //           }
+  //         }
+  //         .logOn:hover .dropDown {
+  //           display: block;
+  //         }
+  // .dropDown {
+  //   //   display: none;
+  //   //   padding-top: 15px;
+  //   position: absolute;
+  //   //   top: 50px;
+  //   background: #fff;
+  //   width: 150px;
+  //   border-radius: 10px;
+  //   //   right: -10%;
+  // }
+  //         .myUsecon {
+  //           display: flex;
+  //           flex-direction: column;
+  //           align-items: center;
+  //           font-size: 14px;
+  //         }
+  // .goPage {
+  //   padding-top: 10px;
+
+  //   a:hover {
+  //     transform: scale(1);
+  //     transition-duration: 0.3s;
+  //     background: #fff;
+  //     color: #191d73;
+  //   }
+  // }
+}
