@@ -14,7 +14,6 @@ const MyPage = () => {
   };
 
   // 회원탈퇴 팝업 ===================================================
-  // 프로젝트 시간 부족으로DB연결은 못한 상황
   const handleDel = () => {
     Swal.fire({
       title: '정말 탈퇴하시겠습니까?',
@@ -60,14 +59,16 @@ const MyPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     havePoint();
-    PlusPoint();
-    MinusPoint();
+    //PlusPoint();
+    //MinusPoint();
     handleReportList();
   }, []);
 
   const user_id = window.sessionStorage.getItem('USER_ID');
 
   const [point, setPoint] = useState([]);
+  const [pluspoint, setPlusPoint] = useState([]);
+  const [minuspoint, setMinusPoint] = useState([]);
   const havePoint = async () => {
     const response = await server_bridge.axios_instace.post(
       '/pointlistbyuser',
@@ -78,13 +79,19 @@ const MyPage = () => {
     const point_list = response.data;
 
     let temp = 0;
+    let plus = 0;
+    let minus = 0;
     point_list.forEach((item) => {
-      console.log('나옴', item);
-      temp += parseInt(item.POINT_PLUS) - parseInt(item.POINT_MINUS);
+      //console.log('나옴', item);
+
+      plus += parseInt(item.POINT_PLUS);
+      minus += parseInt(item.POINT_MINUS);
+      //temp += parseInt(item.POINT_PLUS) - parseInt(item.POINT_MINUS);
     });
-    setPoint(temp);
+    setPoint(plus - minus);
+    setPlusPoint(plus);
+    setMinusPoint(minus);
   };
-  const [pluspoint, setPlusPoint] = useState([]);
   const PlusPoint = async () => {
     const response = await server_bridge.axios_instace.post(
       '/pointlistbyuser',
@@ -96,13 +103,12 @@ const MyPage = () => {
 
     let plus = 0;
     point_list.forEach((item) => {
-      console.log('플러스', item);
+      //console.log('플러스', item);
       plus += parseInt(item.POINT_PLUS);
     });
     setPlusPoint(plus);
   };
 
-  const [minuspoint, setMinusPoint] = useState([]);
   const MinusPoint = async () => {
     const response = await server_bridge.axios_instace.post(
       '/pointlistbyuser',
@@ -114,7 +120,7 @@ const MyPage = () => {
 
     let minus = 0;
     point_list.forEach((item) => {
-      console.log('마이너스', item);
+      //console.log('마이너스', item);
       minus += parseInt(item.POINT_MINUS);
     });
     setMinusPoint(minus);
@@ -128,7 +134,9 @@ const MyPage = () => {
       '/getreportcount',
       { user_id: user_id },
     );
-    setCnt(res.data.length);
+    const data = res.data[0];
+    console.log(data);
+    setCnt(data.CNT);
   };
   return (
     <div id="MyPage">

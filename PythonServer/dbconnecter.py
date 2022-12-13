@@ -1086,7 +1086,9 @@ def get_report_count(body_data):  # 사용자 신고 건수
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
     sql = f"""SELECT COUNT(*) AS CNT 
-              FROM NOTIFY WHERE USER_IDX = 1"""
+                FROM NOTIFY AS A
+                LEFT JOIN USER AS B ON A.USER_IDX = B.USER_IDX
+                WHERE B.USER_ID = '{body_data['user_id']}';"""
 
     try:
         row_cnt = cursor.execute(sql)
