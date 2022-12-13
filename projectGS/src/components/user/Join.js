@@ -290,7 +290,6 @@ const Join = () => {
 
         <form className="form-join">
           <div className="input-box">
-            <p>{idComment}</p>
             <input
               className="join_id"
               type="text"
@@ -301,6 +300,7 @@ const Join = () => {
               placeholder=" "
             />
             <label>아이디 (문자, 숫자 포함 6-20자)</label>
+            <p>{idComment}</p>
           </div>
 
           <div className="input-box">
