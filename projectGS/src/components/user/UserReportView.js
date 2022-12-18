@@ -81,10 +81,10 @@ const UserReportView = () => {
     // </div>
 
     <div>
+      <div className="subTop">
+        <h1>나의 신고 상세내역</h1>
+      </div>
       <div className="container section">
-        <div className="sub-title my-title">
-          <h2>나의 신고 상세내역</h2>
-        </div>
         <table
           className="boardTable boardTable2"
           border="0"
@@ -171,6 +171,11 @@ const UserReportView = () => {
               </tr>
             </tbody>
           </table>
+        </div>
+        
+
+        <div className="btn-wrap">
+          <button className="button btn btn-navy" onClick={()=>{navigate('/myreport')}}>목록으로</button>
         </div>
       </div>
     </div>

@@ -2,14 +2,17 @@ import React from 'react';
 // import '../../css/todoList.css';
 import { useEffect } from 'react';
 import $ from 'jquery';
-
+import CountUp from 'react-countup';
 export default function TodoList({ data }) {
-  useEffect(() => {
-    animate('.todoCnt1', data.c1_sum);
-    animate('.todoCnt2', data.c2_sum);
-    animate('.todoCnt3', data.c3_sum);
-    animate('.todoCnt4', data.c4_sum);
-  }, []);
+  // useEffect(() => {
+  //   // animate('todoCnt1', data.c1_sum);
+  //   // animate('todoCnt2', data.c2_sum);
+  //   // animate('todoCnt3', data.c3_sum);
+  //   // animate('todoCnt4', data.c4_sum);
+  //   //test
+  // }, []);
+
+  const duration = 1;
 
   const animate = (c_name, data) => {
     $({ val: 0 }).animate(
@@ -18,11 +21,11 @@ export default function TodoList({ data }) {
         duration: 400,
         step: function () {
           var num = numberWithCommas(Math.floor(this.val));
-          $(c_name).text(num);
+          $('span.' + c_name).text(num);
         },
         complete: function () {
           var num = numberWithCommas(Math.floor(this.val));
-          $(c_name).text(num);
+          $('span.' + c_name).text(num);
         },
       },
     );
@@ -41,25 +44,33 @@ export default function TodoList({ data }) {
       <div className="todoListItem">
         <div className="todoContainer tc1">
           <span className="newList cTitle">신규</span>
-          <span className="newCount todoCnt todoCnt1">{data.c1_sum}</span>
+          <span className="newCount todoCnt todoCnt1">
+            <CountUp end={data.c1_sum} duration={duration} />
+          </span>
         </div>
       </div>
       <div className="todoListItem">
         <div className="todoContainer tc2">
           <span className="progressList cTitle">담당자배정</span>
-          <span className="progressCount todoCnt todoCnt2">{data.c2_sum}</span>
+          <span className="progressCount todoCnt todoCnt2">
+            <CountUp end={data.c2_sum} duration={duration} />
+          </span>
         </div>
       </div>
       <div className="todoListItem">
         <div className="todoContainer tc3">
           <span className="dropList cTitle">처리중</span>
-          <span className="dropCount todoCnt todoCnt3">{data.c3_sum}</span>
+          <span className="dropCount todoCnt todoCnt3">
+            <CountUp end={data.c3_sum} duration={duration} />
+          </span>
         </div>
       </div>
       <div className="todoListItem">
         <div className="todoContainer tc4">
           <span className="finishList cTitle">완료</span>
-          <span className="finishCount todoCnt todoCnt4">{data.c4_sum}</span>
+          <span className="finishCount todoCnt todoCnt4">
+            <CountUp end={data.c4_sum} duration={duration} />
+          </span>
         </div>
       </div>
     </div>

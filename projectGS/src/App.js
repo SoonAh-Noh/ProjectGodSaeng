@@ -21,6 +21,7 @@ import UserReportList from './components/user/UserReportList'; // 221130 선우 
 import UserReportView from './components/user/UserReportView'; // 221130 선우 -  사용자 신고 상세
 import MyPoint from './components/user/MyPoint';
 import Forgot from './components/user/Forgot';
+import ManagementP from './components/user/ManagementP'; //221205 도연 - 마이페이지 포인트관리
 
 /* 221116 순아 사용자용 페이지 추가*/
 import Login from './components/user/Login';
@@ -92,9 +93,11 @@ function App() {
             <Route path="/login" element={<Login />} /> {/* 로그인 */}
             <Route path="/join" element={<Join />} /> {/* 회원가입 */}
             <Route path="/mypage" element={<MyPage />} /> {/* 마이페이지 */}
+            <Route path="/ManagementP" element={<ManagementP />} />
+            {/* 마이페이지 - 포인트 관리 */}
             <Route path="/Forgot" element={<Forgot />} /> {/* 비밀번호 찾기 */}
             <Route path="/myreport" element={<UserReportList />} />
-            {/* 221130 선우 - 내 신고내역 */}
+            {/* 221130 선우 - 내 신고내역 (마이페이지 - 나의 신고현황)*/}
             <Route path="/myreportview" element={<UserReportView />} />
             {/* 221130 선우 - 내 신고내역 상세 */}
             <Route path="/mypoint" element={<MyPoint />} />

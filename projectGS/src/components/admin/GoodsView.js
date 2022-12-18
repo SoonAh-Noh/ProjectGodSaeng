@@ -21,8 +21,8 @@ const GoodsView = () => {
       cancelButtonText: '취소', // cancel 버튼 텍스트 지정
 
       reverseButtons: true, // 버튼 순서 거꾸로
-    }).then((willDelete) => {
-      if (willDelete) {
+    }).then((result) => {
+      if (result.isConfirmed) {
         const formData = new FormData();
         formData.append('name', nameRef.current.value);
         formData.append('price', priceRef.current.value);
@@ -57,8 +57,8 @@ const GoodsView = () => {
       cancelButtonText: '취소', // cancel 버튼 텍스트 지정
 
       reverseButtons: true, // 버튼 순서 거꾸로
-    }).then((willDelete) => {
-      if (willDelete) {
+    }).then((result) => {
+      if (result.isConfirmed) {
         server_bridge.axios_instace
           .post('/deletegoods', {
             goods_idx: state.data.GOODS_IDX,

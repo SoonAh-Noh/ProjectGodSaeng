@@ -28,12 +28,11 @@ const DisposeReport = () => {
     handleReportList();
   }, []);
 
-  
   // 처리상태 css변경
   const searchClick = (e) => {
     // e.preventDefault();
     e.target.parentElement.classList.toggle('on');
-  }
+  };
 
   const getComponentData = async () => {
     //컴포넌트 생성용 리스트 받아오기
@@ -127,7 +126,9 @@ const DisposeReport = () => {
 
   return (
     <div className="Contents">
-      <div className="adminTitle"><h3>신고 처리</h3></div>
+      <div className="adminTitle">
+        <h3>신고 처리</h3>
+      </div>
 
       <div className="pageWrap subPageWrap adminSearchBar">
         <div className="subTitle subTitle2">
@@ -136,7 +137,9 @@ const DisposeReport = () => {
 
         <div className="searchContents">
           <div className="searchBox">
-            <div className="searchType"><h4>기간</h4></div>
+            <div className="searchType">
+              <h4>기간</h4>
+            </div>
             <div className="searchWrap searchWrap2">
               <div className="searchCate">
                 <select ref={dateoptRef}>
@@ -144,14 +147,15 @@ const DisposeReport = () => {
                   <option value="NOTIFY_REPORT_DATE">접수일시</option>
                 </select>
               </div>
-              
               <input type="date" ref={start_dateRef} /> ~{' '}
               <input type="date" ref={end_dateRef} />
             </div>
           </div>
 
           <div className="searchBox">
-            <div className="searchType"><h4>카테고리</h4></div>
+            <div className="searchType">
+              <h4>카테고리</h4>
+            </div>
             <div className="searchWrap">
               <div className="searchCate">
                 <select name="cate_sel" id="cate_sel" ref={categoryRef}>
@@ -168,7 +172,9 @@ const DisposeReport = () => {
           </div>
 
           <div className="searchBox">
-            <div className="searchType"><h4>처리상태</h4></div>
+            <div className="searchType">
+              <h4>처리상태</h4>
+            </div>
             <div className="searchCkWrap">
               {process.length > 1 &&
                 process.map((val, key) => (
@@ -180,7 +186,9 @@ const DisposeReport = () => {
                       value={val.NOTIFY_PNUM}
                       ref={addToRefs}
                     />
-                    <label htmlFor={`process_` + key} onClick={searchClick}>{val.NOTIFY_STATUS}</label>
+                    <label htmlFor={`process_` + key} onClick={searchClick}>
+                      {val.NOTIFY_STATUS}
+                    </label>
                   </span>
                 ))}
             </div>
@@ -188,7 +196,9 @@ const DisposeReport = () => {
         </div>
 
         <div className="adminBtnWrap">
-          <button onClick={handleReportList} className="adminBtn adminBtn2">검색</button>
+          <button onClick={handleReportList} className="adminBtn adminBtn2">
+            검색
+          </button>
         </div>
       </div>
 
@@ -210,7 +220,12 @@ const DisposeReport = () => {
         </div>
         <div>
           <div>
-            <table className="adminTable2" border="0" cellPadding="0" cellSpacing="0">
+            <table
+              className="adminTable2"
+              border="0"
+              cellPadding="0"
+              cellSpacing="0"
+            >
               <colgroup>
                 <col width="80px" />
                 <col width="10%" />
@@ -242,24 +257,36 @@ const DisposeReport = () => {
                       <tr key={key} align="center">
                         <td>{data.NOTIFY_IDX}</td>
                         <td>
-                          {data.USER_NAME === null ? '비회원' : data.USER_NAME}
+                          {data.USER_OX === 'X' ? '비회원' : data.USER_NAME}
                         </td>
                         <td>{data.CATEGORY}</td>
                         {/* <td>{data.NOTIFY_STATUS}</td> */}
                         <td>
-                          {data.NOTIFY_STATUS === '신고접수' ? 
-                            <span className="status status1">{data.NOTIFY_STATUS}</span> :
-                          data.NOTIFY_STATUS === '담당자배정' ? 
-                            <span className="status status2">{data.NOTIFY_STATUS}</span> :
-                          data.NOTIFY_STATUS === '신고처리중' ? 
-                            <span className="status status3">{data.NOTIFY_STATUS}</span> :
-                            <span className="status status4">{data.NOTIFY_STATUS}</span>
-                          }
+                          {data.NOTIFY_STATUS === '신고접수' ? (
+                            <span className="status status1">
+                              {data.NOTIFY_STATUS}
+                            </span>
+                          ) : data.NOTIFY_STATUS === '담당자배정' ? (
+                            <span className="status status2">
+                              {data.NOTIFY_STATUS}
+                            </span>
+                          ) : data.NOTIFY_STATUS === '신고처리중' ? (
+                            <span className="status status3">
+                              {data.NOTIFY_STATUS}
+                            </span>
+                          ) : (
+                            <span className="status status4">
+                              {data.NOTIFY_STATUS}
+                            </span>
+                          )}
                         </td>
                         <td>{data.NOTIFY_DATE}</td>
                         <td>{data.NOTIFY_REPORT_DATE}</td>
                         <td>
-                          <button onClick={() => move2Detail(data)} className="adminBtn">
+                          <button
+                            onClick={() => move2Detail(data)}
+                            className="adminBtn"
+                          >
                             상세보기
                           </button>
                         </td>
@@ -267,7 +294,11 @@ const DisposeReport = () => {
                     ))
                 ) : (
                   <tr>
-                    <td colSpan={7}><div className="noSearch"><p>검색결과가 없습니다.</p></div></td>
+                    <td colSpan={7}>
+                      <div className="noSearch">
+                        <p>검색결과가 없습니다.</p>
+                      </div>
+                    </td>
                   </tr>
                 )}
               </tbody>

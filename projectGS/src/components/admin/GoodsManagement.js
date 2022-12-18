@@ -34,8 +34,8 @@ const GoodsManagement = () => {
       cancelButtonText: '취소', // cancel 버튼 텍스트 지정
 
       reverseButtons: true, // 버튼 순서 거꾸로
-    }).then((willDelete) => {
-      if (willDelete) {
+    }).then((result) => {
+      if (result.isConfirmed) {
         server_bridge.axios_instace
           .post('/deletegoods', {
             goods_idx: goods_idx,
@@ -73,14 +73,7 @@ const GoodsManagement = () => {
       server_bridge.normalInfoAlert('등록 성공!');
       getGoodsList();
     } else {
-      // alert('등록 실패!');
-      Swal.fire({
-        title: '등록 실패!',
-        icon: 'warning',
-        confirmButtonText: '확인',
-        confirmButtonColor: '#191d73',
-        backdrop: `rgba(0,0,0,0.4)`,
-      });
+      alert('등록 실패!');
       server_bridge.normalAlert('등록실패!' + '\r\n' + response.data);
     }
   };

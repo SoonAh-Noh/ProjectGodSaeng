@@ -48,24 +48,24 @@ const Notice = () => {
           {/* <div className="info"> */}
             <ul className="notice_info">
               <li><span>작성자</span>{board.USER_NAME}</li>
-              <li><span>등록일</span>{board.BOARD_DATE}</li>            
-              <li className='file'><span>파일</span>
+              <li><span>등록일</span>{board.BOARD_DATE}</li> 
                 {board.BOARD_FILE !== '' ? (
-                  <>
-                    <a
-                      href={
-                        server_bridge.py_url +
-                        '/download_file/' +
-                        board.BOARD_FILE.dir
-                      }
-                    >
-                      {board.BOARD_FILE.filename}
-                    </a>
+                  <>     
+                    <li className='file'><span>파일</span>
+                      <a
+                        href={
+                          server_bridge.py_url +
+                          '/download_file/' +
+                          board.BOARD_FILE.dir
+                        }
+                      >
+                        {board.BOARD_FILE.filename}
+                      </a>
+                    </li>
                   </>
                 ) : (
                   ''
                 )}
-              </li>
             </ul>
           {/* </div> */}
 

@@ -584,7 +584,7 @@ const Report = () => {
                     ref={userTelRef}
                     type="text"
                     placeholder="핸드폰 번호를 입력해주세요"
-                    efaultValue={tel}
+                    defaultValue={tel}
                   />
                 </div>
 

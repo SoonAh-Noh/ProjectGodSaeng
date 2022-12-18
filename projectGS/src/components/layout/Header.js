@@ -16,7 +16,7 @@ import '../../css/header.css';
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const [mode, setMode] = useState(false);
   // 로그아웃시 세션 초기화
   const logout = () => {
     window.sessionStorage.clear();
@@ -28,7 +28,6 @@ const Header = () => {
 
   const [login, setLogin] = useState(false);
   const name = window.sessionStorage.getItem('USER_NAME');
-
   useEffect(() => {
     $('.menu > ul > li').on('mouseover', function () {
       $(this).children('.submenu').addClass('on');
@@ -48,14 +47,16 @@ const Header = () => {
             '</span></div>'),
       );
 
-    // mobile
-    $('#hambtn').on('click', function () {
-      $(this).toggleClass('active');
-      $('.menu').toggleClass('active');
-      $('.login').toggleClass('active');
-    });
+    //mobile
+    // $('#togglemenu').on('click', function () {
+    // $(this).toggleClass('active');
+    // $('.menu').toggleClass('active');
+    // $('.login').toggleClass('active');
+    // });
   }, [$]);
-
+  const handleToggle = () => {
+    setMode(!mode);
+  };
   return (
     <div id="Header">
       <div className="logo">
@@ -63,7 +64,8 @@ const Header = () => {
           <img src={logo} alt="안전꽹과리 로고" />
         </a>
       </div>
-      <div className="menu">
+      {/* <div className="menu"> */}
+      <div className={`menu ${mode ? 'active' : ''}`}>
         <ul>
           <li>
             <a>불법주정차 신고</a>
@@ -97,7 +99,9 @@ const Header = () => {
       </div>
 
       {/* 로그인 여부 확인 */}
-      <div className="login">
+      {/* <div className="login"> */}
+
+      <div className={`login ${mode ? 'active' : ''}`}>
         {window.sessionStorage.getItem('USER_ID') ? (
           <ul className="mydropmenu ">
             <li className="logOn">
@@ -105,23 +109,25 @@ const Header = () => {
                 <FaRegUser />
                 {name} 님<BiChevronDown />
               </a>
-              <ul class="depth_1">
+              <ul className="depth_1">
                 <li>
                   <a href="/mypage">
                     <CiEdit />
                     회원정보
                   </a>
                 </li>
+                {/* 
+                221213 선우 - 회원정보에 병합되어서 필요 없어졌으므로 삭제
                 <li>
                   <a href="/ManagementP">
                     <CiDollar />
                     포인트 관리
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a href="/myreport">
                     <CiReceipt />
-                    나의 신고현황
+                    신고현황
                   </a>
                 </li>
                 <li>
@@ -145,7 +151,12 @@ const Header = () => {
         )}
       </div>
 
-      <button type="button" id="hambtn" className="ham visible-lg">
+      <button
+        type="button"
+        id="togglemenu"
+        className={`ham visible-lg ${mode ? 'active' : ''}`}
+        onClick={handleToggle}
+      >
         <span className="line line1"></span>
         <span className="line line2"></span>
         <span className="line line3"></span>

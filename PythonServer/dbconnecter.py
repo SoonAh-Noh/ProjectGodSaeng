@@ -797,9 +797,9 @@ def update_userinfo(body_data):  # 사용자 정보 수정하기
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
-    # sql = f"""UPDATE USER SET 
-    #             USER_PW = '{body_data['user_pw']}', 
-    #             USER_NAME='{body_data['user_name']}', 
+    # sql = f"""UPDATE USER SET
+    #             USER_PW = '{body_data['user_pw']}',
+    #             USER_NAME='{body_data['user_name']}',
     #             USER_MAIL='{body_data['user_mail']}',
     #             USER_TEL='{body_data['user_tel']}',
     #             USER_OX='{body_data["user_ox"]}'
@@ -849,7 +849,7 @@ def search_user_info(body_data):  # 사용자 목록 가져오기
     cursor = db.cursor(pymysql.cursors.DictCursor)
 
     sql = f"""SELECT * FROM USER """
-    where = " WHERE ADMIN_OX IS NULL "
+    where = " WHERE ADMIN_OX IS NULL AND USER_OX = 'O' "
     if body_data["is_searching"] == 1:
         where = f"""AND {body_data["search_option"]} LIKE '%{body_data["keyword"]}%'"""
     sql += where + ";"
@@ -873,17 +873,25 @@ def search_user_info(body_data):  # 사용자 목록 가져오기
 def get_poit_list_by_user(body_data):  # 사용자별 포인트 리스트 가져오기
     db = conn_db()
     cursor = db.cursor(pymysql.cursors.DictCursor)
-
-    sql = f"""            
-            SELECT A.POINT_IDX, A.POINT_PLUS, A.POINT_MINUS, A.POINT_CHANGE, A.NOTIFY_IDX,
-             date_format(A.POINT_DATE, '%Y-%m-%d %H:%i') AS POINT_DATE
+    set_sql = f"""
+        SET @a:= (SELECT COUNT(*) AS CNT 
+        FROM POINT AS A 
+        LEFT JOIN USER AS B ON A.USER_IDX=B.USER_IDX 
+        WHERE B.USER_ID='{body_data["user_id"]}');
+    """
+    sql = f"""          
+            SELECT 
+            (@a:=@a-1) AS POINT_NO,
+            A.POINT_IDX, A.POINT_PLUS, A.POINT_MINUS, A.POINT_CHANGE, A.NOTIFY_IDX,
+            date_format(A.POINT_DATE, '%Y-%m-%d %H:%i') AS POINT_DATE
             FROM POINT AS A
             LEFT JOIN USER AS B ON A.USER_IDX=B.USER_IDX
             WHERE B.USER_ID = '{body_data["user_id"]}'
             ORDER BY A.POINT_IDX DESC;
         """
-
+    print(sql)
     try:
+        cursor.execute(set_sql)
         row_cnt = cursor.execute(sql)
         # db.commit()
         if row_cnt > 0:
@@ -1089,7 +1097,7 @@ def get_report_count(body_data):  # 사용자 신고 건수
                 FROM NOTIFY AS A
                 LEFT JOIN USER AS B ON A.USER_IDX = B.USER_IDX
                 WHERE B.USER_ID = '{body_data['user_id']}';"""
-
+    print(sql)
     try:
         row_cnt = cursor.execute(sql)
         if row_cnt > 0:

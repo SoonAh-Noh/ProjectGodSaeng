@@ -2,8 +2,10 @@ import { useNavigate, Link } from 'react-router-dom';
 const NoticeListMini = ({ data }) => {
   return (
     <div className="cell-d">
-      <div className="mainTitle"><h4>공지사항 리스트</h4></div>
-      
+      <div className="mainTitle">
+        <h4>공지사항 리스트</h4>
+      </div>
+
       <table className="adminTable" border="0" cellPadding="0" cellSpacing="0">
         <thead>
           <tr>
@@ -14,7 +16,8 @@ const NoticeListMini = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 &&
+          {typeof data !== 'string' &&
+            data.length > 0 &&
             data.map((data, key) => {
               return (
                 <tr key={key}>

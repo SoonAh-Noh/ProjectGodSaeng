@@ -8,54 +8,77 @@
 .mydropmenu ul {
   list-style: none;
 }
+
 .mydropmenu a {
   text-decoration: none;
 }
+
 .mydropmenu:after {
   display: block;
   content: '';
   clear: both;
 }
-.mydropmenu > li {
+
+.mydropmenu>li {
   position: relative;
   float: left;
   margin-right: 5px;
 }
-.mydropmenu > li > a {
-  display: block;
-  padding: 0 15px;
 
+.mydropmenu>li>a {
+  display: block;
+  padding: 10px 15px;
+  /* width: 136px;
   height: 40px;
-  line-height: 40px;
+  line-height: 40px;*/
   color: #fff;
 }
-.mydropmenu > li:hover .depth_1 {
+
+.mydropmenu>li>a>svg {
+  padding: 0 5px;
+  font-size: 14px;
+}
+
+.mydropmenu>li:hover .depth_1 {
   display: block;
 }
+
 .mydropmenu .depth_1 {
   display: none;
   position: absolute;
   left: 0;
   right: 0;
-  text-align: center;
+  /* text-align: center; */
   padding-top: 10px;
 }
+
 .mydropmenu .depth_1 a {
   display: block;
-  padding: 5px;
+  /* width: 136px; */
   color: #fff;
+  width: 157px;
+  margin-top: -1px;
+}
+
+.mydropmenu .depth_1 a>svg {
+  padding-right: 10px;
+  vertical-align: text-top;
+}
+
+.depth_1 a {
+  text-align: left;
 }
 
 .logOn a {
   border: 1px solid rgba(255, 255, 255, 0.5);
   padding: 10px 20px;
   box-sizing: border-box;
-  /* transition: all 0.4s; */
+  transition: all 0.4s;
   border-radius: 10px;
 }
 
 .logOn a:hover {
   background: #fff;
-  color: #191d73;
+  color: #191d73 !important;
   border-color: #fff;
 }

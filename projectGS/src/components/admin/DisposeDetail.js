@@ -38,8 +38,8 @@ const DisposeDetail = () => {
       cancelButtonText: '취소', // cancel 버튼 텍스트 지정
 
       reverseButtons: true, // 버튼 순서 거꾸로
-    }).then((willDelete) => {
-      if (willDelete) {
+    }).then((result) => {
+      if (result.isConfirmed) {
         server_bridge.axios_instace
           .post('/updateDispose', {
             USER_IDX: data.USER_IDX === null ? 'non' : data.USER_IDX,
@@ -166,7 +166,7 @@ const DisposeDetail = () => {
 
         <div className="reportDispose">
           <div className="subTitle">
-            <h4>신고처리</h4>
+            <h4>신고내용</h4>
           </div>
 
           <table

@@ -241,7 +241,7 @@
         flex-wrap: wrap;
         border: 1px dashed rgba(25, 29, 115, 0.2);
         border-radius: 10px;
-
+        pointer-events: none; //221212 선우 신고알림창 클릭이벤트막기
         iframe {
             cursor: default;
             margin-bottom: 10px;

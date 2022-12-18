@@ -86,10 +86,12 @@ const UserReportList = () => {
   const cnt = 0;
   return (
     <>
+      <div className="subTop">
+        <h1>나의 신고 현황</h1>
+      </div>
+
       <div className="container section">
-        <div className="sub-title my-title">
-          <h2>나의 신고 내역</h2>
-        </div>
+        {/* <div className="sub-title my-title"></div> */}
         <div className="reportForm">
           <div className="row">
             <div className="col-2 col-sm-12">
@@ -165,7 +167,7 @@ const UserReportList = () => {
               cellSpacing="0"
             >
               <colgroup>
-                <col width="80px" />
+                {/* <col width="80px" /> */}
                 <col width="80px" />
                 <col width="60%" />
                 <col width="" />
@@ -173,7 +175,7 @@ const UserReportList = () => {
               </colgroup>
               <thead>
                 <tr>
-                  <th>No</th>
+                  {/* <th>No</th> */}
                   <th>접수번호</th>
                   <th>카테고리</th>
                   <th>신고일시</th>
@@ -197,7 +199,7 @@ const UserReportList = () => {
                           })
                         }
                       >
-                        <td>{totalcnt}</td>
+                        {/* <td>{totalcnt}</td> */}
                         <td>{data.NOTIFY_IDX}</td>
                         <td>{data.CATEGORY}</td>
                         <td>{data.NOTIFY_DATE}</td>

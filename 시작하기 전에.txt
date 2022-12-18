@@ -33,6 +33,7 @@ yarn add @mui/material
 
 **** 선우 추가 ****
 yarn add socket.io-client
+yarn add react-countup
 
 1-1. react의 실행
 C:\Project\AI_Source\AIProject\projectGS> yarn start

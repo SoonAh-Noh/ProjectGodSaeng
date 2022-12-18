@@ -35,14 +35,22 @@ const AdminLayout = () => {
     //소켓통신(실시간 양방향 통신)
     transports: ['websocket'],
   });
-  socket.connect(); // 소켓연결
-  socket.on('response', function (msg) {
-    //대기하다가 response로 데이터가 날라오면(신고접수되면) 반응
-    setTxt('새로운 신고가 들어왔습니다!');
-  });
 
+  useEffect(() => {
+    console.log(socket.connected);
+    if (!socket.connected) {
+      console.log('소켓 연결됨!!');
+      socket.connect(); // 소켓연결
+      socket.on('response', function (msg) {
+        //대기하다가 response로 데이터가 날라오면(신고접수되면) 반응
+        console.log(msg);
+        setTxt('새로운 신고가 들어왔습니다!');
+      });
+    }
+  }, []);
   const handleClose = () => {
     document.getElementById('popUp').classList.add('off');
+    setTxt('');
   };
 
   return (

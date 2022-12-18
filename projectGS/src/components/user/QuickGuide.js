@@ -205,7 +205,8 @@ const QuickGuide = () => {
                   <ul className="checkTxt">
                     <li>
                       <strong>「도로교통법 시행령」별표 8 제 29호</strong>
-                      <br />- 전동 킥보드 주차 방법을 위반한 운전자에게는 2만 원의 법칙금이 부과됨.
+                      <br />- 전동 킥보드 주차 방법을 위반한 운전자에게는 2만
+                      원의 법칙금이 부과됨.
                     </li>
                   </ul>
                 </div>
@@ -292,7 +293,8 @@ const QuickGuide = () => {
                   <ul className="checkTxt">
                     <li>
                       <strong>「도로교통법 시행령」별표 8 제 29호</strong>
-                      <br />- 전동 킥보드 주차 방법을 위반한 운전자에게는 2만 원의 법칙금이 부과됨.
+                      <br />- 전동 킥보드 주차 방법을 위반한 운전자에게는 2만
+                      원의 법칙금이 부과됨.
                     </li>
                   </ul>
                 </div>
@@ -332,7 +334,8 @@ const QuickGuide = () => {
                   <ul className="checkTxt">
                     <li>
                       <strong>「도로교통법 시행령」별표 8 제 29호</strong>
-                      <br />- 전동 킥보드 주차 방법을 위반한 운전자에게는 2만 원의 법칙금이 부과됨.
+                      <br />- 전동 킥보드 주차 방법을 위반한 운전자에게는 2만
+                      원의 법칙금이 부과됨.
                     </li>
                   </ul>
                 </div>
@@ -374,7 +377,8 @@ const QuickGuide = () => {
                   <ul className="checkTxt">
                     <li>
                       <strong>「도로교통법 시행령」별표 8 제 29호</strong>
-                      <br />- 전동 킥보드 주차 방법을 위반한 운전자에게는 2만 원의 법칙금이 부과됨.
+                      <br />- 전동 킥보드 주차 방법을 위반한 운전자에게는 2만
+                      원의 법칙금이 부과됨.
                     </li>
                   </ul>
                 </div>

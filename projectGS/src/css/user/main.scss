@@ -1,7 +1,6 @@
 .main {
   width: 100%;
   position: relative;
-  z-index: -1;
 
   &:before {
     content: '';
@@ -302,6 +301,7 @@
 }
 
 @media all and (max-width: 525px) {
+
   // main
   .main::before {
     height: 280px;
